@@ -10,5 +10,5 @@ package eventproaplicacion;
  * @author danae
  */
 public class Danae {
-    
+    private String hola;
 }
