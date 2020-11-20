@@ -18,7 +18,7 @@ public class EventProAplicacion {
         System.out.println("Hola");
         System.out.println("Suerte con las clasexamenes :c");
         System.out.println("Modificacion aqui-.---");
-        System.out.println("Hola x2");
+        System.out.println("Chao");
         // TODO code application logic here
     }
     
