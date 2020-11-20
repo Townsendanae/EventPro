@@ -10,6 +10,7 @@ package eventproaplicacion;
  * @author isaac
  */
 public class Usuario{
-    
+    private String nombre;
+    private String cedula;
     
 }
