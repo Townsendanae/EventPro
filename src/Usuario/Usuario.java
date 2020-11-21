@@ -5,6 +5,12 @@
  */
 package Usuario;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  *
  * @author ablup
@@ -65,7 +71,68 @@ public class Usuario {
     public void setTipo(char tipo) {
         this.tipo = tipo;
     }
+    
+    /*Metodo por el cual cargaremos todos los datos de los usuarios desde un 
+      tipo de archivo*/
+    public static void cargarArchivos(String nombrearchivo,ArrayList<Usuario> usuarios) {
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
 
+        try {
+
+            archivo = new File(nombrearchivo);
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+
+            // Lectura del fichero
+            String linea = " ";
+            int i=1;
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split(";");
+                if(i!=1)
+                    usuarios.add(new Usuario(datos[0],datos[1],datos[2],datos[3],datos[4].charAt(0)));
+                i++;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        
+        }finally {
+            // En el finally cerramos el fichero, para asegurarnos
+            // que se cierra tanto si todo va bien como si salta 
+            // una excepcion.
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        
+        
+        
+
+    }
+    
+     /*Metodo para iniciar sesion*/
+      public Usuario menuLogin(){
+          
+        System.out.println("+++++++++++++++++++++++++++");
+        System.out.println();
+        System.out.println("BIENVENIDO A EVENTPRO");
+        System.out.println();
+        System.out.println("+++++++++++++++++++++++++++");
+        System.out.println();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("USUARIO: ");
+        
+        System.out.println("CONTRASEÑA: ");
+        return null;
+    }
+    
+    
     @Override
     public String toString() {
         return "Usuario{" + "nombre=" + nombre + ", apellido=" + apellido + ", usuario=" + usuario + ", contrasena=" + contrasena + ", tipo=" + tipo + '}';
