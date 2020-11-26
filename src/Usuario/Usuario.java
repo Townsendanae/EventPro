@@ -86,12 +86,15 @@ public class Usuario {
             br = new BufferedReader(fr);
 
             // Lectura del fichero
-            String linea = " ";
+            String linea;
             int i=1;
+            String[] datos;
             while ((linea = br.readLine()) != null) {
-                String[] datos = linea.split(";");
-                if(i!=1)
+                
+                if(i!=1){
+                    datos = linea.split(";");
                     usuarios.add(new Usuario(datos[0],datos[1],datos[2],datos[3],datos[4].charAt(0)));
+                }
                 i++;
             }
 

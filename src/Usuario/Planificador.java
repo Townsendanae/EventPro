@@ -5,6 +5,7 @@
  */
 package Usuario;
 
+import Papeleo.Solicitud;
 import java.util.ArrayList;
 
 /**
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Planificador {
     //ArrayList<Evento> ListaEventos = new ArrayList<Evento>();
-   //ArrayList<Solicitud> ListaSolicitud = new ArrayList<Solicitud>();
+      ArrayList<Solicitud> ListaSolicitud = new ArrayList<Solicitud>();
 
-
+      public void nenuPlanificador(){}
 }

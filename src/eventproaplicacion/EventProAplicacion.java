@@ -27,6 +27,7 @@ public class EventProAplicacion {
     public static void main(String[] args) {
         Usuario.cargarArchivos("usuarios.txt", usuarios);
         System.out.println(usuarios);
+        System.out.println(usuarios.size());
         //EventProAplicacion.menuLogin();
         // TODO code application logic here
     }

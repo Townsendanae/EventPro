@@ -5,6 +5,8 @@
  */
 package Usuario;
 
+import java.util.Scanner;
+
 /**
  *
  * @author ablup
@@ -13,8 +15,11 @@ public class Cliente extends Usuario{
     private String celular;
     private String correo;
     
-    public Cliente(String nombre, String apellido, String usuario, String contrasena, char tipo) {
+    public Cliente(String nombre, String apellido, String usuario, String contrasena, char tipo, String celular,String correo) {
         super(nombre, apellido, usuario, contrasena, tipo);
+        this.celular=celular;
+        this.correo=correo;                
+        
     }
 
     public String getCelular() {
@@ -40,5 +45,13 @@ public class Cliente extends Usuario{
     
    //public Solicitud registrarSolicitud(){}
     //public void registrarPago(){}
+    public void menuCliente(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("++++++++++++++++MENU CLIENTE++++++++++++");
+        System.out.println("1.- Solicitar planificacion de evento");
+        System.out.println("2.- Registrar pago envento");
+        System.out.println("3.- Salir");
+        
+    }
     
 }
