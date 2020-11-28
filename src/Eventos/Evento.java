@@ -2,10 +2,12 @@
 package Eventos;
 
 import Papeleo.EstadoEvento;
+import Papeleo.TipoEvento;
 import Usuario.Cliente;
 import Usuario.Planificador;
 import java.util.Random;
 import java.util.ArrayList;
+import Papeleo.TipoEvento;
 
 /**
  *
@@ -18,15 +20,28 @@ public class Evento {
     Cliente cliente;
     Planificador planificador;
     EstadoEvento estado;
-//    TipoEvento tipo;
+    TipoEvento tipo;
     ArrayList<Adicional> adicionales;
     
     
     //-----------------------Metodos------------------------------
     
-    public void generarCodigo(){//GENERAR CODIGO 4 DIGITOS
+    public int generarCodigo(){//GENERAR CODIGO 4 DIGITOS
         Random ID=new Random();
         this.ID=1000+ID.nextInt(9000);
+        return this.ID;
+    }
+    
+    public void generarPago(){//PAGA BASE DEL EVENTO
+        if (tipo.equals("Boda")){
+            precio=3500;
+        }else if(tipo.equals("FiestaInfantil")){
+            precio=300;
+        }else {
+            precio=2000;
+        }
+            
+        
     }
     
     public String mostrarMensaje(){
