@@ -39,7 +39,7 @@ public class Evento {
         return this.ID;
     }
 
-//    public void generarPago() {//PAGA BASE DEL EVENTO
+//    public void generarPago() {//PAGA BASE DEL EVENTO ( lo coloqué de una de las clases hijas )
 //        if (tipo.equals("Boda")) {
 //            precio = 3500;
 //        } else if (tipo.equals("FiestaInfantil")) {
