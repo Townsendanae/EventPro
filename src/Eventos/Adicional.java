@@ -48,6 +48,22 @@ public class Adicional {
         return this.total;
     }
     
+    //--- Constructores -----
+    
+    public Adicional(TipoAdicional tipo, double total,int cantidad,double precioUnitario){
+        this.tipo = tipo;
+        this.total = total;
+        this.cantidad = cantidad;
+        this.precioUnitario = precioUnitario;
+    }
+    
+    public Adicional(TipoAdicional tipo, double total){
+        this.tipo = tipo;
+        this.total = total;
+        this.cantidad = 1;
+        this.precioUnitario = total;
+    }
+    
     
     }
 

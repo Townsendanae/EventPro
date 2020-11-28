@@ -19,62 +19,54 @@ public class Solicitud {
     private int id;
     private EstadoSolicitud estadoSolicitud;
     
-    //Constructor
-    
-    
-    
-    // Número
-    
-    public String getNumero(){
-        return this.numero;
-    }
-    
+ //---- Setters ------
     public void setNumero(String numero){
         this.numero = numero;  
-    }
-    
-    // Cliente
-    
-    public Cliente getCliente(){
-        return this.cliente;
     }
     
     public void setCliente(Cliente cliente){
         this.cliente = cliente;
     }
     
-    // Planificador
-    
-    
-    public Planificador getPlanificador(){
-        return this.planificador;
-    }
-    
     public void setPlanificador(Planificador planificador){
         this.planificador = planificador;
-    }
-    
-    // Fecha Solicitud
-    
-    public Date getFechaSolicitud(){
-        return this.fechaSolicitud;
     }
     
     public void setFechaSolicitud(Date fechaSolicitud){
         this.fechaSolicitud = fechaSolicitud;
     }
     
-    // Fecha Evento
+    public void setFechaEvento(Date fechaEvento){
+        this.fechaEvento = fechaEvento;
+    }
+    
+     public void setEstadoSolicitud(EstadoSolicitud estadoSolicitud){
+        this.estadoSolicitud = estadoSolicitud;
+    }
+     
+    //----- Getters -----
+    
+    public String getNumero(){
+        return this.numero;
+    }
+    
+    public Cliente getCliente(){
+        return this.cliente;
+    }
+    
+    public Planificador getPlanificador(){
+        return this.planificador;
+    }
+    
+    public Date getFechaSolicitud(){
+        return this.fechaSolicitud;
+    }
+
     
     public Date getFechaEvento(){
         return this.fechaEvento;
     }
     
-    public void setFechaEvento(Date fechaEvento){
-        this.fechaEvento = fechaEvento;
-    }
-    
-    //ID
     
     public int getiI(){
         return this.id;
@@ -82,15 +74,21 @@ public class Solicitud {
     
     // ID no debería poder cambiar. ID único.
     
-    // Estado Solicitud
-    
     public EstadoSolicitud getEstadoSolicitud(){
         return this.estadoSolicitud;
     }
     
-    public void setEstadoSolicitud(EstadoSolicitud estadoSolicitud){
-        this.estadoSolicitud = estadoSolicitud;
+    
+    // ---- Constructores ---- 
+    
+    public Solicitud(String numero, Cliente cliente, Planificador planificador, Date fechaSolicitud, Date fechaEvento, int id){
+        this.cliente = cliente;
+        this.numero = numero;
+        this.fechaEvento = fechaEvento;
+        this.fechaSolicitud = fechaSolicitud;
+        this.id = id;
+        this.planificador = planificador;
+        this.estadoSolicitud = EstadoSolicitud.PENDIENTE;
     }
-    
-    
 }
+    
