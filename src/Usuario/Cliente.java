@@ -8,20 +8,26 @@ package Usuario;
 import java.util.*;
 import eventproaplicacion.*;
 import Papeleo.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author ablup
  */
-public class Cliente extends Usuario{
+public class Cliente extends Usuario {
+
     private String celular;
     private String correo;
-    
-    public Cliente(String nombre, String apellido, String usuario, String contrasena, char tipo, String celular,String correo) {
+    Scanner sc = new Scanner(System.in);
+
+    public Cliente(String nombre, String apellido, String usuario, String contrasena, char tipo, String celular, String correo) {
         super(nombre, apellido, usuario, contrasena, tipo);
-        this.celular=celular;
-        this.correo=correo;                
-        
+        this.celular = celular;
+        this.correo = correo;
+
     }
 
     public String getCelular() {
@@ -44,11 +50,11 @@ public class Cliente extends Usuario{
     public String toString() {
         return "Cliente{" + "celular=" + celular + ", correo=" + correo + '}';
     }
-    
-   //public Solicitud registrarSolicitud(){}
+
+    //public Solicitud registrarSolicitud(){}
     //public void registrarPago(){}
-    public void menuCliente(Cliente cliente, ArrayList<Usuario> usuarios){
-        Scanner sc = new Scanner(System.in);
+    public void menuCliente(Cliente cliente, ArrayList<Usuario> usuarios) {
+
         System.out.println("\n 1. Solicitar planificacion de evento");
         System.out.println(" 2. Registrar pago evento");
         System.out.println(" 3. Salir");
@@ -70,26 +76,26 @@ public class Cliente extends Usuario{
 
                 System.out.println("Seleccione: ");
                 int seleccion = sc.nextInt();
-                //sc.nextLine();
-                
+                sc.nextLine();
+
                 Date fechaEvento;
-                switch (seleccion) {                 
+                switch (seleccion) {
                     case 1: // BODA
-                        fechaEvento = cliente.validarFecha();
+                        Date fecha = new Date();
+                        System.out.println(cliente.validarFecha(seleccion));
                         // crear solicitud 
-                        Solicitud solicitud = new Solicitud(cliente,new Date(), fechaEvento, usuarios);
-                        
-                        
+                        //Solicitud solicitud = new Solicitud(cliente,new Date(), fechaEvento, usuarios);
+
                         break;
                     case 2: // FIESTA INTANTIL
                         fechaEvento = cliente.validarFecha();
-                        
+
                         break;
                     case 3: // FIESTA EMPRESARIAL
                         fechaEvento = cliente.validarFecha();
-                        
+
                         break;
-                        
+
                 }
 
                 break;
@@ -106,32 +112,58 @@ public class Cliente extends Usuario{
         }
 
     }
-    
-     public Boolean validarFecha(Date fechaEvento,int opcion){
-         Date fechaActual=new Date();
-         fechaActual.getDay();
-        
-        int diferencia=(fechaEvento.getYear()-(fechaActual.getYear()))*12+fechaEvento.getMonth()-fechaActual.getMonth();
-        int dias=(int) ((fechaEvento.getTime()-fechaActual.getTime())/86400000);;
-        switch(opcion){
+
+    public Boolean validarFecha(int opcion) {
+        System.out.println("Ingresa fecha Evento: ");
+        String fechaEvento = sc.nextLine();
+        int diferencia = calcularDiferenciaFechas(fechaEvento, opcion);
+
+        switch (opcion) {
             case 1://Boda
-                if(diferencia>=10)
+                if (diferencia >= 10) {
                     return true;
-                else
+                } else {
                     return false;
+                }
             case 2://Fiesta Infantil
-                if(dias>21)
+                if (diferencia > 21) {
                     return true;
-                else
+                } else {
                     return false;
+                }
             case 3://Fiesta Empresarial
-                if(diferencia>2)
+                if (diferencia > 2) {
                     return true;
-                else
+                } else {
                     return false;
+                }
             default:
                 return false;
         }
     }
-    
+
+    @SuppressWarnings("unchecked")
+    private int calcularDiferenciaFechas(String fecha, int opcion) {
+        try {
+            Calendar inicio = new GregorianCalendar();
+            Calendar fin = new GregorianCalendar();
+            inicio.setTime(new Date());
+            fin.setTime(new SimpleDateFormat("dd/MM/yyyy").parse(fecha));
+            int difA = fin.get(Calendar.YEAR) - inicio.get(Calendar.YEAR);
+            int difM = difA * 12 + fin.get(Calendar.MONTH) - inicio.get(Calendar.MONTH);
+            int difD = (int) ((fin.get(Calendar.DATE) - inicio.get(Calendar.DATE)) / 86400000);
+            if (opcion == 1) {
+                return difM;
+            } else if (opcion == 2) {
+                return difD;
+            } else if (opcion == 3) {
+                return difM;
+            }
+
+        } catch (ParseException ex) {
+        }
+        return 0;
+
+    }
+
 }
