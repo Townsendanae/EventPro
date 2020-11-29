@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.*;
 
+
 /**
  *
  * @author danae
@@ -22,6 +23,7 @@ import java.util.*;
 public class EventProAplicacion {
 
     private static ArrayList<Usuario> usuarios = new ArrayList();
+    static Scanner sc = new Scanner(System.in);
 
     /**
      * @param args the command line arguments
@@ -32,12 +34,16 @@ public class EventProAplicacion {
         ArrayList<String> lineasClientes;
         lineasClientes = cargarArchivos("clientes.txt");
         CargarUsuarios(lineas, lineasClientes);
+        
+        Usuario user = EventProAplicacion.menuLogin();
 
-        System.out.println(EventProAplicacion.menuLogin().getNombre());
-        
-        
-        
-        
+        if (user.getTipo() == 'C') {
+            System.out.println("es un cliente"); //mostrar menú y opciones clientes, hacer método
+            MenuCliente(user);
+        } else {
+            System.out.println(""); //nistrar menú y opciones planificadores, hacer método.            
+        }
+
         // TODO code application logic here
     }
 
@@ -68,8 +74,7 @@ public class EventProAplicacion {
         System.out.println("BIENVENIDO A EVENTPRO");
         System.out.println();
         System.out.println("+++++++++++++++++++++++++++");
-        System.out.println();
-        Scanner sc = new Scanner(System.in);
+        System.out.println();     
 
         String nomUsuario, contrasena;
         boolean acceso = true;
@@ -84,7 +89,7 @@ public class EventProAplicacion {
                 acceso = false;
                 for (Usuario usuario : usuarios) {
                     if (nomUsuario.equals(usuario.getUsuario())) {
-                        return usuario;
+                        return usuario;                      
                     }
                 }
             } else {
@@ -105,6 +110,39 @@ public class EventProAplicacion {
             }
         }
         return false;
+    }
+
+    private static boolean MenuCliente(Usuario usuario) {
+        //Scanner sc = new Scanner(System.in);
+        System.out.println("\n 1. Solicitar planificacion de evento");
+        System.out.println(" 2. Registrar pago evento");
+        System.out.println(" 3. Salir");
+
+        System.out.println("Ingrese una opcion: ");
+        int opcion = sc.nextInt();
+        sc.nextLine();
+
+        switch (opcion) {
+            case 1:
+                System.out.println("/**************** NUEVA SOLICITUD ****************/");
+                System.out.println("/*                                               */");
+                System.out.println("/*************************************************/");
+                System.out.println("Bienvenido, " + usuario.getNombre());
+
+                break;
+            case 2:
+                System.out.println("/**************** REGISTRAR PAGO EVENTO ****************/");
+                System.out.println("/*                                               */");
+                System.out.println("/*************************************************/");
+
+                break;
+            case 3:
+                return true;
+
+        }
+
+        return false;
+
     }
 
     /*Metodo por el cual cargaremos todos los datos de los usuarios desde un 
