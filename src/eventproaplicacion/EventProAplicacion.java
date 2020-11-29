@@ -5,7 +5,7 @@
  */
 package eventproaplicacion;
 
-import Usuario.Usuario;
+import Usuario.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,29 +13,140 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  *
  * @author danae
  */
 public class EventProAplicacion {
-    private static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+
+    private static ArrayList<Usuario> usuarios = new ArrayList();
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Usuario.cargarArchivos("usuarios.txt", usuarios);
-        System.out.println(usuarios);
-        System.out.println(usuarios.size());
-        //EventProAplicacion.menuLogin();
+        ArrayList<String> lineas;
+        lineas = cargarArchivos("usuarios.txt");
+        ArrayList<String> lineasClientes;
+        lineasClientes = cargarArchivos("clientes.txt");
+        CargarUsuarios(lineas, lineasClientes);
+
+        System.out.println(EventProAplicacion.menuLogin().getNombre());
+        
+        
+        
+        
         // TODO code application logic here
     }
-    
-  
-    
-    
-     
+
+    private static void CargarUsuarios(ArrayList<String> lineas, ArrayList<String> lineasClientes) {
+        for (String linea : lineas) { // crear Usuarios. 
+            if (!linea.equals("Nombre;Apellido;Usuario;Contrasena;Tipo")) { //modificar para que no salga la primera linea. 
+                String[] datos = linea.split(";");
+                if (datos[4].equals("C")) {
+                    for (String lineaCliente : lineasClientes) {
+                        String[] datosCliente = lineaCliente.split(";");
+                        if (datosCliente[0].equals(datos[2])) {
+                            usuarios.add(new Cliente(datos[0], datos[1], datos[2], datos[3], datos[4].charAt(0), datosCliente[1], datosCliente[2]));
+                        }
+                    }
+                } else {
+                    usuarios.add(new Planificador(datos[0], datos[1], datos[2], datos[3], datos[4].charAt(0)));
+                }
+            }
+        }
+
+    }
+
+    /*Metodo para iniciar sesion*/
+    private static Usuario menuLogin() {
+
+        System.out.println("+++++++++++++++++++++++++++");
+        System.out.println();
+        System.out.println("BIENVENIDO A EVENTPRO");
+        System.out.println();
+        System.out.println("+++++++++++++++++++++++++++");
+        System.out.println();
+        Scanner sc = new Scanner(System.in);
+
+        String nomUsuario, contrasena;
+        boolean acceso = true;
+
+        do {
+            System.out.println("USUARIO: ");
+            nomUsuario = sc.nextLine();
+            System.out.println("CONTRASEÑA: ");
+            contrasena = sc.nextLine();
+
+            if (VerificarUsuario(nomUsuario, contrasena)) {
+                acceso = false;
+                for (Usuario usuario : usuarios) {
+                    if (nomUsuario.equals(usuario.getUsuario())) {
+                        return usuario;
+                    }
+                }
+            } else {
+                System.out.println("\n ******Usuario incorrecto*******\n");
+            }
+
+        } while (acceso);
+
+        return null;
+    }
+
+    private static boolean VerificarUsuario(String nomUsuario, String contrasena) {
+        for (Usuario usuario : usuarios) {
+            if (nomUsuario.equals(usuario.getUsuario())) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    /*Metodo por el cual cargaremos todos los datos de los usuarios desde un 
+      tipo de archivo*/
+    public static ArrayList<String> cargarArchivos(String nombrearchivo) {
+        ArrayList<String> lineas = new ArrayList<>();
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+
+        try {
+            // Apertura del fichero y creacion de BufferedReader para poder
+            // hacer una lectura comoda (disponer del metodo readLine()).
+            archivo = new File(nombrearchivo);
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+
+            // Lectura del fichero
+            String linea;
+            while ((linea = br.readLine()) != null && (!linea.equals(""))) {
+                //System.out.println(linea);
+                lineas.add(linea);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // En el finally cerramos el fichero, para asegurarnos
+            // que se cierra tanto si todo va bien como si salta 
+            // una excepcion.
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        return lineas;
+
+    }
 
     public static void sobreEscribirArchivos(String nombreArchivo, String linea) {
 
@@ -43,9 +154,9 @@ public class EventProAplicacion {
         BufferedWriter bw = null;
         PrintWriter pw = null;
         try {
-            fichero = new FileWriter(nombreArchivo,true);
+            fichero = new FileWriter(nombreArchivo, true);
             bw = new BufferedWriter(fichero);
-            bw.write(linea+"\n");
+            bw.write(linea + "\n");
             System.out.println("ksdsdlsd");
 
         } catch (Exception e) {
@@ -63,7 +174,5 @@ public class EventProAplicacion {
             }
         }
     }
-    
-   
-    
+
 }

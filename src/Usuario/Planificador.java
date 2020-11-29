@@ -21,6 +21,10 @@ public class Planificador extends Usuario{
           super( nombre,  apellido,  usuario,  contrasena,  tipo);
           this.ListaSolicitud = listaSolicitud;
       }
+      
+      public Planificador(String nombre, String apellido, String usuario, String contrasena, char tipo){
+          super( nombre,  apellido,  usuario,  contrasena,  tipo);
+      }
 
       public void nenuPlanificador(){}
 }
