@@ -105,7 +105,7 @@ public class EventProAplicacion {
 
     private static boolean VerificarUsuario(String nomUsuario, String contrasena) {
         for (Usuario usuario : usuarios) {
-            if (nomUsuario.equals(usuario.getUsuario())) {
+            if ((nomUsuario.equals(usuario.getUsuario())) && contrasena.equals(usuario.getContrasena())) {
                 return true;
             } else {
                 return false;
@@ -138,23 +138,22 @@ public class EventProAplicacion {
                 System.out.println("Seleccione: ");
                 int seleccion = sc.nextInt();
                 //sc.nextLine();
-
-                switch (seleccion) {
+                
+                Date fechaEvento;
+                switch (seleccion) {                 
                     case 1:
-
-                        Scanner sc = new Scanner(System.in);
-                        System.out.println("Fecha del evento:  "); // USUARIO INGRESA FECHA DEL EVENTO
-                        String fecha = sc.nextLine();
-
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
-                        Date convertedDate = new Date(); // String Fecha convertida a Date
+                        fechaEvento = usuario.validarFecha();
                         
+                        break;
+                    case 2:
+                        fechaEvento = usuario.validarFecha();
                         
-                        try {
-                            convertedDate = dateFormat.parse(fecha);
-                        } catch (ParseException ex) {
-                            Logger.getLogger(EventProAplicacion.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                        break;
+                    case 3:
+                        fechaEvento = usuario.validarFecha();
+                        
+                        break;
+                        
                 }
 
                 break;

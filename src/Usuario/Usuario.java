@@ -8,8 +8,12 @@ package Usuario;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.Calendar;
 
 /**
  *
@@ -73,14 +77,39 @@ public class Usuario {
     }
     
     
-    
-     
-    
-    
     @Override
     public String toString() {
         return "Usuario{" + "nombre=" + nombre + ", apellido=" + apellido + ", usuario=" + usuario + ", contrasena=" + contrasena + ", tipo=" + tipo + '}';
     }
+    
+    public Date validarFecha() {
+        
+        Calendar c = Calendar.getInstance();
+        Date hoy = new Date();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Fecha del evento:  "); // USUARIO INGRESA FECHA DEL EVENTO
+        String fecha = sc.nextLine();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy"); // El formato.
+        Date convertedDate = new Date(); // Se crea el objeto al que se le va a designar la hora del usuario. 
+
+        try {
+            convertedDate = dateFormat.parse(fecha); // se convierte String a Date
+        } catch (ParseException ex) {
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex); 
+        }
+        
+        // -----------No sé como comparar las fechas :( ------
+        //System.out.println(hoy);
+        //System.out.println(convertedDate);
+        
+        //c.add(Calendar.MONTH, 10);
+        //System.out.println(hoy.compareTo(convertedDate));
+
+        return convertedDate; // --------- Hasta que funcione el método que retorne esto. -----
+    }
+    
+    
     
     //Metodos por agregar
     
