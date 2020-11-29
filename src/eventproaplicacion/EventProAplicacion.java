@@ -6,17 +6,17 @@
 package eventproaplicacion;
 
 import Usuario.*;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+//import java.io.BufferedReader;
+//import java.io.BufferedWriter;
+//import java.io.File;
+//import java.io.FileReader;
+//import java.io.FileWriter;
+//import java.io.PrintWriter;
+import java.io.*;
 //import java.util.ArrayList;
 import java.util.*;
 import java.text.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -41,9 +41,10 @@ public class EventProAplicacion {
 
         if (user.getTipo() == 'C') {
             System.out.println("es un cliente"); //mostrar menú y opciones clientes, hacer método
-            MenuCliente(user);
+                Cliente userCliente = (Cliente) user;
+                userCliente.menuCliente(userCliente,usuarios);
         } else {
-            System.out.println(""); //nistrar menú y opciones planificadores, hacer método.            
+            System.out.println(""); //mostrar menú y opciones planificadores, hacer método.            
         }
 
         // TODO code application logic here
@@ -113,66 +114,29 @@ public class EventProAplicacion {
         }
         return false;
     }
+    
+   
 
-    private static boolean MenuCliente(Usuario usuario) {
-        //Scanner sc = new Scanner(System.in);
-        System.out.println("\n 1. Solicitar planificacion de evento");
-        System.out.println(" 2. Registrar pago evento");
-        System.out.println(" 3. Salir");
-
-        System.out.println("Ingrese una opcion: ");
-        int opcion = sc.nextInt();
-        sc.nextLine();
-
-        switch (opcion) {
-            case 1:
-                System.out.println("/**************** NUEVA SOLICITUD ****************/");
-                System.out.println("/*                                               */");
-                System.out.println("/*************************************************/");
-                System.out.println("Bienvenido, " + usuario.getNombre());
-                System.out.println("TIPO DE EVENTO (Elija) ");
-                System.out.println("\n 1. Boda");
-                System.out.println(" 2. Fiesta Infantil");
-                System.out.println(" 3. Fiesta Empresarial");
-
-                System.out.println("Seleccione: ");
-                int seleccion = sc.nextInt();
-                //sc.nextLine();
-                
-                Date fechaEvento;
-                switch (seleccion) {                 
-                    case 1:
-                        fechaEvento = usuario.validarFecha();
-                        
-                        break;
-                    case 2:
-                        fechaEvento = usuario.validarFecha();
-                        
-                        break;
-                    case 3:
-                        fechaEvento = usuario.validarFecha();
-                        
-                        break;
-                        
-                }
-
-                break;
-
-            case 2:
-                System.out.println("/**************** REGISTRAR PAGO EVENTO ****************/");
-                System.out.println("/*                                               */");
-                System.out.println("/*************************************************/");
-
-                break;
-            case 3:
-                return true;
-
-        }
-
-        return false;
-
-    }
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

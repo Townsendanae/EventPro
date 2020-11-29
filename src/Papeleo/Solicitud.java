@@ -11,7 +11,7 @@ import java.util.*;
  * @author danae
  */
 public class Solicitud {
-    private String numero;
+    private static int numero;
     private Cliente cliente;
     private Planificador planificador;
     private Date fechaSolicitud;
@@ -20,7 +20,7 @@ public class Solicitud {
     private EstadoSolicitud estadoSolicitud;
     
  //---- Setters ------
-    public void setNumero(String numero){
+    public void setNumero(int numero){
         this.numero = numero;  
     }
     
@@ -46,7 +46,7 @@ public class Solicitud {
      
     //----- Getters -----
     
-    public String getNumero(){
+    public int getNumero(){
         return this.numero;
     }
     
@@ -81,14 +81,41 @@ public class Solicitud {
     
     // ---- Constructores ---- 
     
-    public Solicitud(String numero, Cliente cliente, Planificador planificador, Date fechaSolicitud, Date fechaEvento, int id){
+//    public Solicitud(String numero, Cliente cliente, Planificador planificador, Date fechaSolicitud, Date fechaEvento, int id){
+//        this.cliente = cliente;
+//        this.numero = numero;
+//        this.fechaEvento = fechaEvento;
+//        this.fechaSolicitud = fechaSolicitud;
+//        this.id = id;
+//        this.planificador = planificador;
+//        this.estadoSolicitud = EstadoSolicitud.PENDIENTE;
+//    }
+    
+    public Solicitud(Cliente cliente, Date fechaSolicitud, Date fechaEvento, ArrayList<Usuario> usuarios){
         this.cliente = cliente;
-        this.numero = numero;
+        this.numero += 1;
         this.fechaEvento = fechaEvento;
         this.fechaSolicitud = fechaSolicitud;
-        this.id = id;
-        this.planificador = planificador;
+        //this.id = id;
+        this.planificador = AsignarPlanificador(usuarios);
         this.estadoSolicitud = EstadoSolicitud.PENDIENTE;
     }
+    
+    public Planificador AsignarPlanificador(ArrayList<Usuario> usuarios){
+        // Crear array Planificadores
+        ArrayList <Planificador> planificadores = new ArrayList();
+        for (Usuario usuario: usuarios){
+            if(usuario.getTipo() == 'P')
+                planificadores.add((Planificador)usuario);                     
+        }              
+        // Generar valor aleatorio entre 0 y longitud de la Arraylist Planificador
+        int tamano = planificadores.size();
+        Random r = new Random();
+        int aleatorio = r.nextInt(tamano);
+        Planificador planificador = planificadores.get(aleatorio);
+        return planificador;        
+    }
+    
+    
 }
     
