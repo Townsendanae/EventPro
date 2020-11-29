@@ -107,4 +107,31 @@ public class Cliente extends Usuario{
 
     }
     
+     public Boolean validarFecha(Date fechaEvento,int opcion){
+         Date fechaActual=new Date();
+         fechaActual.getDay();
+        
+        int diferencia=(fechaEvento.getYear()-(fechaActual.getYear()))*12+fechaEvento.getMonth()-fechaActual.getMonth();
+        int dias=(int) ((fechaEvento.getTime()-fechaActual.getTime())/86400000);;
+        switch(opcion){
+            case 1://Boda
+                if(diferencia>=10)
+                    return true;
+                else
+                    return false;
+            case 2://Fiesta Infantil
+                if(dias>21)
+                    return true;
+                else
+                    return false;
+            case 3://Fiesta Empresarial
+                if(diferencia>2)
+                    return true;
+                else
+                    return false;
+            default:
+                return false;
+        }
+    }
+    
 }
