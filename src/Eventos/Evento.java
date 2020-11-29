@@ -18,6 +18,8 @@ public class Evento {
     protected Cliente cliente;
     protected Planificador planificador;
     protected EstadoEvento estado;
+    protected String horaInicio; 
+    protected String horaFin; 
    // TipoEvento tipo;
     protected ArrayList<Adicional> adicionales;
 

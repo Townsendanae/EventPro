@@ -28,11 +28,7 @@ public class FiestaEmpresarial extends Evento{
     public void setCantPersonas(int cantPersonas) {
         this.cantPersonas = cantPersonas;
     }
-    
-     public String mostrarMensahe(){
-        return "YA VERE QUE SE PONE AQUI X3";
-    }
-     
+  
      //------- Constructores --------
      
      public FiestaEmpresarial(int ID, Cliente cliente, Planificador planificador, ArrayList<Adicional> adicionales, int capacidad, boolean transporte, int cantPersonas){
@@ -41,5 +37,11 @@ public class FiestaEmpresarial extends Evento{
         this.cantPersonas = cantPersonas;
         this.precio = 2000;
     }
+     //-----Metodos------------
+     public String mostrarMensaje(){//IMPRESION
+        return "--------Registro de Datos del Evento-------------------"+"\nHora inicio: "+this.horaInicio+"\nHora final: "+this.horaFin+"\nCapacidad: "+this.cantPersonas+"\n¿Desea registrar elementos adicionales?(S/N)";
+    }
+     
+     
 
 }

@@ -58,4 +58,8 @@ public class FiestaInfantil extends Evento {
         this.sorpresas = sorpresas;
 
    }
+   //-----metodos-----------------
+    public String mostrarMensaje(){//IMPRESION
+        return "--------Registro de Datos del Evento-------------------"+"\nHora inicio: "+this.horaInicio+"\nHora final: "+this.horaFin+"\nPersonajes Disfrazados: "+this.personajesDis+"\n¿Desea registrar elementos adicionales?(S/N)";
+    }
 }
