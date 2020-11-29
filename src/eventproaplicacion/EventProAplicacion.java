@@ -150,11 +150,11 @@ public class EventProAplicacion {
                         Date convertedDate = new Date(); // String Fecha convertida a Date
                         
                         
-//                        try {
-//                            convertedDate = dateFormat.parse(fecha);
-//                        } catch (ParseException ex) {
-//                            Logger.getLogger(EventProAplicacion.class.getName()).log(Level.SEVERE, null, ex);
-//                        }
+                        try {
+                            convertedDate = dateFormat.parse(fecha);
+                        } catch (ParseException ex) {
+                            Logger.getLogger(EventProAplicacion.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                 }
 
                 break;
@@ -174,6 +174,12 @@ public class EventProAplicacion {
 
     }
 
+    
+    
+    
+    
+    
+    
     /*Metodo por el cual cargaremos todos los datos de los usuarios desde un 
       tipo de archivo*/
     public static ArrayList<String> cargarArchivos(String nombrearchivo) {
