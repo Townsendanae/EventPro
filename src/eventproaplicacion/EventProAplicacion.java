@@ -12,9 +12,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.*;
-
+import java.text.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -34,7 +36,7 @@ public class EventProAplicacion {
         ArrayList<String> lineasClientes;
         lineasClientes = cargarArchivos("clientes.txt");
         CargarUsuarios(lineas, lineasClientes);
-        
+
         Usuario user = EventProAplicacion.menuLogin();
 
         if (user.getTipo() == 'C') {
@@ -74,7 +76,7 @@ public class EventProAplicacion {
         System.out.println("BIENVENIDO A EVENTPRO");
         System.out.println();
         System.out.println("+++++++++++++++++++++++++++");
-        System.out.println();     
+        System.out.println();
 
         String nomUsuario, contrasena;
         boolean acceso = true;
@@ -89,7 +91,7 @@ public class EventProAplicacion {
                 acceso = false;
                 for (Usuario usuario : usuarios) {
                     if (nomUsuario.equals(usuario.getUsuario())) {
-                        return usuario;                      
+                        return usuario;
                     }
                 }
             } else {
@@ -128,8 +130,35 @@ public class EventProAplicacion {
                 System.out.println("/*                                               */");
                 System.out.println("/*************************************************/");
                 System.out.println("Bienvenido, " + usuario.getNombre());
+                System.out.println("TIPO DE EVENTO (Elija) ");
+                System.out.println("\n 1. Boda");
+                System.out.println(" 2. Fiesta Infantil");
+                System.out.println(" 3. Fiesta Empresarial");
+
+                System.out.println("Seleccione: ");
+                int seleccion = sc.nextInt();
+                //sc.nextLine();
+
+                switch (seleccion) {
+                    case 1:
+
+                        Scanner sc = new Scanner(System.in);
+                        System.out.println("Fecha del evento:  "); // USUARIO INGRESA FECHA DEL EVENTO
+                        String fecha = sc.nextLine();
+
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+                        Date convertedDate = new Date(); // String Fecha convertida a Date
+                        
+                        
+//                        try {
+//                            convertedDate = dateFormat.parse(fecha);
+//                        } catch (ParseException ex) {
+//                            Logger.getLogger(EventProAplicacion.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
+                }
 
                 break;
+
             case 2:
                 System.out.println("/**************** REGISTRAR PAGO EVENTO ****************/");
                 System.out.println("/*                                               */");
