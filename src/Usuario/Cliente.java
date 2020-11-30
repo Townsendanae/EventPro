@@ -93,7 +93,7 @@ public class Cliente extends Usuario {
                             }
                             System.out.println("¡Fecha Válida!");
 
-                            Solicitud solicitud_Boda = new Solicitud(cliente, new Date(), fechaEvento, usuarios, "Boda"); // SE CREA LA SOLICITUD
+                            Solicitud solicitud_Boda = new Solicitud(cliente, new Date(), fechaEvento, usuarios, TipoEvento.BODA, 3500); // SE CREA LA SOLICITUD
                             Planificador planificador = solicitud_Boda.AsignarPlanificador(usuarios);
                             for (Usuario usuario : usuarios) {
                                 if (usuario == planificador) {
@@ -112,7 +112,7 @@ public class Cliente extends Usuario {
                                 fechaEvento = sc.nextLine();
                             }
                             System.out.println("¡Fecha Válida!");
-                            Solicitud solicitud_FI = new Solicitud(cliente, new Date(), fechaEvento, usuarios, "Fiesta Infantil"); // SE CREA LA SOLICITUDlicitud solicitud_FI = new Solicitud(cliente, new Date(), fechaEvento, usuarios, "Fiesta Infantil"); // SE CREA LA SOLICITUD
+                            Solicitud solicitud_FI = new Solicitud(cliente, new Date(), fechaEvento, usuarios, TipoEvento.FIESTAINFANTIL,300); // SE CREA LA SOLICITUDlicitud solicitud_FI = new Solicitud(cliente, new Date(), fechaEvento, usuarios, "Fiesta Infantil"); // SE CREA LA SOLICITUD
                             Planificador planificador_FI = solicitud_FI.AsignarPlanificador(usuarios);
                             for (Usuario usuario : usuarios) {
                                 if (usuario == planificador_FI) {
@@ -129,7 +129,7 @@ public class Cliente extends Usuario {
                                 fechaEvento = sc.nextLine();
                             }
                             System.out.println("¡Fecha Válida!");
-                            Solicitud solicitud_FE = new Solicitud(cliente, new Date(), fechaEvento, usuarios, "Fiesta Empresarial"); // SE CREA LA SOLICITUDolicitud solicitud_FE = new Solicitud(cliente, new Date(), fechaEvento, usuarios, "Fiesta Empresarial"); // SE CREA LA SOLICITUD
+                            Solicitud solicitud_FE = new Solicitud(cliente, new Date(), fechaEvento, usuarios, TipoEvento.FIESTAEMPRESARIAL,2000); // SE CREA LA SOLICITUD
                             Planificador planificador_FE = solicitud_FE.AsignarPlanificador(usuarios);
                             for (Usuario usuario : usuarios) {
                                 if (usuario == planificador_FE) {

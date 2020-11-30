@@ -4,6 +4,7 @@ import Papeleo.EstadoEvento;
 import Usuario.Cliente;
 import Usuario.Planificador;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -31,8 +32,8 @@ public class FiestaEmpresarial extends Evento{
   
      //------- Constructores --------
      
-     public FiestaEmpresarial(int ID, Cliente cliente, Planificador planificador, ArrayList<Adicional> adicionales, int capacidad, boolean transporte, int cantPersonas){
-        super(ID, cliente, planificador, adicionales, capacidad);
+     public FiestaEmpresarial(Cliente cliente, Planificador planificador, Date fecha, String horaInicio, String horaFin, int capacidad, boolean transporte, int cantPersonas){
+        super(cliente, planificador, fecha, horaInicio, horaFin, capacidad);
         this.transporte = transporte;
         this.cantPersonas = cantPersonas;
         this.precio = 2000;

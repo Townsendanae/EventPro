@@ -5,9 +5,10 @@
  */
 package Usuario;
 
-import Papeleo.Solicitud;
+import Papeleo.*;
 import java.util.*;
 import Eventos.*;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -51,14 +52,93 @@ public class Planificador extends Usuario {
                 case 1:
                     System.out.println("/**************** SOLICITUDES PENDIENTES ****************/");
                     System.out.println("/*                                                      */");
-                    System.out.println("/********************************************************/");
-                    
-                    System.out.println(planificador.ListaSolicitud);
+                    System.out.println("/********************************************************/\n");
 
-//                    for (int i = 0; i > ListaSolicitud.size(); i++) {
-//                        System.out.println(i+1 + ". " + planificador.ListaSolicitud.get(i).toString());
-//
-//                    }
+                    System.out.println(planificador.ListaSolicitud);
+                    int contador = 1;
+
+                    for (Solicitud solicitud : ListaSolicitud) {
+                        System.out.println("" + contador + ". " + solicitud.getId()+" - "+new SimpleDateFormat("dd/MM/yyyy").format(solicitud.getFechaEvento()));
+                        contador += 1;
+
+                    }
+                    break;
+                case 2: 
+                     
+                    System.out.println("Ingrese el id de la solicitud: ");
+                    int id = sc.nextInt();
+                    sc.nextLine();
+                    
+                    for (Solicitud solicitud: ListaSolicitud){
+                        if (solicitud.getId() == id){                           
+                            solicitud.toString();
+                            System.out.println("/****************  REGISTRO DE DATOS DEL EVENTO  ****************/");
+                            
+                            System.out.println("Hora de inicio: ");
+                            String horaInicio = sc.nextLine();
+                            System.out.println("Hora fin: ");
+                            String horaFin = sc.nextLine();
+                            
+                            switch(solicitud.getTipoEvento()){
+                                case BODA:
+                                    System.out.println("Tipo vehículo: ");
+                                    String tipoVehiculo = sc.nextLine();
+                                    
+                                    // CREAR BODA
+                                    
+                                    System.out.println("¿Desea agregar elementos adicionales? (S/N)");
+                                    String agregarAdicional = sc.nextLine();
+                                    
+                                    if (agregarAdicional.equals("S")){
+                                        
+                                      // AGREGAR ADICIONALES PARA BODA 
+                                        
+                                    }
+                                    
+                                    
+                                    break;
+                                case FIESTAINFANTIL:
+                                    System.out.println("Cantidad personajes disfrazados: ");
+                                    int personajesDis = sc.nextInt();
+                                    sc.nextLine();
+                                    System.out.println("Cantidad sorpresas: ");
+                                    int sorpresas = sc.nextInt();
+                                    sc.nextLine();
+                                    
+                                    break;
+                                case FIESTAEMPRESARIAL:
+                                    
+                                    System.out.println("¿Desea transporte? (S/N): ");
+                                    String trans = sc.nextLine();
+                                    boolean transporte;
+                                    
+                                    switch (trans){
+                                        case "S":
+                                            transporte = true;
+                                            
+                                            
+                                            break;
+                                        case "N":
+                                            transporte = false;
+                                            
+                                            break;
+                                            
+                                        default:
+                                            break;
+                                    }
+                                    
+                                    break;
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                    
+                    
+                    break;
+                
 
             }
 

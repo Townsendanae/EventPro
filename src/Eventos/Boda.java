@@ -4,6 +4,7 @@ import Usuario.*;
 import Papeleo.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -13,8 +14,8 @@ public class Boda extends Evento{
     private String vehiculo; 
     
     //---- Constructor ------------
-    public Boda(int ID, Cliente cliente, Planificador planificador, ArrayList<Adicional> adicionales, int capacidad, String vehiculo){
-        super(ID, cliente, planificador, adicionales, capacidad);
+    public Boda(Cliente cliente, Planificador planificador, Date fecha, String horaInicio, String horaFin, int capacidad, String vehiculo){
+        super(cliente, planificador, fecha, horaInicio, horaFin, capacidad);
         this.vehiculo = vehiculo;
         this.precio = 3500;
     }

@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * @author danae
  */
 public class Solicitud {
-    private static int contador;
+    private static long contador = 100000;
     private int numero;
     private Cliente cliente;
     private Planificador planificador;
@@ -22,7 +22,8 @@ public class Solicitud {
     private Date fechaEvento;
     private int id;
     private EstadoSolicitud estadoSolicitud;
-    private String tipoEvento;
+    private TipoEvento tipoEvento;
+    private double precioBase;
     
  //---- Setters ------
     public void setNumero(int numero){
@@ -77,33 +78,27 @@ public class Solicitud {
         return this.id;
     }
     
-    // ID no debería poder cambiar. ID único.
     
     public EstadoSolicitud getEstadoSolicitud(){
         return this.estadoSolicitud;
     }
     
+    public TipoEvento getTipoEvento(){
+        return this.tipoEvento;
+    }
+    
     
     // ---- Constructores ---- 
-    
-//    public Solicitud(String numero, Cliente cliente, Planificador planificador, Date fechaSolicitud, Date fechaEvento, int id){
-//        this.cliente = cliente;
-//        this.numero = numero;
-//        this.fechaEvento = fechaEvento;
-//        this.fechaSolicitud = fechaSolicitud;
-//        this.id = id;
-//        this.planificador = planificador;
-//        this.estadoSolicitud = EstadoSolicitud.PENDIENTE;
-//    }
-    
-    public Solicitud(Cliente cliente,Date fechaSolicitud, String fechaEvento, ArrayList<Usuario> usuarios, String tipoEvento){
+       
+    public Solicitud(Cliente cliente,Date fechaSolicitud, String fechaEvento, ArrayList<Usuario> usuarios, TipoEvento tipoEvento,double precioBase){
         this.cliente = cliente;
-        this.numero += this.contador +1 ;
+        this.id += this.contador +1 ;
         this.contador += 1;
-        this.fechaSolicitud = fechaSolicitud;
-        this.planificador = planificador;
+        this.fechaSolicitud = fechaSolicitud;      
         this.planificador = AsignarPlanificador(usuarios);
         this.estadoSolicitud = EstadoSolicitud.PENDIENTE;
+        this.precioBase = precioBase;
+        this.tipoEvento = tipoEvento;
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
         Date fecha = new Date();
@@ -134,9 +129,20 @@ public class Solicitud {
         return planificador;        
     }
     
+ 
     
+    @Override
     public String toString(){
-        return this.id+" - "+this.fechaEvento;
+        System.out.println("DATOS:");
+        System.out.println("CLIENTE: "+cliente.getNombre()+" "+cliente.getApellido());
+        System.out.println("PLANIFICADOR ASIGNADO: "+planificador.getNombre()+" "+planificador.getNombre());
+        System.out.println("FECHA DE REGISTRO: "+fechaSolicitud);
+        System.out.println("TIPO EVENTO: "+tipoEvento);
+        System.out.println("FECHA DEL EVENTO: "+new SimpleDateFormat("dd/MM/yyyy").format(fechaEvento));
+        System.out.println("PRECIO BASE: "+precioBase);
+        
+        return "";
+    
     }
     
 }

@@ -182,13 +182,11 @@ public class Evento {
     }
 
     //------Contructores ------
-    public Evento(int ID, Cliente cliente, Planificador planificador, ArrayList<Adicional> adicionales, int capacidad){
-        this.ID = ID;
-        this.adicionales = adicionales;
-        this.capacidad = capacidad;
+    public Evento(Cliente cliente, Planificador planificador, Date fecha, String horaInicio, String horaFin, int capacidad){ 
+        //this.ID = ID; Se genera de forma automática
         this.cliente = cliente;
         this.estado = EstadoEvento.PENDIENTE; 
         this.planificador = planificador;
-        this.precio = precio;
+        this.capacidad = capacidad;
     }
 }
