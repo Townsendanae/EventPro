@@ -77,6 +77,7 @@ public class Cliente extends Usuario {
                 System.out.println("Seleccione: ");
                 int seleccion = sc.nextInt();
                 sc.nextLine();
+                
 
                 Date fechaEvento;
                 switch (seleccion) {
