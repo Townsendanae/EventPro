@@ -23,7 +23,7 @@ public class Evento {
    // TipoEvento tipo;
     protected ArrayList<Adicional> adicionales;
 
-    Scanner sc = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);//Scanner
     
     //----------------Setters -----------
     
@@ -41,16 +41,7 @@ public class Evento {
         return this.ID;
     }
 
-//    public void generarPago() {//PAGA BASE DEL EVENTO ( lo coloqué de una de las clases hijas )
-//        if (tipo.equals("Boda")) {
-//            precio = 3500;
-//        } else if (tipo.equals("FiestaInfantil")) {
-//            precio = 300;
-//        } else {
-//            precio = 2000;
-//        }
-//
-//    }
+
 
     public String mostrarMensaje() {
         return "mensaje"; //FALTA DETALLES
