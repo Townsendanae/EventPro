@@ -53,7 +53,7 @@ public class Cliente extends Usuario {
 
     //public Solicitud registrarSolicitud(){}
     //public void registrarPago(){}
-    public void menuCliente(Cliente cliente, ArrayList<Usuario> usuarios) {
+    public boolean menuCliente(Cliente cliente, ArrayList<Usuario> usuarios) {
 
         System.out.println("\n 1. Solicitar planificacion de evento");
         System.out.println(" 2. Registrar pago evento");
@@ -63,60 +63,95 @@ public class Cliente extends Usuario {
         int opcion = sc.nextInt();
         sc.nextLine();
 
-        switch (opcion) {
-            case 1: // SOLICITAR PLANIFICACION EVENTO
-                System.out.println("/**************** NUEVA SOLICITUD ****************/");
-                System.out.println("/*                                               */");
-                System.out.println("/*************************************************/");
-                System.out.println("Bienvenido, " + cliente.getNombre());
-                System.out.println("TIPO DE EVENTO (Elija) ");
-                System.out.println("\n 1. Boda");
-                System.out.println(" 2. Fiesta Infantil");
-                System.out.println(" 3. Fiesta Empresarial");
+        while (opcion != 3) {
 
-                System.out.println("Seleccione: ");
-                int seleccion = sc.nextInt();
-                sc.nextLine();
-                
+            switch (opcion) {
+                case 1: // SOLICITAR PLANIFICACION EVENTO
+                    System.out.println("/**************** NUEVA SOLICITUD ****************/");
+                    System.out.println("/*                                               */");
+                    System.out.println("/*************************************************/");
+                    System.out.println("Bienvenido, " + cliente.getNombre());
+                    System.out.println("TIPO DE EVENTO (Elija) ");
+                    System.out.println("\n 1. Boda");
+                    System.out.println(" 2. Fiesta Infantil");
+                    System.out.println(" 3. Fiesta Empresarial");
 
-                Date fechaEvento;
-                switch (seleccion) {
-                    case 1: // BODA
-                        Date fecha = new Date();
-                        System.out.println(cliente.validarFecha(seleccion));
-                        // crear solicitud 
-                        //Solicitud solicitud = new Solicitud(cliente,new Date(), fechaEvento, usuarios);
+                    System.out.println("Seleccione: ");
+                    int seleccion = sc.nextInt();
+                    sc.nextLine();
 
-                        break;
-                    case 2: // FIESTA INTANTIL
-                        fechaEvento = cliente.validarFecha();
+                    String fechaEvento;
+                    System.out.println("Ingresa fecha Evento: ");
+                    fechaEvento = sc.nextLine();
+                    switch (seleccion) {
+                        case 1: // BODA               
 
-                        break;
-                    case 3: // FIESTA EMPRESARIAL
-                        fechaEvento = cliente.validarFecha();
+                            while (!cliente.validarTiempo(fechaEvento, seleccion)) {
+                                System.out.println("\n** La fecha es muy próxima. Para este tipo de evento debemos tener por lo menos 10 meses para planificar. Ingrese nuevamente \n");
+                                System.out.println("Ingresa fecha Evento: ");
+                                fechaEvento = sc.nextLine();
+                            }
+                            System.out.println("¡Fecha Válida!");
 
-                        break;
+                            Solicitud solicitud_Boda = new Solicitud(cliente, new Date(), fechaEvento, usuarios, "Boda"); // SE CREA LA SOLICITUD
+                            Planificador planificador = solicitud_Boda.AsignarPlanificador(usuarios);
+                            for (Usuario usuario : usuarios) {
+                                if (usuario == planificador) {
+                                    planificador.setListaSolicitud(solicitud_Boda);
+                                }
+                            }
+                            System.out.println("Ha registrado todos los datos necesarios para la solicitud");
+                            break;
 
-                }
+                        case 2: // FIESTA INTANTIL
 
-                break;
+                            while (!cliente.validarTiempo(fechaEvento, seleccion)) {
+                                System.out.println("\n** La fecha es muy próxima. Para este tipo de evento debemos tener por lo menos 3 semanas para planificar. Ingrese nuevamente \n");
+                                System.out.println("Ingresa fecha Evento: ");
+                                fechaEvento = sc.nextLine();
+                            }
+                            System.out.println("¡Fecha Válida!");
+                            Solicitud solicitud_FI = new Solicitud(cliente, new Date(), fechaEvento, usuarios, "Fiesta Infantil"); // SE CREA LA SOLICITUDlicitud solicitud_FI = new Solicitud(cliente, new Date(), fechaEvento, usuarios, "Fiesta Infantil"); // SE CREA LA SOLICITUD
+                            Planificador planificador_FI = solicitud_FI.AsignarPlanificador(usuarios);
+                            for (Usuario usuario : usuarios) {
+                                if (usuario == planificador_FI) {
+                                    planificador_FI.setListaSolicitud(solicitud_FI);
+                                }
+                            }
+                            System.out.println("Ha registrado todos los datos necesarios para la solicitud");
+                            break;
 
-            case 2: // REGISTRAR PAGO EVENTO
-                System.out.println("/**************** REGISTRAR PAGO EVENTO ****************/");
-                System.out.println("/*                                               */");
-                System.out.println("/*************************************************/");
+                        case 3: // FIESTA EMPRESARIAL
+                            while (!cliente.validarTiempo(fechaEvento, seleccion)) {
+                                System.out.println("\n**La fecha es muy próxima. Para este tipo de evento debemos tener por lo menos 2 meses para planificar. Ingrese nuevamente. \n");
+                                System.out.println("Ingresa fecha Evento: ");
+                                fechaEvento = sc.nextLine();
+                            }
+                            System.out.println("¡Fecha Válida!");
+                            Solicitud solicitud_FE = new Solicitud(cliente, new Date(), fechaEvento, usuarios, "Fiesta Empresarial"); // SE CREA LA SOLICITUDolicitud solicitud_FE = new Solicitud(cliente, new Date(), fechaEvento, usuarios, "Fiesta Empresarial"); // SE CREA LA SOLICITUD
+                            Planificador planificador_FE = solicitud_FE.AsignarPlanificador(usuarios);
+                            for (Usuario usuario : usuarios) {
+                                if (usuario == planificador_FE) {
+                                    planificador_FE.setListaSolicitud(solicitud_FE);
+                                }
+                            }
+                            System.out.println("Ha registrado todos los datos necesarios para la solicitud");
+                            break;
+                    }
+                    break;
 
-                break;
-            case 3: // SALIR 
-                break;
+                case 2: // REGISTRAR PAGO EVENTO
+                    System.out.println("/**************** REGISTRAR PAGO EVENTO ****************/");
+                    System.out.println("/*                                               */");
+                    System.out.println("/*************************************************/");
 
+                    break;
+            }
         }
-
+        return true;
     }
 
-    public Boolean validarFecha(int opcion) {
-        System.out.println("Ingresa fecha Evento: ");
-        String fechaEvento = sc.nextLine();
+    public Boolean validarTiempo(String fechaEvento, int opcion) {
         int diferencia = calcularDiferenciaFechas(fechaEvento, opcion);
 
         switch (opcion) {
@@ -130,6 +165,7 @@ public class Cliente extends Usuario {
                 if (diferencia > 21) {
                     return true;
                 } else {
+                    System.out.println(diferencia);
                     return false;
                 }
             case 3://Fiesta Empresarial
@@ -149,10 +185,21 @@ public class Cliente extends Usuario {
             Calendar inicio = new GregorianCalendar();
             Calendar fin = new GregorianCalendar();
             inicio.setTime(new Date());
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date fechaEvento = new Date();
+            try {
+                fechaEvento = dateFormat.parse(fecha);
+            } catch (ParseException ex) {
+                Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             fin.setTime(new SimpleDateFormat("dd/MM/yyyy").parse(fecha));
             int difA = fin.get(Calendar.YEAR) - inicio.get(Calendar.YEAR);
             int difM = difA * 12 + fin.get(Calendar.MONTH) - inicio.get(Calendar.MONTH);
-            int difD = (int) ((fin.get(Calendar.DATE) - inicio.get(Calendar.DATE)) / 86400000);
+            int difD = (int) ((fechaEvento.getTime() - (new Date()).getTime()) / 86400000);;
+
+            System.out.println(difD);
             if (opcion == 1) {
                 return difM;
             } else if (opcion == 2) {

@@ -7,7 +7,7 @@ package Usuario;
 
 import Papeleo.Solicitud;
 import java.util.*;
-
+import Eventos.*;
 
 /**
  *
@@ -15,10 +15,11 @@ import java.util.*;
  */
 public class Planificador extends Usuario {
 
-    //ArrayList<Evento> ListaEventos = new ArrayList<Evento>();
-    ArrayList<Solicitud> ListaSolicitud = new ArrayList<Solicitud>();
+    private ArrayList<Evento> ListaEventos = new ArrayList<Evento>();
+    private ArrayList<Solicitud> ListaSolicitud = new ArrayList<Solicitud>();
+    Scanner sc = new Scanner(System.in);
 
-    //---- Constructor ----
+    //---- Constructores ----
     public Planificador(String nombre, String apellido, String usuario, String contrasena, char tipo, ArrayList<Solicitud> listaSolicitud) {
         super(nombre, apellido, usuario, contrasena, tipo);
         this.ListaSolicitud = listaSolicitud;
@@ -28,9 +29,40 @@ public class Planificador extends Usuario {
         super(nombre, apellido, usuario, contrasena, tipo);
     }
 
-    public void nenuPlanificador() {
+    public void setListaSolicitud(Solicitud solicitud) {
+        ListaSolicitud.add(solicitud);
+    }
+
+    public boolean menuPlanificador() {
+        System.out.println("Bienvenido " + this.getNombre());
+        System.out.println("\n 1. Consultar Solicitudes pendientes");
+        System.out.println(" 2. Registrar evento");
+        System.out.println(" 3. Confirmar evento");
+        System.out.println(" 4. Consultar evento");
+        System.out.println(" 5. Salir");
+
+        System.out.println("Ingrese una opcion: ");
+        int opcion = sc.nextInt();
+        sc.nextLine();
+
+        while (opcion != 5) {
+            switch (opcion) {
+
+                case 1:
+                    System.out.println("/**************** SOLICITUDES PENDIENTES ****************/");
+                    System.out.println("/*                                                      */");
+                    System.out.println("/********************************************************/");
+
+                    for (int i = 0; i > ListaSolicitud.size(); i++) {
+                        System.out.println(i + ". " + ListaSolicitud.get(i).toString());
+
+                    }
+
+            }
+
+        }
+        return true;
 
     }
 
-    
 }

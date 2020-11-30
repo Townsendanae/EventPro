@@ -5,7 +5,10 @@
  */
 package Papeleo;
 import Usuario.*;
+import java.text.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author danae
@@ -18,6 +21,7 @@ public class Solicitud {
     private Date fechaEvento;
     private int id;
     private EstadoSolicitud estadoSolicitud;
+    private String tipoEvento;
     
  //---- Setters ------
     public void setNumero(int numero){
@@ -68,7 +72,7 @@ public class Solicitud {
     }
     
     
-    public int getiI(){
+    public int getId(){
         return this.id;
     }
     
@@ -91,14 +95,25 @@ public class Solicitud {
 //        this.estadoSolicitud = EstadoSolicitud.PENDIENTE;
 //    }
     
-    public Solicitud(Cliente cliente, Date fechaSolicitud, Date fechaEvento, ArrayList<Usuario> usuarios){
+    public Solicitud(Cliente cliente,Date fechaSolicitud, String fechaEvento, ArrayList<Usuario> usuarios, String tipoEvento){
         this.cliente = cliente;
         this.numero += 1;
-        this.fechaEvento = fechaEvento;
         this.fechaSolicitud = fechaSolicitud;
-        //this.id = id;
+        this.planificador = planificador;
         this.planificador = AsignarPlanificador(usuarios);
         this.estadoSolicitud = EstadoSolicitud.PENDIENTE;
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+        Date fecha = new Date();
+        try {
+            fecha = dateFormat.parse(fechaEvento);
+        } catch (ParseException ex) {
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.fechaEvento = fecha;
+        
+        
+        
     }
     
     public Planificador AsignarPlanificador(ArrayList<Usuario> usuarios){
@@ -113,9 +128,14 @@ public class Solicitud {
         Random r = new Random();
         int aleatorio = r.nextInt(tamano);
         Planificador planificador = planificadores.get(aleatorio);
+               
         return planificador;        
     }
     
+    
+    public String toString(){
+        return this.id+" - "+this.fechaEvento;
+    }
     
 }
     

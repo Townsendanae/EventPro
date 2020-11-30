@@ -17,7 +17,6 @@ import java.io.*;
 import java.util.*;
 import java.text.*;
 
-
 /**
  *
  * @author danae
@@ -37,15 +36,31 @@ public class EventProAplicacion {
         lineasClientes = cargarArchivos("clientes.txt");
         CargarUsuarios(lineas, lineasClientes);
 
-        Usuario user = EventProAplicacion.menuLogin();
+        boolean salirPrograma = false;
 
-        if (user.getTipo() == 'C') {
-            System.out.println("es un cliente"); //mostrar menú y opciones clientes, hacer método
-                Cliente userCliente = (Cliente) user;
-                userCliente.menuCliente(userCliente,usuarios);
-        } else {
-            System.out.println(""); //mostrar menú y opciones planificadores, hacer método.            
-        }
+        do {
+            Usuario user = EventProAplicacion.menuLogin();
+
+            if (user.getTipo() == 'C') {
+                boolean salirCliente = false;
+                do {
+                    System.out.println("Es un cliente"); //mostrar menú y opciones clientes, hacer método
+                    Cliente userCliente = (Cliente) user;
+                    salirCliente = userCliente.menuCliente(userCliente, usuarios);
+
+                } while (!salirCliente);
+
+            } else {
+                boolean salirPlanificador = false;
+                do {
+                    System.out.println("Es un planificador"); //mostrar menú y opciones planificadores, hacer método. 
+                    Planificador userPlanificador = (Planificador) user;
+                    salirPlanificador = userPlanificador.menuPlanificador();
+
+                } while (!salirPlanificador);
+            }
+
+        } while (!salirPrograma);
 
         // TODO code application logic here
     }
@@ -108,41 +123,11 @@ public class EventProAplicacion {
         for (Usuario usuario : usuarios) {
             if ((nomUsuario.equals(usuario.getUsuario())) && contrasena.equals(usuario.getContrasena())) {
                 return true;
-            } else {
-                return false;
             }
         }
         return false;
     }
-    
-   
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     /*Metodo por el cual cargaremos todos los datos de los usuarios desde un 
       tipo de archivo*/
     public static ArrayList<String> cargarArchivos(String nombrearchivo) {
