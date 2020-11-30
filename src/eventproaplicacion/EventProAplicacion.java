@@ -55,7 +55,7 @@ public class EventProAplicacion {
                 do {
                     System.out.println("Es un planificador"); //mostrar menú y opciones planificadores, hacer método. 
                     Planificador userPlanificador = (Planificador) user;
-                    salirPlanificador = userPlanificador.menuPlanificador();
+                    salirPlanificador = userPlanificador.menuPlanificador(userPlanificador);
 
                 } while (!salirPlanificador);
             }

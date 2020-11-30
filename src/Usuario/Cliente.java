@@ -101,6 +101,7 @@ public class Cliente extends Usuario {
                                 }
                             }
                             System.out.println("Ha registrado todos los datos necesarios para la solicitud");
+
                             break;
 
                         case 2: // FIESTA INTANTIL
@@ -147,6 +148,15 @@ public class Cliente extends Usuario {
 
                     break;
             }
+
+            System.out.println("\n 1. Solicitar planificacion de evento");
+            System.out.println(" 2. Registrar pago evento");
+            System.out.println(" 3. Salir");
+
+            System.out.println("Ingrese una opcion: ");
+            opcion = sc.nextInt();
+            sc.nextLine();
+
         }
         return true;
     }

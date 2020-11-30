@@ -33,7 +33,7 @@ public class Planificador extends Usuario {
         ListaSolicitud.add(solicitud);
     }
 
-    public boolean menuPlanificador() {
+    public boolean menuPlanificador(Planificador planificador) {
         System.out.println("Bienvenido " + this.getNombre());
         System.out.println("\n 1. Consultar Solicitudes pendientes");
         System.out.println(" 2. Registrar evento");
@@ -52,13 +52,25 @@ public class Planificador extends Usuario {
                     System.out.println("/**************** SOLICITUDES PENDIENTES ****************/");
                     System.out.println("/*                                                      */");
                     System.out.println("/********************************************************/");
+                    
+                    System.out.println(planificador.ListaSolicitud);
 
-                    for (int i = 0; i > ListaSolicitud.size(); i++) {
-                        System.out.println(i + ". " + ListaSolicitud.get(i).toString());
-
-                    }
+//                    for (int i = 0; i > ListaSolicitud.size(); i++) {
+//                        System.out.println(i+1 + ". " + planificador.ListaSolicitud.get(i).toString());
+//
+//                    }
 
             }
+
+            System.out.println("\n 1. Consultar Solicitudes pendientes");
+            System.out.println(" 2. Registrar evento");
+            System.out.println(" 3. Confirmar evento");
+            System.out.println(" 4. Consultar evento");
+            System.out.println(" 5. Salir");
+
+            System.out.println("Ingrese una opcion: ");
+            opcion = sc.nextInt();
+            sc.nextLine();
 
         }
         return true;
