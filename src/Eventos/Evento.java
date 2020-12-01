@@ -42,11 +42,6 @@ public class Evento {
     }
 
 
-
-    public String mostrarMensaje() {
-        return "mensaje"; //FALTA DETALLES
-    }
-
     public void guardarAdicional(int numero) {
         String eleccion;
         switch (numero) {
@@ -180,7 +175,14 @@ public class Evento {
 
         }
     }
+    
+    public String mostrarMensaje() {
+        return "mensaje"; //FALTA DETALLES
+    }
 
+    
+    
+    
     //------Contructores ------
     public Evento(Cliente cliente, Planificador planificador, Date fecha, String horaInicio, String horaFin, int capacidad){ 
         //this.ID = ID; Se genera de forma automática
