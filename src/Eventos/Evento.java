@@ -22,6 +22,7 @@ public class Evento {
     protected String horaFin; 
    // TipoEvento tipo;
     protected ArrayList<Adicional> adicionales;
+    protected ArrayList<Double> sumaAdicionales;//La suma de la cuenta de los pedidos adicionales
 
     Scanner sc = new Scanner(System.in);//Scanner
     
@@ -45,7 +46,7 @@ public class Evento {
     public void guardarAdicional(int numero) {
         String eleccion;
         switch (numero) {
-            case 1:
+            case 1://Pedido platos
                 System.out.print("Ingrese la cantidad de platos: ");
                 int cantidad = sc.nextInt();
                 double total = cantidad * 15;
@@ -55,10 +56,11 @@ public class Evento {
                 if (eleccion.equals("S")) //Invoca constructor adicional para COMIDA              
                 {
                     adicionales.add(new Adicional(TipoAdicional.COMIDA, total, cantidad, 15));
+                    sumaAdicionales.add(total);
                 }
                 break;
 
-            case 2:
+            case 2://Pedido Bocaditos
                 System.out.print("Cantidad de bocaditos: ");
                 cantidad = sc.nextInt();
                 if (cantidad > 150) {
@@ -69,6 +71,7 @@ public class Evento {
                     if (eleccion.equals("S")) //Invocar constructor adicional para BOCADITOS
                     {
                         adicionales.add(new Adicional(TipoAdicional.BOCADITOS, total, cantidad, 0.10));
+                        sumaAdicionales.add(total);
                     }
                     break;
 
@@ -84,8 +87,8 @@ public class Evento {
                     break;
                 }
 
-            case 3:
-                System.out.println("Opciones: \n 1. DJ ($300) \n 2. Banda($200)");
+            case 3://Pedido Musica
+                System.out.println("Opciones: \n 1. DJ ($300) \n 2. Banda($2000)");
                 System.out.print("¿Qué prefiere?");
                 int opcion = sc.nextInt();
                 if (opcion == 1) {
@@ -96,6 +99,7 @@ public class Evento {
                     if (eleccion.equals("S")) //Invocar constructor adicional para MUSICA
                     {
                         adicionales.add(new Adicional(TipoAdicional.MUSICA, 300));
+                        sumaAdicionales.add(total);
                     }
                     break;
 
@@ -107,11 +111,13 @@ public class Evento {
                     if (eleccion.equals("S")) //Invocar constructor adicional para MUSICA
                     {
                         adicionales.add(new Adicional(TipoAdicional.MUSICA, 2000));
+                        sumaAdicionales.add(total);
+                       
                     }
                     break;
                 }
 
-            case 4: // 
+            case 4: // Pedido Fotografia
                 total = 500;
                 System.out.println("Total: " + total + " \n Agregar(S/N)");
                 eleccion = sc.nextLine();
@@ -119,6 +125,7 @@ public class Evento {
                 if (eleccion.equals("S")) //Invocar constructor adicional para FOTOGRAFÍA
                 {
                     adicionales.add(new Adicional(TipoAdicional.FOTOGRAFIA, 500));
+                    sumaAdicionales.add(total);
                 }
                 break;
 
@@ -136,6 +143,7 @@ public class Evento {
                         sc.nextLine();
                         if (eleccion.equals("S")) {
                             adicionales.add(new Adicional(TipoAdicional.BEBIDA, total, cantidad, 50));
+                            sumaAdicionales.add(total);
                         }
                         //Invocar constructor adicional para BEBIDA
                         break;
@@ -146,6 +154,7 @@ public class Evento {
                         sc.nextLine();
                         if (eleccion.equals("S")) {
                             adicionales.add(new Adicional(TipoAdicional.BEBIDA, total, cantidad, 25));
+                            sumaAdicionales.add(total);
                         }
                         //Invocar constructor adicional para BEBIDA                       
                         break;
@@ -156,6 +165,7 @@ public class Evento {
                         sc.nextLine();
                         if (eleccion.equals("S")) {
                             adicionales.add(new Adicional(TipoAdicional.BEBIDA, total, cantidad, 3));
+                            sumaAdicionales.add(total);
                         }
                         //Invocar constructor adicional para BEBIDA
                         break;
@@ -166,6 +176,7 @@ public class Evento {
                         sc.nextLine();
                         if (eleccion.equals("S")) {
                             adicionales.add(new Adicional(TipoAdicional.BEBIDA, total, cantidad, 1));
+                            sumaAdicionales.add(total);
                         }
                         //Invocar constructor adicional para BEBIDA
                         break;
@@ -179,8 +190,19 @@ public class Evento {
     public String mostrarMensaje() {
         return "mensaje"; //FALTA DETALLES
     }
-
+    public double generarPago(ArrayList<Double> sumaAdicionales){//Se va sumando el costo de los adicionales
+        double suma=0;
+        for (Double x:sumaAdicionales){
+            suma+=x;
+        }
+        return suma;
+    }
     
+    
+    public String menu(){//SE MUESTRA EL MENÚ
+        
+        return "/*---------------------------------------------------/*"+"\nLas opciones son:\n1.  Comida"+"\n2.  Bocaditos"+"\n3.  Música"+"\n4.  Fotografía"+"\n5.  Bebida"+"\n6.  Regresar al menú anterior";
+    }
     
     
     //------Contructores ------
