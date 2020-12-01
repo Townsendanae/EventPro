@@ -29,7 +29,7 @@ public class Planificador extends Usuario {
     public Planificador(String nombre, String apellido, String usuario, String contrasena, char tipo) {
         super(nombre, apellido, usuario, contrasena, tipo);
     }
-    
+
     public void setListaSolicitud(Solicitud solicitud) {
         ListaSolicitud.add(solicitud);
     }
@@ -54,48 +54,54 @@ public class Planificador extends Usuario {
                     System.out.println("/*                                                      */");
                     System.out.println("/********************************************************/\n");
 
-                    //System.out.println(planificador.ListaSolicitud);
                     int contador = 1;
 
                     for (Solicitud solicitud : ListaSolicitud) {
-                        System.out.println("" + contador + ". " + solicitud.getId()+" - "+new SimpleDateFormat("dd/MM/yyyy").format(solicitud.getFechaEvento()));
+                        System.out.println("" + contador + ". " + solicitud.getId() + " - " + new SimpleDateFormat("dd/MM/yyyy").format(solicitud.getFechaEvento()));
                         contador += 1;
 
                     }
                     break;
-                case 2: 
-                     
+                case 2:
+
                     System.out.println("Ingrese el id de la solicitud: ");
                     int id = sc.nextInt();
                     sc.nextLine();
-                    
-                    for (Solicitud solicitud: ListaSolicitud){
-                        if (solicitud.getId() == id){                           
+
+                    for (Solicitud solicitud : ListaSolicitud) {
+                        if (solicitud.getId() == id) {
                             solicitud.toString();
                             System.out.println("/****************  REGISTRO DE DATOS DEL EVENTO  ****************/");
-                            
+
                             System.out.println("Hora de inicio: ");
                             String horaInicio = sc.nextLine();
                             System.out.println("Hora fin: ");
                             String horaFin = sc.nextLine();
-                            
-                            switch(solicitud.getTipoEvento()){
+                            System.out.println("Capacidad: ");
+                            int capacidad = sc.nextInt();
+                            sc.nextLine();
+
+                            switch (solicitud.getTipoEvento()) {
                                 case BODA:
                                     System.out.println("Tipo vehículo: ");
                                     String tipoVehiculo = sc.nextLine();
-                                    
-                                    // CREAR BODA
-                                    
+
+                                    Evento eventoBoda = new Boda(solicitud.getCliente(), planificador, solicitud.getFechaEvento(), horaInicio, horaFin, capacidad, tipoVehiculo);// CREAR OBJETO BODA
+                                    ListaEventos.add(eventoBoda);
+                                    System.out.println("/*-------------------------------------------------------------*/");
                                     System.out.println("¿Desea agregar elementos adicionales? (S/N)");
-                                    String agregarAdicional = sc.nextLine();
-                                    
-                                    if (agregarAdicional.equals("S")){
-                                        
-                                      // AGREGAR ADICIONALES PARA BODA 
-                                        
+                                    String adicionalBoda = sc.nextLine();
+
+                                    if (adicionalBoda.equals("S")) {
+                                        int eleccion = 0;
+                                        do {// Mostrar Menú adicional: 
+                                            eleccion = eventoBoda.mostrarMenuAdicional();
+                                            eventoBoda.guardarAdicional(eleccion);
+                                        } while (eleccion != 6);// AGREGAR ADICIONALES PARA BODA                                     
                                     }
-                                    
-                                    
+
+                                    System.out.println("Ha concluido el ingreso de los datos del evento");
+
                                     break;
                                 case FIESTAINFANTIL:
                                     System.out.println("Cantidad personajes disfrazados: ");
@@ -104,41 +110,55 @@ public class Planificador extends Usuario {
                                     System.out.println("Cantidad sorpresas: ");
                                     int sorpresas = sc.nextInt();
                                     sc.nextLine();
-                                    
-                                    break;
-                                case FIESTAEMPRESARIAL:
-                                    
-                                    System.out.println("¿Desea transporte? (S/N): ");
-                                    String trans = sc.nextLine();
-                                    boolean transporte;
-                                    
-                                    switch (trans){
-                                        case "S":
-                                            transporte = true;
-                                            
-                                            
-                                            break;
-                                        case "N":
-                                            transporte = false;
-                                            
-                                            break;
-                                            
-                                        default:
-                                            break;
+                                    System.out.println("¿Desea Juegos de fiesta? (S/N)");
+                                    String juegosFiesta = sc.nextLine();
+
+                                    Evento eventoFI = new FiestaInfantil(solicitud.getCliente(), planificador, solicitud.getFechaEvento(), horaInicio, horaFin, capacidad, personajesDis, sorpresas, juegosFiesta);// CREAR OBJETO BODA
+                                    ListaEventos.add(eventoFI);
+                                    System.out.println("/*-------------------------------------------------------------*/");
+                                    System.out.println("¿Desea agregar elementos adicionales? (S/N)");
+                                    String adicionalFI = sc.nextLine();
+
+                                    if (adicionalFI.equals("S")) {
+                                        int eleccion = 0;
+                                        do {// Mostrar Menú adicional: 
+                                            eleccion = eventoFI.mostrarMenuAdicional();
+                                            eventoFI.guardarAdicional(eleccion);
+                                        } while (eleccion != 6);// AGREGAR ADICIONALES PARA FI                                     
                                     }
-                                    
+
+                                    System.out.println("Ha concluido el ingreso de los datos del evento");
                                     break;
-                                
+
+                                case FIESTAEMPRESARIAL:
+
+                                    System.out.println("¿Desea transporte? (S/N): ");
+                                    String transporte = sc.nextLine();
+
+                                    Evento eventoFE = new FiestaEmpresarial(solicitud.getCliente(), planificador, solicitud.getFechaEvento(), horaInicio, horaFin, capacidad, transporte);// CREAR OBJETO BODA
+                                    ListaEventos.add(eventoFE);
+                                    System.out.println("/*-------------------------------------------------------------*/");
+                                    System.out.println("¿Desea agregar elementos adicionales? (S/N)");
+                                    String adicionalFE = sc.nextLine();
+
+                                    if (adicionalFE.equals("S")) {
+                                        int eleccion = 0;
+                                        do {// Mostrar Menú adicional: 
+                                            eleccion = eventoFE.mostrarMenuAdicional();
+                                            eventoFE.guardarAdicional(eleccion);
+                                        } while (eleccion != 6);// AGREGAR ADICIONALES PARA FI                                     
+                                    }
+
+                                    System.out.println("Ha concluido el ingreso de los datos del evento");
+                                    break;
+
                             }
-                            
+
                         }
-                        
+
                     }
-                    
-                    
-                    
+
                     break;
-                
 
             }
 

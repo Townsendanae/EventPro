@@ -18,7 +18,6 @@ public class Adicional {
     private int cantidad;
     private double precioUnitario; // depende del elemento en particular - constructor. 
     private double total; // precio * cantidad 
-    
 
     Scanner sc = new Scanner(System.in);
 
@@ -47,23 +46,22 @@ public class Adicional {
     public double getTotal() {
         return this.total;
     }
-    
+
     //--- Constructores -----
-    
-    public Adicional(TipoAdicional tipo, double total,int cantidad,double precioUnitario){
+    public Adicional(TipoAdicional tipo, double total, int cantidad, double precioUnitario) {
         this.tipo = tipo;
         this.total = total;
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
     }
-    
-    public Adicional(TipoAdicional tipo, double total){
+
+    public Adicional(TipoAdicional tipo, double total) {
         this.tipo = tipo;
         this.total = total;
         this.cantidad = 1;
         this.precioUnitario = total;
     }
-    
-    }
 
+ 
 
+}

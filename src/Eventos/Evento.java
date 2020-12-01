@@ -44,6 +44,7 @@ public class Evento {
 
 
     public void guardarAdicional(int numero) {
+        
         String eleccion;
         switch (numero) {
             case 1://Pedido platos
@@ -198,10 +199,14 @@ public class Evento {
         return suma;
     }
     
-    
-    public String menu(){//SE MUESTRA EL MENÚ
+    public int mostrarMenuAdicional() {
+        System.out.println("/*---------------------------------------------------/*"+"\nLas opciones son:\n1.  Comida"+"\n2.  Bocaditos"+"\n3.  Música"+"\n4.  Fotografía"+"\n5.  Bebida"+"\n6.  Regresar al menú anterior");
+        System.out.println("Elija elemento a adicionar: ");
+        int eleccion = sc.nextInt();
+        sc.nextLine();
         
-        return "/*---------------------------------------------------/*"+"\nLas opciones son:\n1.  Comida"+"\n2.  Bocaditos"+"\n3.  Música"+"\n4.  Fotografía"+"\n5.  Bebida"+"\n6.  Regresar al menú anterior";
+        return eleccion;
+
     }
     
     
