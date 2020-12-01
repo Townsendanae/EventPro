@@ -29,7 +29,7 @@ public class Planificador extends Usuario {
     public Planificador(String nombre, String apellido, String usuario, String contrasena, char tipo) {
         super(nombre, apellido, usuario, contrasena, tipo);
     }
-
+    
     public void setListaSolicitud(Solicitud solicitud) {
         ListaSolicitud.add(solicitud);
     }
@@ -54,7 +54,7 @@ public class Planificador extends Usuario {
                     System.out.println("/*                                                      */");
                     System.out.println("/********************************************************/\n");
 
-                    System.out.println(planificador.ListaSolicitud);
+                    //System.out.println(planificador.ListaSolicitud);
                     int contador = 1;
 
                     for (Solicitud solicitud : ListaSolicitud) {
