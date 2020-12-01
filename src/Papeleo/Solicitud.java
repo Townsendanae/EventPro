@@ -123,10 +123,10 @@ public class Solicitud {
         // Generar valor aleatorio entre 0 y longitud de la Arraylist Planificador
         int tamano = planificadores.size();
         Random r = new Random();
-        int aleatorio = r.nextInt(tamano);
-        Planificador planificador = planificadores.get(aleatorio);
+        int aleatorio = r.nextInt(tamano-1);
+        Planificador planificadorSelec = planificadores.get(aleatorio);
                
-        return planificador;        
+        return planificadorSelec;        
     }
     
  
@@ -135,7 +135,7 @@ public class Solicitud {
     public String toString(){
         System.out.println("DATOS:");
         System.out.println("CLIENTE: "+cliente.getNombre()+" "+cliente.getApellido());
-        System.out.println("PLANIFICADOR ASIGNADO: "+planificador.getNombre()+" "+planificador.getNombre());
+        System.out.println("PLANIFICADOR ASIGNADO: "+planificador.getNombre()+" "+planificador.getApellido());
         System.out.println("FECHA DE REGISTRO: "+fechaSolicitud);
         System.out.println("TIPO EVENTO: "+tipoEvento);
         System.out.println("FECHA DEL EVENTO: "+new SimpleDateFormat("dd/MM/yyyy").format(fechaEvento));
