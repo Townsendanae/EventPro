@@ -41,7 +41,7 @@ public class Evento {
 
     public void guardarAdicional(int numero) {
 
-
+        String eleccion;
         switch (numero) {
             case 1://Pedido platos
                 System.out.print("Ingrese la cantidad de platos: ");
@@ -49,8 +49,8 @@ public class Evento {
                 sc.nextLine();
                 double total = cantidad * 15;
                 System.out.print("Total: " + total + "\n ¿Agregar?(S/N): ");
-                String eleccionPL = sc.nextLine();
-                if (eleccionPL.equals("S")) //Invoca constructor adicional para COMIDA              
+                eleccion = sc.nextLine();
+                if (eleccion.equals("S")) //Invoca constructor adicional para COMIDA              
                 {
                     adicionales.add(new Adicional(TipoAdicional.COMIDA, total, cantidad, 15));
                     sumaAdicionales.add(total);
@@ -64,8 +64,8 @@ public class Evento {
                 if (cantidad > 150) {
                     total = 0.10 * cantidad;
                     System.out.println("Total: " + total + "\n ¿Agregar?(S/N): ");
-                    String eleccionBO = sc.nextLine();
-                    if (eleccionBO.equals("S")) //Invocar constructor adicional para BOCADITOS
+                     eleccion = sc.nextLine();
+                    if (eleccion.equals("S")) //Invocar constructor adicional para BOCADITOS
                     {
                         adicionales.add(new Adicional(TipoAdicional.BOCADITOS, total, cantidad, 0.10));
                         sumaAdicionales.add(total);
@@ -75,8 +75,8 @@ public class Evento {
                 } else {
                     total = 0.25 * cantidad;
                     System.out.println("Total: " + total + "\n ¿Agregar?(S/N): ");
-                    String eleccionBoM = sc.nextLine();
-                    if (eleccionBoM.equals("S")) //Invocar constructor adicional para BOCADITOS
+                     eleccion = sc.nextLine();
+                    if (eleccion.equals("S")) //Invocar constructor adicional para BOCADITOS
                     {
                         adicionales.add(new Adicional(TipoAdicional.BOCADITOS, total, cantidad, 0.25));
                     }
@@ -91,8 +91,8 @@ public class Evento {
                 if (opcion == 1) {
                     total = 300;
                     System.out.println("Total: " + total + " \n Agregar(S/N)");
-                    String eleccionMU = sc.nextLine();
-                    if (eleccionMU.equals("S"))                                      //Invocar constructor adicional para MUSICA
+                     eleccion = sc.nextLine();
+                    if (eleccion.equals("S"))                                      //Invocar constructor adicional para MUSICA
                     {
                         adicionales.add(new Adicional(TipoAdicional.MUSICA, 300));
                         sumaAdicionales.add(total);
@@ -102,8 +102,8 @@ public class Evento {
                 } else {
                     total = 2000;
                     System.out.println("Total: " + total + " \n Agregar(S/N)");
-                    String eleccionMUB = sc.nextLine();
-                    if (eleccionMUB.equals("S"))                                        //Invocar constructor adicional para MUSICA
+                     eleccion = sc.nextLine();
+                    if (eleccion.equals("S"))                                        //Invocar constructor adicional para MUSICA
                     {
                         adicionales.add(new Adicional(TipoAdicional.MUSICA, 2000));
                         sumaAdicionales.add(total);
@@ -115,8 +115,8 @@ public class Evento {
             case 4: // Pedido Fotografia
                 total = 500;
                 System.out.println("Total: " + total + " \n Agregar(S/N)");
-                String eleccionFOT = sc.nextLine();
-                if (eleccionFOT.equals("S")) //Invocar constructor adicional para FOTOGRAFÍA
+                 eleccion = sc.nextLine();
+                if (eleccion.equals("S")) //Invocar constructor adicional para FOTOGRAFÍA
                 {
                     adicionales.add(new Adicional(TipoAdicional.FOTOGRAFIA, 500));
                     sumaAdicionales.add(total);
@@ -135,8 +135,8 @@ public class Evento {
                     case 1:
                         total = 50 * cantidad;
                         System.out.println("Total: " + total + " \n Agregar(S/N)");
-                        String eleccionW = sc.nextLine();
-                        if (eleccionW.equals("S")) {
+                         eleccion = sc.nextLine();
+                        if (eleccion.equals("S")) {
                             adicionales.add(new Adicional(TipoAdicional.BEBIDA, total, cantidad, 50));
                             sumaAdicionales.add(total);
                         }
@@ -145,8 +145,8 @@ public class Evento {
                     case 2:
                         total = 25 * cantidad;
                         System.out.println("Total: " + total + " \n Agregar(S/N)");
-                        String eleccionV = sc.nextLine();
-                        if (eleccionV.equals("S")) {
+                         eleccion = sc.nextLine();
+                        if (eleccion.equals("S")) {
                             adicionales.add(new Adicional(TipoAdicional.BEBIDA, total, cantidad, 25));
                             sumaAdicionales.add(total);
                         }
@@ -155,9 +155,9 @@ public class Evento {
                     case 3:
                         total = 3 * cantidad;
                         System.out.println("Total: " + total + " \n Agregar(S/N)");
-                        String eleccionC = sc.nextLine();
+                         eleccion = sc.nextLine();
                         ;
-                        if (eleccionC.equals("S")) {
+                        if (eleccion.equals("S")) {
                             adicionales.add(new Adicional(TipoAdicional.BEBIDA, total, cantidad, 3));
                             sumaAdicionales.add(total);
                         }
@@ -166,8 +166,8 @@ public class Evento {
                     case 4:
                         total = cantidad;
                         System.out.println("Total: " + total + " \n Agregar(S/N)");
-                        String eleccionR = sc.nextLine();
-                        if (eleccionR.equals("S")) {
+                         eleccion = sc.nextLine();
+                        if (eleccion.equals("S")) {
                             adicionales.add(new Adicional(TipoAdicional.BEBIDA, total, cantidad, 1));
                             sumaAdicionales.add(total);
                         }
