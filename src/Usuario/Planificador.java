@@ -70,7 +70,7 @@ public class Planificador extends Usuario {
                     sc.nextLine();
                     
                     for (Solicitud solicitud: ListaSolicitud){
-                        if (solicitud.getId() == id){                           
+                        if (solicitud.getId().equals(id)){                           
                             solicitud.toString();
                             System.out.println("/****************  REGISTRO DE DATOS DEL EVENTO  ****************/");
                             
@@ -156,5 +156,7 @@ public class Planificador extends Usuario {
         return true;
 
     }
+    
+    
 
 }

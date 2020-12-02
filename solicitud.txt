@@ -1,0 +1,4 @@
+id_solicitud,nombre_cliente,nombre_planificador,fecha_solicitud,fecha_evento,estado
+9881,Luis,Andres,2/11/2020,4/12/2021,PENDIENTE
+2382,Luis,Diego,2/11/2020,5/12/2021,PENDIENTE
+2734,Alonso,Andres,2/11/2020,3/12/2021,PENDIENTE
