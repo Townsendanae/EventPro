@@ -6,6 +6,7 @@
 package Eventos;
 
 import Papeleo.EstadoEvento;
+import Papeleo.Solicitud;
 import Usuario.Cliente;
 import Usuario.Planificador;
 import java.util.ArrayList;
@@ -48,8 +49,8 @@ public class FiestaInfantil extends Evento {
     }
 
     //--- Constructores-----
-    public FiestaInfantil(Cliente cliente, Planificador planificador, Date fecha, String horaInicio, String horaFin, int capacidad, int personajesDis, int sorpresas, String juegosFiesta) {
-        super(cliente, planificador, fecha, horaInicio, horaFin, capacidad);
+    public FiestaInfantil(Cliente cliente, Planificador planificador, Date fecha, String horaInicio, String horaFin, int capacidad, Solicitud solicitud, int personajesDis, int sorpresas, String juegosFiesta) {
+        super(cliente, planificador, fecha, horaInicio, horaFin, capacidad, solicitud);
         this.precio = 300;
         this.personajesDis = personajesDis;
         this.sorpresas = sorpresas;

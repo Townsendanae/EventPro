@@ -64,7 +64,7 @@ public class EventProAplicacion {
 
         // TODO code application logic here
     }
-
+        /*Metodo Para cargar la lista de usuarios*/
     private static void CargarUsuarios(ArrayList<String> lineas, ArrayList<String> lineasClientes) {
         for (String linea : lineas) { // crear Usuarios. 
             if (!linea.equals("Nombre;Apellido;Usuario;Contrasena;Tipo")) { //modificar para que no salga la primera linea. 

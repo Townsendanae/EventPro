@@ -5,6 +5,9 @@
  */
 package Papeleo;
 import Usuario.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.text.*;
 import java.util.*;
 import java.util.logging.Level;
@@ -20,7 +23,7 @@ public class Solicitud {
     private Planificador planificador;
     private Date fechaSolicitud;
     private Date fechaEvento;
-    private int id;
+    private String id;
     private EstadoSolicitud estadoSolicitud;
     private TipoEvento tipoEvento;
     private double precioBase;
@@ -74,7 +77,7 @@ public class Solicitud {
     }
     
     
-    public int getId(){
+    public String getId(){
         return this.id;
     }
     
@@ -92,7 +95,7 @@ public class Solicitud {
        
     public Solicitud(Cliente cliente,Date fechaSolicitud, String fechaEvento, ArrayList<Usuario> usuarios, TipoEvento tipoEvento,double precioBase){
         this.cliente = cliente;
-        this.id += this.contador +1 ;
+        this.id =generarId() ;
         this.contador += 1;
         this.fechaSolicitud = fechaSolicitud;      
         this.planificador = AsignarPlanificador(usuarios);
@@ -108,10 +111,13 @@ public class Solicitud {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.fechaEvento = fecha;
-        
-        
-        
+             
     }
+    
+    
+    
+    
+    
     
     public Planificador AsignarPlanificador(ArrayList<Usuario> usuarios){
         // Crear array Planificadores
@@ -145,5 +151,68 @@ public class Solicitud {
     
     }
     
+    /*Generar Id de Solicitud*/
+    private String generarId(){
+        int id=0;
+        String numero="";
+        for(int i=0;i<4;i++){
+            id= (int) Math.floor(Math.random() * 10);;
+            numero=numero+Integer.toString(id);
+        
+        }
+        return numero;
+    }
+    
+    /*Crear solicitudes desde cliente*/
+    public static void crearSolicitud(Solicitud solicitud){
+        
+        FileWriter fichero = null;
+        BufferedWriter bw = null;
+        PrintWriter pw = null;
+        try {
+            fichero = new FileWriter("solicitud.txt", true);
+            bw = new BufferedWriter(fichero);
+            
+            String fechaSolicitud = solicitud.getFechaSolicitud().getDate()+"/"+
+                    solicitud.getFechaSolicitud().getMonth()+"/"+(solicitud.getFechaSolicitud().getYear()+1900);
+            int mes=0;
+            if (solicitud.getFechaEvento().getMonth()>0 && solicitud.getFechaEvento().getMonth()<=11)
+                mes=solicitud.getFechaEvento().getMonth()+1;
+            else if(solicitud.getFechaEvento().getMonth()==0)
+                mes=12;
+            
+            String fechaEvento = solicitud.getFechaEvento().getDate()+"/"+mes+"/"+
+                    (solicitud.getFechaEvento().getYear()+1900);
+            
+            String[] datos = {solicitud.getId(), solicitud.getCliente().getNombre(),
+                solicitud.getPlanificador().getNombre(),fechaSolicitud,
+            fechaEvento,solicitud.getEstadoSolicitud().toString()};
+            
+            
+            String linea=linea="\n"+datos[0];;
+
+            for (int i = 1; i < datos.length; i++) {
+                
+                linea += ","+datos[i];
+            }
+            System.out.println(linea);
+            bw.write(linea);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Nuevamente aprovechamos el finally para 
+                // asegurarnos que se cierra el fichero.
+                if (null != fichero) {
+                    //fichero.close();
+                    bw.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+
+  }
 }
     

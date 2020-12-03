@@ -67,9 +67,9 @@ public class Planificador extends Usuario {
                     System.out.println("Ingrese el id de la solicitud: ");
                     int id = sc.nextInt();
                     sc.nextLine();
-
-                    for (Solicitud solicitud : ListaSolicitud) {
-                        if (solicitud.getId() == id) {
+                    
+                    for (Solicitud solicitud: ListaSolicitud){
+                        if (solicitud.getId().equals(id)){                           
                             solicitud.toString();
                             System.out.println("/****************  REGISTRO DE DATOS DEL EVENTO  ****************/");
 
@@ -80,14 +80,14 @@ public class Planificador extends Usuario {
                             System.out.println("Capacidad: ");
                             int capacidad = sc.nextInt();
                             sc.nextLine();
-
-                            switch (solicitud.getTipoEvento()) {
+                            Evento evento;
+                            switch (solicitud.getTipoEvento()) {                            
                                 case BODA:
                                     System.out.println("Tipo vehículo: ");
                                     String tipoVehiculo = sc.nextLine();
 
-                                    Evento eventoBoda = new Boda(solicitud.getCliente(), planificador, solicitud.getFechaEvento(), horaInicio, horaFin, capacidad, tipoVehiculo);// CREAR OBJETO BODA
-                                    ListaEventos.add(eventoBoda);
+                                    evento = new Boda(solicitud.getCliente(), planificador, solicitud.getFechaEvento(), horaInicio, horaFin, capacidad, solicitud, tipoVehiculo);// CREAR OBJETO BODA
+                                    ListaEventos.add(evento);
                                     System.out.println("/*-------------------------------------------------------------*/");
                                     System.out.println("¿Desea agregar elementos adicionales? (S/N)");
                                     String adicionalBoda = sc.nextLine();
@@ -95,12 +95,16 @@ public class Planificador extends Usuario {
                                     if (adicionalBoda.equals("S")) {
                                         int eleccion = 0;
                                         do {// Mostrar Menú adicional: 
-                                            eleccion = eventoBoda.mostrarMenuAdicional();
-                                            eventoBoda.guardarAdicional(eleccion);
+                                            eleccion = evento.mostrarMenuAdicional();
+                                            evento.guardarAdicional(eleccion);
                                         } while (eleccion != 6);// AGREGAR ADICIONALES PARA BODA                                     
                                     }
 
                                     System.out.println("Ha concluido el ingreso de los datos del evento");
+                                    System.out.println("El costo total de su evento será "+evento.getPrecio()+" dólares.");
+                                    System.out.println("¿Desea generar su orden de pago? (S/N)");
+                                    String eleccionOrden = sc.nextLine();
+                                    // Método generar orden de pago del evento. Que recibe el String elección.                                    
 
                                     break;
                                 case FIESTAINFANTIL:
@@ -113,8 +117,8 @@ public class Planificador extends Usuario {
                                     System.out.println("¿Desea Juegos de fiesta? (S/N)");
                                     String juegosFiesta = sc.nextLine();
 
-                                    Evento eventoFI = new FiestaInfantil(solicitud.getCliente(), planificador, solicitud.getFechaEvento(), horaInicio, horaFin, capacidad, personajesDis, sorpresas, juegosFiesta);// CREAR OBJETO BODA
-                                    ListaEventos.add(eventoFI);
+                                    evento = new FiestaInfantil(solicitud.getCliente(), planificador, solicitud.getFechaEvento(), horaInicio, horaFin, capacidad, solicitud, personajesDis, sorpresas, juegosFiesta);// CREAR OBJETO BODA
+                                    ListaEventos.add(evento);
                                     System.out.println("/*-------------------------------------------------------------*/");
                                     System.out.println("¿Desea agregar elementos adicionales? (S/N)");
                                     String adicionalFI = sc.nextLine();
@@ -122,8 +126,8 @@ public class Planificador extends Usuario {
                                     if (adicionalFI.equals("S")) {
                                         int eleccion = 0;
                                         do {// Mostrar Menú adicional: 
-                                            eleccion = eventoFI.mostrarMenuAdicional();
-                                            eventoFI.guardarAdicional(eleccion);
+                                            eleccion = evento.mostrarMenuAdicional();
+                                            evento.guardarAdicional(eleccion);
                                         } while (eleccion != 6);// AGREGAR ADICIONALES PARA FI                                     
                                     }
 
@@ -135,8 +139,8 @@ public class Planificador extends Usuario {
                                     System.out.println("¿Desea transporte? (S/N): ");
                                     String transporte = sc.nextLine();
 
-                                    Evento eventoFE = new FiestaEmpresarial(solicitud.getCliente(), planificador, solicitud.getFechaEvento(), horaInicio, horaFin, capacidad, transporte);// CREAR OBJETO BODA
-                                    ListaEventos.add(eventoFE);
+                                    evento = new FiestaEmpresarial(solicitud.getCliente(), planificador, solicitud.getFechaEvento(), horaInicio, horaFin, capacidad, solicitud, transporte);// CREAR OBJETO BODA
+                                    ListaEventos.add(evento);
                                     System.out.println("/*-------------------------------------------------------------*/");
                                     System.out.println("¿Desea agregar elementos adicionales? (S/N)");
                                     String adicionalFE = sc.nextLine();
@@ -144,15 +148,15 @@ public class Planificador extends Usuario {
                                     if (adicionalFE.equals("S")) {
                                         int eleccion = 0;
                                         do {// Mostrar Menú adicional: 
-                                            eleccion = eventoFE.mostrarMenuAdicional();
-                                            eventoFE.guardarAdicional(eleccion);
+                                            eleccion = evento.mostrarMenuAdicional();
+                                            evento.guardarAdicional(eleccion);
                                         } while (eleccion != 6);// AGREGAR ADICIONALES PARA FI                                     
                                     }
 
                                     System.out.println("Ha concluido el ingreso de los datos del evento");
                                     break;
 
-                            }
+                            }                          
 
                         }
 
@@ -176,5 +180,7 @@ public class Planificador extends Usuario {
         return true;
 
     }
+    
+    
 
 }
