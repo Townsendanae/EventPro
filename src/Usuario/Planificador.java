@@ -8,6 +8,7 @@ package Usuario;
 import Papeleo.*;
 import java.util.*;
 import Eventos.*;
+import static eventproaplicacion.EventProAplicacion.cargarArchivos;
 import java.text.SimpleDateFormat;
 
 /**
@@ -35,6 +36,10 @@ public class Planificador extends Usuario {
     }
 
     public boolean menuPlanificador(Planificador planificador) {
+        ArrayList<String> lineas;
+        lineas = cargarArchivos("solicitud.txt");
+        ArrayList<String> lineasClientes;
+        // método para cvargar solicitudes. 
         System.out.println("Bienvenido " + this.getNombre());
         System.out.println("\n 1. Consultar Solicitudes pendientes");
         System.out.println(" 2. Registrar evento");
@@ -67,9 +72,9 @@ public class Planificador extends Usuario {
                     System.out.println("Ingrese el id de la solicitud: ");
                     int id = sc.nextInt();
                     sc.nextLine();
-                    
-                    for (Solicitud solicitud: ListaSolicitud){
-                        if (solicitud.getId().equals(id)){                           
+
+                    for (Solicitud solicitud : ListaSolicitud) {
+                        if (solicitud.getId().equals(id)) {
                             solicitud.toString();
                             System.out.println("/****************  REGISTRO DE DATOS DEL EVENTO  ****************/");
 
@@ -81,7 +86,7 @@ public class Planificador extends Usuario {
                             int capacidad = sc.nextInt();
                             sc.nextLine();
                             Evento evento;
-                            switch (solicitud.getTipoEvento()) {                            
+                            switch (solicitud.getTipoEvento()) {
                                 case BODA:
                                     System.out.println("Tipo vehículo: ");
                                     String tipoVehiculo = sc.nextLine();
@@ -101,13 +106,13 @@ public class Planificador extends Usuario {
                                     }
 
                                     System.out.println("Ha concluido el ingreso de los datos del evento");
-                                    System.out.println("El costo total de su evento será "+evento.getPrecio()+" dólares.");
+                                    System.out.println("El costo total de su evento será " + evento.getPrecio() + " dólares.");
                                     System.out.println("¿Desea generar su orden de pago? (S/N)");
                                     String eleccionOrden = sc.nextLine();
                                     // Método generar orden de pago del evento. 
-                                    if ( eleccionOrden.equals("S")){
-                                        OrdenPago ordenPago = new OrdenPago(evento.getCliente(),evento,evento.getFechaEvento(),evento.getArrayAdicionales(),evento.getPrecio());
-                                        ordenPago.guardarOrdenPago();                                                                             
+                                    if (eleccionOrden.equals("S")) {
+                                        OrdenPago ordenPago = new OrdenPago(evento.getCliente(), evento, evento.getFechaEvento(), evento.getArrayAdicionales(), evento.getPrecio());
+                                        ordenPago.guardarOrdenPago();
                                     }
 
                                     break;
@@ -160,7 +165,7 @@ public class Planificador extends Usuario {
                                     System.out.println("Ha concluido el ingreso de los datos del evento");
                                     break;
 
-                            }                          
+                            }
 
                         }
 
@@ -185,6 +190,18 @@ public class Planificador extends Usuario {
 
     }
     
-    
+//    public void cargarSolicitudes(ArrayList<String> lineas, Planificador planificador){
+//         for (String linea : lineas) { 
+//            if (!linea.equals("id_solicitud,nombre_cliente,nombre_planificador,fecha_solicitud,fecha_evento,estado")) { //modificar para que no salga la primera linea. 
+//                String[] datos = linea.split(",");
+//                if (datos[2].equals(planificador.getNombre())) {
+//                    Solicitud new solicitud = 
+//                    ListaSolicitud.add(solicitud)
+//                   
+//                }
+//            }
+//        }
+//        
+//    }
 
 }

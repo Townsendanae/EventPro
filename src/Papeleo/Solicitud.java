@@ -96,7 +96,6 @@ public class Solicitud {
     public Solicitud(Cliente cliente,Date fechaSolicitud, String fechaEvento, ArrayList<Usuario> usuarios, TipoEvento tipoEvento,double precioBase){
         this.cliente = cliente;
         this.id =generarId() ;
-       // this.contador += 1;
         this.fechaSolicitud = fechaSolicitud;      
         this.planificador = AsignarPlanificador(usuarios);
         this.estadoSolicitud = EstadoSolicitud.PENDIENTE;
@@ -112,6 +111,13 @@ public class Solicitud {
         }
         this.fechaEvento = fecha;
              
+    }
+    
+    public Solicitud(String id, String Nombrecliente, String NombrePlanificador, String fechaSolicitud, String fechaEvento, String Estado ){
+        this.id = id;
+        
+        //for (Cliente cliente: )
+        
     }
     
     
