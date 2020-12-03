@@ -33,9 +33,19 @@ public class Evento {
     public double getPrecio() {
         return this.precio;
     }
+    public Cliente getCliente(){
+        return this.cliente;
+    }
     
     public Date getFechaEvento(){
         return this.fechaEvento;
+    }
+    public int getID(){
+        return this.ID;
+    }
+    
+    public ArrayList<Adicional> getArrayAdicionales(){
+        return this.adicionales;
     }
 
     //-----------------------Metodos------------------------------

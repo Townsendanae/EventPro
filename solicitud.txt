@@ -3,3 +3,4 @@ id_solicitud,nombre_cliente,nombre_planificador,fecha_solicitud,fecha_evento,est
 2382,Luis,Diego,2/11/2020,5/12/2021,PENDIENTE
 2734,Alonso,Andres,2/11/2020,3/12/2021,PENDIENTE
 3382,Alonso,Diego,2/11/2020,25/12/2021,PENDIENTE
+9757,Alonso,Andres,3/11/2020,6/12/2021,PENDIENTE

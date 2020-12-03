@@ -104,7 +104,11 @@ public class Planificador extends Usuario {
                                     System.out.println("El costo total de su evento será "+evento.getPrecio()+" dólares.");
                                     System.out.println("¿Desea generar su orden de pago? (S/N)");
                                     String eleccionOrden = sc.nextLine();
-                                    // Método generar orden de pago del evento. Que recibe el String elección.                                    
+                                    // Método generar orden de pago del evento. 
+                                    if ( eleccionOrden.equals("S")){
+                                        OrdenPago ordenPago = new OrdenPago(evento.getCliente(),evento,evento.getFechaEvento(),evento.getArrayAdicionales(),evento.getPrecio());
+                                        ordenPago.guardarOrdenPago();                                                                             
+                                    }
 
                                     break;
                                 case FIESTAINFANTIL:

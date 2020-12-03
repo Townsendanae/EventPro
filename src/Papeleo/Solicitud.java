@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * @author danae
  */
 public class Solicitud {
-    private static long contador = 100000;
+    //private static long contador = 100000;
     private int numero;
     private Cliente cliente;
     private Planificador planificador;
@@ -96,7 +96,7 @@ public class Solicitud {
     public Solicitud(Cliente cliente,Date fechaSolicitud, String fechaEvento, ArrayList<Usuario> usuarios, TipoEvento tipoEvento,double precioBase){
         this.cliente = cliente;
         this.id =generarId() ;
-        this.contador += 1;
+       // this.contador += 1;
         this.fechaSolicitud = fechaSolicitud;      
         this.planificador = AsignarPlanificador(usuarios);
         this.estadoSolicitud = EstadoSolicitud.PENDIENTE;
