@@ -62,7 +62,7 @@ public class EventProAplicacion {
 
         } while (!salirPrograma);
 
-        //TODO code application logic here
+        // TODO code application logic here
     }
         /*Metodo Para cargar la lista de usuarios*/
     private static void CargarUsuarios(ArrayList<String> lineas, ArrayList<String> lineasClientes) {

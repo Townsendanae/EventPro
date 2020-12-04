@@ -5,6 +5,7 @@
  */
 package Usuario;
 
+import Eventos.Evento;
 import java.util.*;
 import eventproaplicacion.*;
 import Papeleo.*;
@@ -24,6 +25,7 @@ public class Cliente extends Usuario {
 
     private String celular;
     private String correo;
+    private ArrayList<Evento> ListaEventos = new ArrayList<Evento>();
     Scanner sc = new Scanner(System.in);
 
     public Cliente(String nombre, String apellido, String usuario, String contrasena, char tipo, String celular, String correo) {
@@ -35,6 +37,10 @@ public class Cliente extends Usuario {
 
     public String getCelular() {
         return celular;
+    }
+    
+    public void setListaEventos(Evento evento) {
+        ListaEventos.add(evento);
     }
 
     public void setCelular(String celular) {
@@ -98,11 +104,10 @@ public class Cliente extends Usuario {
                             System.out.println("¡Fecha Válida!");
 
                             Solicitud solicitud_B=new Solicitud(cliente, new Date(), fechaEvento, usuarios, TipoEvento.BODA, 3500); // SE CREA LA SOLICITUD
-                            
-                            Planificador planificador = solicitud_B.AsignarPlanificador(usuarios);
+                        
                             for (Usuario usuario : usuarios) {
-                                if (usuario == planificador) {
-                                    planificador.setListaSolicitud(solicitud_B);
+                                if (usuario == solicitud_B.getPlanificador()) {
+                                    solicitud_B.getPlanificador().setListaSolicitud(solicitud_B);
                                 }
                             }
                             System.out.println("Ha registrado todos los datos necesarios para la solicitud");
@@ -121,11 +126,11 @@ public class Cliente extends Usuario {
                                 fechaEvento = sc.nextLine();
                             }
                             System.out.println("¡Fecha Válida!");
-                            Solicitud solicitud_fe = new Solicitud(cliente, new Date(), fechaEvento, usuarios, TipoEvento.FIESTAINFANTIL,300); // SE CREA LA SOLICITUDlicitud solicitud_FI = new Solicitud(cliente, new Date(), fechaEvento, usuarios, "Fiesta Infantil"); // SE CREA LA SOLICITUD
-                            Planificador planificador_FI = solicitud_fe.AsignarPlanificador(usuarios);
+                            Solicitud solicitud_fi = new Solicitud(cliente, new Date(), fechaEvento, usuarios, TipoEvento.FIESTAINFANTIL,300); // SE CREA LA SOLICITUDlicitud solicitud_FI = new Solicitud(cliente, new Date(), fechaEvento, usuarios, "Fiesta Infantil"); // SE CREA LA SOLICITUD
+                            
                             for (Usuario usuario : usuarios) {
-                                if (usuario == planificador_FI) {
-                                    planificador_FI.setListaSolicitud(solicitud_fe);
+                                if (usuario == solicitud_fi.getPlanificador()) {
+                                    solicitud_fi.getPlanificador().setListaSolicitud(solicitud_fi);
                                 }
                             }
                             System.out.println("Ha registrado todos los datos necesarios para la solicitud");
@@ -134,7 +139,7 @@ public class Cliente extends Usuario {
                             
                             op=sc.nextLine();
                             if(op.charAt(0)=='S')
-                                Solicitud.crearSolicitud(solicitud_fe);
+                                Solicitud.crearSolicitud(solicitud_fi);
                             
                             break;
 
@@ -145,11 +150,10 @@ public class Cliente extends Usuario {
                                 fechaEvento = sc.nextLine();
                             }
                             System.out.println("¡Fecha Válida!");
-                            Solicitud solicitud_fem = new Solicitud(cliente, new Date(), fechaEvento, usuarios, TipoEvento.FIESTAEMPRESARIAL,2000); // SE CREA LA SOLICITUD
-                            Planificador planificador_FE = solicitud_fem.AsignarPlanificador(usuarios);
+                            Solicitud solicitud_fem = new Solicitud(cliente, new Date(), fechaEvento, usuarios, TipoEvento.FIESTAEMPRESARIAL,2000); // SE CREA LA SOLICITUD                        
                             for (Usuario usuario : usuarios) {
-                                if (usuario == planificador_FE) {
-                                    planificador_FE.setListaSolicitud(solicitud_fem);
+                                if (usuario == solicitud_fem.getPlanificador()) {
+                                    solicitud_fem.getPlanificador().setListaSolicitud(solicitud_fem);
                                 }
                             }
                             System.out.println("Ha registrado todos los datos necesarios para la solicitud");
@@ -168,6 +172,43 @@ public class Cliente extends Usuario {
                     System.out.println("/**************** REGISTRAR PAGO EVENTO ****************/");
                     System.out.println("/*                                               */");
                     System.out.println("/*************************************************/");
+                    
+                    System.out.println("Ingrese el código de su orden: ");
+                    int idOrden = sc.nextInt();
+                    sc.nextLine();
+                    
+                    for ( OrdenPago ordenPago: ListaOrdenesPago){
+                        if ( (ordenPago.getId()== idOrden) && (ordenPago.getCliente().equals(cliente)) && (ordenPago.getEstadoPago().equals(EstadoPago.PENDIENTEPAGO))){
+                            System.out.println("Su orden con código "+ordenPago.getId()+" está pendiente de pago");
+                            System.out.println("¿Desea registrar el pago ahora? (S/N)");
+                            String registrarPago = sc.nextLine();
+                            
+                            switch(registrarPago){
+                                case "S":
+                                    boolean noSalir = true;
+                                    String codigoTransaccion;
+                                    do{
+                                    System.out.println("Ingrese el código de la transacción: ");
+                                    codigoTransaccion= sc.nextLine();
+                                    if (!codigoTransaccion.matches(".*[a-z].*"))
+                                        noSalir = false;                                 
+                                    } while(noSalir);
+                                    ordenPago.setIdTransaccion(Long.parseLong(codigoTransaccion));
+                                    ordenPago.setFechaRegistroTransaccion(new Date());
+                                    System.out.println("Listo, se ha registrado. Cuando el planificador valide el pago se pondrá en contacto con usted. ");
+                            }
+                            
+                        }
+                        
+                        else if (( ordenPago.getId()== idOrden) && (ordenPago.getCliente().equals(cliente)) && (ordenPago.getEstadoPago().equals(EstadoPago.CONFIRMADO))){
+                            System.out.println("Su orden con código "+ordenPago.getId()+ " está confirmada");
+                        }
+                        else{
+                            System.out.println("No tiene orden de pago con ese código. ");
+                        }
+                    }
+                    
+                    
 
                     break;
             }

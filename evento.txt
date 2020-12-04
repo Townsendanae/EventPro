@@ -1,2 +1,3 @@
 código,nombre_cliente,tipo,fecha,hora_inicio,hora_fin,capacidad,planificador,estado
 8133,Alonso,Boda,4/12/2021,4:50,10:50pm,200,Mercedes,PENDIENTE
+7303,Alonso,Boda,12/12/2021,9,6,200,Diego,PENDIENTE

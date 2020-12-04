@@ -5,6 +5,8 @@
  */
 package Usuario;
 
+import Eventos.Evento;
+import Papeleo.OrdenPago;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -20,11 +22,12 @@ import java.util.Calendar;
  * @author ablup
  */
 public class Usuario {
-    private String nombre;
-    private String apellido;
-    private String usuario;
-    private String contrasena;
-    private char tipo;
+    protected String nombre;
+    protected String apellido;
+    protected String usuario;
+    protected String contrasena;
+    protected char tipo;
+    protected static ArrayList<OrdenPago> ListaOrdenesPago = new ArrayList<OrdenPago>();
 
     public Usuario(String nombre, String apellido, String usuario, String contrasena, char tipo) {
         this.nombre = nombre;
@@ -74,6 +77,15 @@ public class Usuario {
 
     public void setTipo(char tipo) {
         this.tipo = tipo;
+    }
+    
+    
+    public ArrayList<OrdenPago> getListaOrdenesPago(){
+        return this.ListaOrdenesPago;
+    }
+    
+    public void setListaSolicitud(OrdenPago ordenPago) {
+        ListaOrdenesPago.add(ordenPago);
     }
     
     

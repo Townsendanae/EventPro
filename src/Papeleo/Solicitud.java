@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * @author danae
  */
 public class Solicitud {
-    private static long contador = 100000;
+    //private static long contador = 100000;
     private int numero;
     private Cliente cliente;
     private Planificador planificador;
@@ -108,8 +108,8 @@ public class Solicitud {
     public Solicitud(Cliente cliente,Date fechaSolicitud, String fechaEvento, ArrayList<Usuario> usuarios, TipoEvento tipoEvento,double precioBase){
         this.cliente = cliente;
         this.id =generarId() ;
-        this.contador += 1;
-        this.fechaSolicitud = fechaSolicitud;      
+        //this.contador += 1;
+        this.fechaSolicitud =  new Date();      
         this.planificador = AsignarPlanificador(usuarios);
         this.estadoSolicitud = EstadoSolicitud.PENDIENTE;
         this.precioBase = precioBase;
@@ -123,18 +123,6 @@ public class Solicitud {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.fechaEvento = fecha;
-             
-    }
-    
-    public Solicitud(){
-        this.cliente = null;
-        this.id =null ;
-        this.contador += 1;
-        this.fechaSolicitud = null;      
-        this.planificador = null;
-        this.estadoSolicitud = null;
-        this.precioBase = 0;
-        this.tipoEvento = null;
         
              
     }
@@ -166,7 +154,7 @@ public class Solicitud {
     public String toString(){
         System.out.println("DATOS:");
         System.out.println("CLIENTE: "+cliente.getNombre()+" "+cliente.getApellido());
-        System.out.println("PLANIFICADOR ASIGNADO: "+planificador.getNombre()+" "+planificador.getApellido());
+        System.out.println("PLANIFICADOR ASIGNADO: "+planificador.getNombre()+" "+planificador.getNombre());
         System.out.println("FECHA DE REGISTRO: "+fechaSolicitud);
         System.out.println("TIPO EVENTO: "+tipoEvento);
         System.out.println("FECHA DEL EVENTO: "+new SimpleDateFormat("dd/MM/yyyy").format(fechaEvento));
