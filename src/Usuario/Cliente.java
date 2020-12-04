@@ -161,7 +161,7 @@ public class Cliente extends Usuario {
                             
                             break;
                     }
-                    System.out.println(Planificador.getListaSolicitud());
+                    //System.out.println(Planificador.getListaSolicitud());
                     break;
 
                 case 2: // REGISTRAR PAGO EVENTO

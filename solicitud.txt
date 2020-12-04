@@ -1,1 +1,4 @@
 id_solicitud,nombre_cliente,nombre_planificador,fecha_solicitud,fecha_evento,estado
+60368,Alonso,Mercedes,4/11/2020,4/12/2021,PENDIENTE
+38803,Alonso,Andres,4/11/2020,4/12/2021,PENDIENTE
+61493,Alonso,Mercedes,4/11/2020,5/12/2021,PENDIENTE

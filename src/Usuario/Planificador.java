@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
  *
  * @author ablup
  */
+
 public class Planificador extends Usuario {
 
     private static ArrayList<Evento> ListaEventos = new ArrayList<Evento>();
@@ -31,11 +32,11 @@ public class Planificador extends Usuario {
         super(nombre, apellido, usuario, contrasena, tipo);
     }
 
-    public static void setListaSolicitud(Solicitud solicitud) {
+    public  void setListaSolicitud(Solicitud solicitud) {
         ListaSolicitud.add(solicitud);
     }
 
-    public static ArrayList<Solicitud> getListaSolicitud() {
+    public  ArrayList<Solicitud> getListaSolicitud() {
         return ListaSolicitud;
     }
     
@@ -43,7 +44,7 @@ public class Planificador extends Usuario {
     /*Menu de ingreso para el planificador*/
     public boolean menuPlanificador(Planificador planificador) {
         String agregarAdicional;
-        System.out.println("Bienvenido " + this.getNombre());
+        System.out.println("Bienvenido " + planificador.getNombre());
         System.out.println("\n 1. Consultar Solicitudes pendientes");
         System.out.println(" 2. Registrar evento");
         System.out.println(" 3. Confirmar evento");
@@ -62,13 +63,14 @@ public class Planificador extends Usuario {
                     System.out.println("/*                                                      */");
                     System.out.println("/********************************************************/\n");
 
-                    System.out.println(planificador.ListaSolicitud);
+                    System.out.println(Planificador.ListaSolicitud);
                     int contador = 1;
 
                     for (Solicitud solicitud : ListaSolicitud) {
-                        System.out.println("" + contador + ". " + solicitud.getId()+" - "+new SimpleDateFormat("dd/MM/yyyy").format(solicitud.getFechaEvento()));
-                        contador += 1;
-
+                        if(solicitud.getPlanificador().getUsuario().equals(planificador.getUsuario())){
+                            System.out.println("" + contador + ". " + solicitud.getId()+" - "+new SimpleDateFormat("dd/MM/yyyy").format(solicitud.getFechaEvento()));
+                            contador += 1;
+                        }
                     }
                     break;
                 case 2: 
@@ -77,7 +79,7 @@ public class Planificador extends Usuario {
                     String id = sc.nextLine();
                     
                     
-                    for (Solicitud solicitud: ListaSolicitud){
+                    for (Solicitud solicitud: planificador.ListaSolicitud){
                         if (solicitud.getId().equals(id)){                           
                             solicitud.toString();
                             System.out.println("/****************  REGISTRO DE DATOS DEL EVENTO  ****************/");
@@ -197,7 +199,6 @@ public class Planificador extends Usuario {
 
         }
         return true;
-
     }
     
     

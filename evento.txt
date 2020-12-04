@@ -1,2 +1,2 @@
 código,nombre_cliente,tipo,fecha,hora_inicio,hora_fin,capacidad,planificador,estado
-7461,Alonso,Fiesta Empresarial,5/12/2021,15:00,22:00,0,Mercedes,PENDIENTE
+8133,Alonso,Boda,4/12/2021,4:50,10:50pm,200,Mercedes,PENDIENTE
