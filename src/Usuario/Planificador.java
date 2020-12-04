@@ -126,6 +126,7 @@ public class Planificador extends Usuario {
                                     ListaEventos.add(boda);
                                     solicitud.getCliente().setListaEventos(boda);
                                     Evento.crearEvento(boda);
+                                    Evento.crearAdicional(boda);
 
                                     break;
                                 case FIESTAINFANTIL:
@@ -166,6 +167,7 @@ public class Planificador extends Usuario {
                                     }
                                     ListaEventos.add(fiestaInfantil);
                                     Evento.crearEvento(fiestaInfantil);
+                                    Evento.crearAdicional(fiestaInfantil);
 
                                     break;
 
@@ -202,6 +204,7 @@ public class Planificador extends Usuario {
                                     }
                                     ListaEventos.add(fiestaEmpresarial);
                                     Evento.crearEvento(fiestaEmpresarial);
+                                    Evento.crearAdicional(fiestaEmpresarial);
                                     solicitud.getCliente().setListaEventos(fiestaEmpresarial);
 
                                     break;

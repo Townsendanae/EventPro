@@ -20,7 +20,7 @@ import java.io.PrintWriter;
 public class OrdenPago {
 
     private static ArrayList<Integer> codigos = new ArrayList();// Variable stática para ver si los códigos no se repiten. 
-    private long idTransaccion = 00;
+    private long idTransaccion =00;
     private int codigo; // Generado de forma aleatoria
     private Date fechaRegistro;
     private Date fechaEvento;
@@ -144,24 +144,35 @@ public class OrdenPago {
         FileWriter fichero = null;
         BufferedWriter bw = null;
         PrintWriter pw = null;
+       
         try {
             fichero = new FileWriter("ordenPago.txt", true);
             bw = new BufferedWriter(fichero);
 
-            String fechaRegistro = this.fechaRegistro.getDate() + "/"
-                    + this.fechaRegistro.getMonth() + "/" + (this.fechaRegistro.getYear() + 1900);
+            
             int mes = 0;
             if (this.fechaRegistro.getMonth() > 0 && this.fechaRegistro.getMonth() <= 11) {
                 mes = this.fechaRegistro.getMonth() + 1;
             } else if (this.fechaRegistro.getMonth() == 0) {
                 mes = 12;
             }
+            String fechaRegistro = this.fechaRegistro.getDate() + "/"
+                    + mes + "/" + (this.fechaRegistro.getYear() + 1900);
+            
+            String[] datos = {String.valueOf(this.codigo), String.valueOf(this.evento.getID()),
+                String.valueOf(totalPagar),this.estadoPago.toString(),
+            String.valueOf(this.idTransaccion),fechaRegistro};
+            
+            String linea="\n"+datos[0];
+            
+            for (int i = 1; i < datos.length; i++) {
+                
+                linea += ","+datos[i];
+            }
+           
 
-            String datos = ("" + this.codigo + "," + this.evento.getID() + this.totalPagar + ","
-                    + this.estadoPago + "," + this.idTransaccion + "," + fechaRegistro + "\n");
-
-            System.out.println(datos);
-            bw.write(datos);
+            System.out.println(linea);
+            bw.write(linea);
 
         } catch (Exception e) {
             e.printStackTrace();

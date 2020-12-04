@@ -119,6 +119,7 @@ public class EventProAplicacion {
         return null;
     }
 
+    /*Verificamos cada usuario que se encuentra almacenado*/
     private static boolean VerificarUsuario(String nomUsuario, String contrasena) {
         for (Usuario usuario : usuarios) {
             if ((nomUsuario.equals(usuario.getUsuario())) && contrasena.equals(usuario.getContrasena())) {
@@ -128,7 +129,7 @@ public class EventProAplicacion {
         return false;
     }
 
-    /*Metodo por el cual cargaremos todos los datos de los usuarios desde un 
+    /*Metodo por el cual cargaremos todos los datos almacenados desde un 
       tipo de archivo*/
     public static ArrayList<String> cargarArchivos(String nombrearchivo) {
         ArrayList<String> lineas = new ArrayList<>();
@@ -169,31 +170,6 @@ public class EventProAplicacion {
 
     }
 
-    public static void sobreEscribirArchivos(String nombreArchivo, String linea) {
-
-        FileWriter fichero = null;
-        BufferedWriter bw = null;
-        PrintWriter pw = null;
-        try {
-            fichero = new FileWriter(nombreArchivo, true);
-            bw = new BufferedWriter(fichero);
-            bw.write(linea + "\n");
-            System.out.println("ksdsdlsd");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                // Nuevamente aprovechamos el finally para 
-                // asegurarnos que se cierra el fichero.
-                if (null != fichero) {
-                    //fichero.close();
-                    bw.close();
-                }
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
-    }
+   
 
 }

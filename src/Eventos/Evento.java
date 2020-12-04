@@ -348,5 +348,45 @@ public class Evento {
         }
 
     }
+    
+    public static void crearAdicional(Evento evento) {
+
+        FileWriter fichero = null;
+        BufferedWriter bw = null;
+        PrintWriter pw = null;
+        try {
+            fichero = new FileWriter("adicional.txt", true);
+            bw = new BufferedWriter(fichero);
+
+            for(Adicional a: evento.adicionales){
+                String[] datos = {String.valueOf(evento.getID()),a.getTipo().toString(),
+                    String.valueOf(a.getCantidad()),String.valueOf(a.getPrecioUnitario()),String.valueOf(a.getTotal())};
+
+                String linea = "\n" + datos[0];
+
+                for (int i = 1; i < datos.length; i++) {
+
+                    linea += "," + datos[i];
+                }
+                System.out.println(linea);
+                bw.write(linea);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Nuevamente aprovechamos el finally para 
+                // asegurarnos que se cierra el fichero.
+                if (null != fichero) {
+                    //fichero.close();
+                    bw.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+
+    }
 
 }

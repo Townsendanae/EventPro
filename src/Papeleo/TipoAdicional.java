@@ -10,5 +10,7 @@ package Papeleo;
  * @author danae
  */
 public enum TipoAdicional {
-    COMIDA,BOCADITOS,MUSICA,FOTOGRAFIA,BEBIDA
+    COMIDA,BOCADITOS,MUSICA,FOTOGRAFIA,BEBIDA;
+    
+   
 }
