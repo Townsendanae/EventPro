@@ -48,7 +48,8 @@ public class FiestaEmpresarial extends Evento {
 
     @Override
     public String mostrarMensaje() {//IMPRESION
-        return "--------Registro de Datos del Evento-------------------" + "\nHora inicio: " + this.horaInicio + "\nHora final: " + this.horaFin + "\nCapacidad: " + this.capacidad + "\n¿Desea registrar elementos adicionales?(S/N)";
+        return "Si ustede realiza su evento con el mismo planificador"
+                + " Su vehiculo sera totalmente gratuito";
     }
 
 }

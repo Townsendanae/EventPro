@@ -14,6 +14,8 @@ public class Boda extends Evento{
     private String vehiculo; 
     
     //---- Constructor ------------
+   
+    
     public Boda(Cliente cliente, Planificador planificador, Date fecha, String horaInicio, String horaFin, int capacidad,Solicitud solicitud, String vehiculo){
         super(cliente, planificador, fecha, horaInicio, horaFin, capacidad, solicitud);
         this.vehiculo = vehiculo;
@@ -33,7 +35,9 @@ public class Boda extends Evento{
   
     //----Metodos-------------------------
     public String mostrarMensaje(){//IMPRESION
-        return "--------Registro de Datos del Evento-------------------"+"\nHora inicio: "+this.horaInicio+"\nHora final: "+this.horaFin+"\nVehículo: "+this.vehiculo+"\n¿Desea registrar elementos adicionales?(S/N)";
+        return "Recuerde que los novios tendran un 15% de descuento "
+                + "si compran sus tickets de luna de miel en la "
+                + "aerolinea LATAM";
     }
     
 }

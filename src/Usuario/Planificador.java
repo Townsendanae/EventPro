@@ -204,7 +204,7 @@ public class Planificador extends Usuario {
                                     }
                                     ListaEventos.add(fiestaEmpresarial);
                                     Evento.crearEvento(fiestaEmpresarial);
-                                    Evento.crearAdicional(fiestaEmpresarial);
+//////////////////                                    Evento.crearAdicional(fiestaEmpresarial);
                                     solicitud.getCliente().setListaEventos(fiestaEmpresarial);
 
                                     break;
@@ -214,7 +214,7 @@ public class Planificador extends Usuario {
                         }
                     }
                     break;
-                case 3:
+                case 3://confirmar eventos
                     System.out.println("/******************* CONFIRMAR EVENTO *******************/");
                     System.out.println("/*                                                      */");
                     System.out.println("/********************************************************/\n");
@@ -255,7 +255,7 @@ public class Planificador extends Usuario {
                     
 
                     break;
-                case 4:
+                case 4://consultar eventos
                     System.out.println("/****************** CONSULTAR EVENTO9S ******************/");
                     System.out.println("/*                                                      */");
                     System.out.println("/********************************************************/\n");
@@ -272,6 +272,7 @@ public class Planificador extends Usuario {
 
                     for (Evento evento : ListaEventos) {
                         if ((elecTipoEven == 1) && (evento instanceof Boda)) {
+                            
                             cantidad += 1;
                         } else if ((elecTipoEven == 2) && (evento instanceof FiestaInfantil)) {
                             cantidad += 1;
@@ -283,12 +284,18 @@ public class Planificador extends Usuario {
 
                             case 1:
                                 System.out.println("Tiene " + cantidad + " boda(s) asignadas");
+                                Boda boda= (Boda) evento;
+                                boda.mostrarMensaje();
                                 break;
                             case 2:
                                 System.out.println("Tiene " + cantidad + " fiesta(s) infaltil(es) asignadas");
+                                FiestaInfantil fiestaInfantil=(FiestaInfantil) evento;
+                                fiestaInfantil.mostrarMensaje();
                                 break;
                             case 3:
                                 System.out.println("Tiene " + cantidad + " fiesta(s) empresarial(es) asignadas.");
+                                FiestaEmpresarial fiestaEmpresarial=(FiestaEmpresarial) evento;
+                                fiestaEmpresarial.mostrarMensaje();
                                 break;
                             default:
                                 System.out.println("Ingrese el número correctamente");

@@ -64,6 +64,8 @@ public class FiestaInfantil extends Evento {
     //-----metodos-----------------
 
     public String mostrarMensaje() {//IMPRESION
-        return "--------Registro de Datos del Evento-------------------" + "\nHora inicio: " + this.horaInicio + "\nHora final: " + this.horaFin + "\nPersonajes Disfrazados: " + this.personajesDis + "\n¿Desea registrar elementos adicionales?(S/N)";
+        return "Si realizas un proximo evento en las mismas "
+                + "instalaciones en un plazo de 6 meses se te otorgara"
+                + " el servicio de musica gratuito ";
     }
 }
