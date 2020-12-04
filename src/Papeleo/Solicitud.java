@@ -80,6 +80,18 @@ public class Solicitud {
     public String getId(){
         return this.id;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTipoEvento(TipoEvento tipoEvento) {
+        this.tipoEvento = tipoEvento;
+    }
+
+    public void setPrecioBase(double precioBase) {
+        this.precioBase = precioBase;
+    }
     
     
     public EstadoSolicitud getEstadoSolicitud(){
@@ -111,6 +123,19 @@ public class Solicitud {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.fechaEvento = fecha;
+             
+    }
+    
+    public Solicitud(){
+        this.cliente = null;
+        this.id =null ;
+        this.contador += 1;
+        this.fechaSolicitud = null;      
+        this.planificador = null;
+        this.estadoSolicitud = null;
+        this.precioBase = 0;
+        this.tipoEvento = null;
+        
              
     }
     
@@ -147,7 +172,7 @@ public class Solicitud {
         System.out.println("FECHA DEL EVENTO: "+new SimpleDateFormat("dd/MM/yyyy").format(fechaEvento));
         System.out.println("PRECIO BASE: "+precioBase);
         
-        return "";
+        return null;
     
     }
     
@@ -155,7 +180,7 @@ public class Solicitud {
     private String generarId(){
         int id=0;
         String numero="";
-        for(int i=0;i<4;i++){
+        for(int i=0;i<5;i++){
             id= (int) Math.floor(Math.random() * 10);;
             numero=numero+Integer.toString(id);
         
@@ -214,5 +239,7 @@ public class Solicitud {
         }
 
   }
+    
+    
 }
     

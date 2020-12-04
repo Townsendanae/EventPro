@@ -8,6 +8,7 @@ package Usuario;
 import Papeleo.*;
 import java.util.*;
 import Eventos.*;
+import eventproaplicacion.EventProAplicacion;
 import java.text.SimpleDateFormat;
 
 /**
@@ -16,8 +17,8 @@ import java.text.SimpleDateFormat;
  */
 public class Planificador extends Usuario {
 
-    private ArrayList<Evento> ListaEventos = new ArrayList<Evento>();
-    private ArrayList<Solicitud> ListaSolicitud = new ArrayList<Solicitud>();
+    private static ArrayList<Evento> ListaEventos = new ArrayList<Evento>();
+    private static ArrayList<Solicitud> ListaSolicitud = new ArrayList<Solicitud>();
     Scanner sc = new Scanner(System.in);
 
     //---- Constructores ----
@@ -30,9 +31,15 @@ public class Planificador extends Usuario {
         super(nombre, apellido, usuario, contrasena, tipo);
     }
 
-    public void setListaSolicitud(Solicitud solicitud) {
+    public static void setListaSolicitud(Solicitud solicitud) {
         ListaSolicitud.add(solicitud);
     }
+
+    public static ArrayList<Solicitud> getListaSolicitud() {
+        return ListaSolicitud;
+    }
+    
+    
 
     public boolean menuPlanificador(Planificador planificador) {
         System.out.println("Bienvenido " + this.getNombre());
@@ -66,8 +73,8 @@ public class Planificador extends Usuario {
                 case 2: 
                      
                     System.out.println("Ingrese el id de la solicitud: ");
-                    int id = sc.nextInt();
-                    sc.nextLine();
+                    String id = sc.nextLine();
+                    
                     
                     for (Solicitud solicitud: ListaSolicitud){
                         if (solicitud.getId().equals(id)){                           
@@ -90,7 +97,8 @@ public class Planificador extends Usuario {
                                     String agregarAdicional = sc.nextLine();
                                     
                                     if (agregarAdicional.equals("S")){
-                                        
+                                       Evento.menu();
+                                       
                                       // AGREGAR ADICIONALES PARA BODA 
                                         
                                     }
@@ -156,6 +164,52 @@ public class Planificador extends Usuario {
         return true;
 
     }
+    
+//    private static void cargarSolicitudes(String nombreArchivo) {
+//        
+//        ArrayList<String> lineas = EventProAplicacion.cargarArchivos("usuarios.txt");
+//        ArrayList<String> lineas2 = EventProAplicacion.cargarArchivos("solicitud.txt");
+//        ArrayList<String> lineas3 = EventProAplicacion.cargarArchivos("clientes.txt");
+//        
+//        for (String linea : lineas2) { // crear Usuarios. 
+//            if (!linea.equals("id_solicitud,nombre_cliente,nombre_planificador,fecha_solicitud,fecha_evento,estado")) { //Recorremos archivo de solicitudes. 
+//                String[] datosSolicitud = linea.split(",");
+//                Solicitud solicitud = new Solicitud();
+//                    for (String lineaUsuario : lineas) {//Recorremos los usuarios
+//                        
+//                        if (!lineaUsuario.equals("Nombre;Apellido;Usuario;Contrasena;Tipo")) {
+//                            String[] datosCliente = lineaUsuario.split(";");
+//                            
+//                            if(datosSolicitud[4].equals(datosCliente[0])){
+//                                for(String lineaCliente: lineas3){//recorremos los clientes
+//                                    if(!lineaCliente.equals("Usuario;telefono;mail")){
+//                                        
+//                                        String[] datosCliente2 = lineaCliente.split(";");
+//                                        if(datosCliente2[0].equals(datosCliente[2])){
+//                                                solicitud.setCliente(new Cliente(datosCliente[0],datosCliente[1],datosCliente[2],
+//                                                datosCliente[3],datosCliente[4].charAt(0),datosCliente2[1],datosCliente2[2]));
+//                                        }
+//                                    }
+//                                }
+//                            }else if(datosSolicitud[2].equals(datosCliente[0])){
+//                                solicitud.setPlanificador(new Planificador(datosCliente[0],datosCliente[1],datosCliente[2],
+//                                datosCliente[3],datosCliente[4].charAt(0)));
+//                            
+//                            }
+//                            solicitud.setId(datosSolicitud[0]);
+//                            solicitud.setPrecioBase(0);
+//                            
+//                                
+//                            ListaSolicitud.add(new Solicitud(datos[0], datos[1], datos[2], null, datos[4].charAt(0), datosCliente[1], datosCliente[2]));
+//                        }
+//                    }
+//                
+//            }
+//        }
+//        
+//        
+//
+//    }
     
     
 

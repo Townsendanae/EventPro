@@ -98,6 +98,7 @@ public class Cliente extends Usuario {
                             System.out.println("¡Fecha Válida!");
 
                             Solicitud solicitud_B=new Solicitud(cliente, new Date(), fechaEvento, usuarios, TipoEvento.BODA, 3500); // SE CREA LA SOLICITUD
+                            
                             Planificador planificador = solicitud_B.AsignarPlanificador(usuarios);
                             for (Usuario usuario : usuarios) {
                                 if (usuario == planificador) {
@@ -160,7 +161,7 @@ public class Cliente extends Usuario {
                             
                             break;
                     }
-                    
+                    System.out.println(Planificador.getListaSolicitud());
                     break;
 
                 case 2: // REGISTRAR PAGO EVENTO
@@ -180,6 +181,7 @@ public class Cliente extends Usuario {
             sc.nextLine();
 
         }
+        
         return true;
     }
 
