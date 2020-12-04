@@ -21,8 +21,8 @@ public class Evento {
     protected Cliente cliente;
     protected Planificador planificador;
     protected EstadoEvento estado = EstadoEvento.PENDIENTE;
-    protected String horaInicio;
-    protected String horaFin;
+    protected int horaInicio;
+    protected int horaFin;
     protected Solicitud solicitud;
     protected Date fechaEvento;
     protected int idOrdenPago;
@@ -33,7 +33,7 @@ public class Evento {
     Scanner sc = new Scanner(System.in);//Scanner
 
     //Constructor
-    public Evento(Cliente cliente, Planificador planificador, Date fecha, String horaInicio, String horaFin, int capacidad, Solicitud solicitud) {
+    public Evento(Cliente cliente, Planificador planificador, Date fecha, int horaInicio, int horaFin, int capacidad, Solicitud solicitud) {
         this.ID = generarCodigo();
         this.cliente = cliente;
         this.planificador = planificador;
@@ -45,10 +45,10 @@ public class Evento {
     }
 
     //----------------Setters -----------
-    
-    public void setIdOrdenPago(int idOrdenPago){
+    public void setIdOrdenPago(int idOrdenPago) {
         this.idOrdenPago = idOrdenPago;
     }
+
     //--------------Getters ----------------
     public double getPrecio() {
         return this.precio;
@@ -82,15 +82,15 @@ public class Evento {
         return estado;
     }
 
-    public String getHoraInicio() {
+    public int getHoraInicio() {
         return horaInicio;
     }
 
-    public String getHoraFin() {
+    public int getHoraFin() {
         return horaFin;
     }
-    
-    public int getIdOrdenPago(){
+
+    public int getIdOrdenPago() {
         return this.idOrdenPago;
     }
 
@@ -155,19 +155,20 @@ public class Evento {
                 System.out.print("¿Qué prefiere? ");
                 int opcion = sc.nextInt();
                 sc.nextLine();
-                
+
                 /* COMPROBAR QUE EL USUARIO NO HAYA ELEGIDO LA OPCIÓN ANTES. */
                 boolean opcionDj = true;
                 boolean opcionBanda = true;
-                
-                for (Adicional adicional: adicionales){ 
-                    if ((adicional.getTipo().equals(TipoAdicional.MUSICA)) && (adicional.getTotal() == 300))
+
+                for (Adicional adicional : adicionales) {
+                    if ((adicional.getTipo().equals(TipoAdicional.MUSICA)) && (adicional.getTotal() == 300)) {
                         opcionDj = false;
-                    else if ((adicional.getTipo().equals(TipoAdicional.MUSICA)) && (adicional.getTotal() == 2000))
+                    } else if ((adicional.getTipo().equals(TipoAdicional.MUSICA)) && (adicional.getTotal() == 2000)) {
                         opcionBanda = false;
+                    }
                 }
                 /* --- */
-                
+
                 if ((opcion == 1) && (opcionDj)) {
                     total = 300;
                     System.out.println("Total: " + total + " \n Agregar(S/N)");
@@ -180,7 +181,7 @@ public class Evento {
                     }
                     break;
 
-                } else if ((opcion == 2) && (opcionBanda) ) {
+                } else if ((opcion == 2) && (opcionBanda)) {
                     total = 2000;
                     System.out.println("Total: " + total + " \n Agregar(S/N)");
                     eleccion = sc.nextLine();
@@ -192,11 +193,10 @@ public class Evento {
 
                     }
                     break;
-                } else{
+                } else {
                     System.out.println("YA HA AGREGADO ESTE ELEMENTO A SU LISTA, ELIJA OTRO.");
-                   break;
+                    break;
                 }
-                
 
             case 4: // Pedido Fotografia
                 total = 500;
@@ -337,8 +337,8 @@ public class Evento {
             }
 
             String[] datos = {String.valueOf(evento.getID()), evento.getCliente().getNombre(),
-                tipoEvento,fechaEvento,evento.getHoraInicio(),evento.getHoraFin(),String.valueOf(evento.getCapacidad()),
-                evento.getPlanificador().getNombre(),evento.getEstado().toString()};
+                tipoEvento, fechaEvento, String.valueOf(evento.getHoraInicio()), String.valueOf(evento.getHoraFin()), String.valueOf(evento.getCapacidad()),
+                evento.getPlanificador().getNombre(), evento.getEstado().toString()};
 
             String linea = "\n" + datos[0];
 
@@ -365,7 +365,7 @@ public class Evento {
         }
 
     }
-    
+
     public static void crearAdicional(Evento evento) {
 
         FileWriter fichero = null;
@@ -375,9 +375,9 @@ public class Evento {
             fichero = new FileWriter("adicional.txt", true);
             bw = new BufferedWriter(fichero);
 
-            for(Adicional a: evento.adicionales){
-                String[] datos = {String.valueOf(evento.getID()),a.getTipo().toString(),
-                    String.valueOf(a.getCantidad()),String.valueOf(a.getPrecioUnitario()),String.valueOf(a.getTotal())};
+            for (Adicional a : evento.adicionales) {
+                String[] datos = {String.valueOf(evento.getID()), a.getTipo().toString(),
+                    String.valueOf(a.getCantidad()), String.valueOf(a.getPrecioUnitario()), String.valueOf(a.getTotal())};
 
                 String linea = "\n" + datos[0];
 
@@ -401,6 +401,32 @@ public class Evento {
                 }
             } catch (Exception e2) {
                 e2.printStackTrace();
+            }
+        }
+
+    }
+
+    public void mostrarMenuGuardarAdicional(Evento evento) {
+        boolean Nosalir = true;
+
+        while (Nosalir) {
+
+            System.out.println("/*-------------------------------------------------------------*/");
+            System.out.println("¿Desea agregar elementos adicionales? (S/N)");
+            String agregarAdicional = sc.nextLine().toUpperCase();
+
+            if (agregarAdicional.equals("S")) {
+                int eleccion = 0;
+                do {// Mostrar Menú adicional: 
+                    eleccion = evento.mostrarMenuAdicional();
+                    evento.guardarAdicional(eleccion);
+                } while (eleccion != 6);// AGREGAR ADICIONALES PARA FI     
+                Nosalir = false;
+            } else if (agregarAdicional.equals("N")) {
+                System.out.println("No se han agregado elementos adicionales");
+                Nosalir = false;
+            } else {
+                System.out.println("Ingrese una opción válida.");
             }
         }
 

@@ -49,7 +49,7 @@ public class FiestaInfantil extends Evento {
     }
 
     //--- Constructores-----
-    public FiestaInfantil(Cliente cliente, Planificador planificador, Date fecha, String horaInicio, String horaFin, int capacidad, Solicitud solicitud, int personajesDis, int sorpresas, String juegosFiesta) {
+    public FiestaInfantil(Cliente cliente, Planificador planificador, Date fecha, int horaInicio, int horaFin, int capacidad, Solicitud solicitud, int personajesDis, int sorpresas, String juegosFiesta) {
         super(cliente, planificador, fecha, horaInicio, horaFin, capacidad, solicitud);
         this.precio = 300;
         this.personajesDis = personajesDis;

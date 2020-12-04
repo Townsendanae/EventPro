@@ -35,7 +35,7 @@ public class FiestaEmpresarial extends Evento {
     }
 
     //------- Constructores --------
-    public FiestaEmpresarial(Cliente cliente, Planificador planificador, Date fecha, String horaInicio, String horaFin, int capacidad, Solicitud solicitud, String transporte) {
+    public FiestaEmpresarial(Cliente cliente, Planificador planificador, Date fecha, int horaInicio, int horaFin, int capacidad, Solicitud solicitud, String transporte) {
         super(cliente, planificador, fecha, horaInicio, horaFin, capacidad, solicitud);
         this.capacidad = capacidad;
         this.precio = 2000;

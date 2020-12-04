@@ -16,7 +16,7 @@ public class Boda extends Evento{
     //---- Constructor ------------
    
     
-    public Boda(Cliente cliente, Planificador planificador, Date fecha, String horaInicio, String horaFin, int capacidad,Solicitud solicitud, String vehiculo){
+    public Boda(Cliente cliente, Planificador planificador, Date fecha, int horaInicio, int horaFin, int capacidad,Solicitud solicitud, String vehiculo){
         super(cliente, planificador, fecha, horaInicio, horaFin, capacidad, solicitud);
         this.vehiculo = vehiculo;
         this.precio = 3500;

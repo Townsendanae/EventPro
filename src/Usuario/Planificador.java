@@ -48,9 +48,12 @@ public class Planificador extends Usuario {
         System.out.println(" 4. Consultar evento");
         System.out.println(" 5. Salir");
 
-        System.out.println("Ingrese una opcion: ");
-        int opcion = sc.nextInt();
-        sc.nextLine();
+        String opcionString;
+        do {
+            System.out.println("Ingrese una opcion: ");
+            opcionString = sc.nextLine();
+        } while (opcionString.matches(".*[a-z].*"));
+        int opcion = Integer.parseInt(opcionString);
 
         while (opcion != 5) {
             switch (opcion) {
@@ -61,7 +64,6 @@ public class Planificador extends Usuario {
                     System.out.println("/********************************************************/\n");
 
                     int contador = 1;
-
                     for (Solicitud solicitud : ListaSolicitud) {
                         if (solicitud.getEstadoSolicitud().equals(EstadoSolicitud.PENDIENTE)) {
                             System.out.println("" + contador + ". " + solicitud.getId() + " - " + new SimpleDateFormat("dd/MM/yyyy").format(solicitud.getFechaEvento()));
@@ -81,16 +83,37 @@ public class Planificador extends Usuario {
                             String agregarAdicional;
                             System.out.println("/****************  REGISTRO DE DATOS DEL EVENTO  ****************/");
 
-                            System.out.println("Hora de inicio: (HH:MM) ");
-                            String horaInicio = sc.nextLine();
-                            System.out.println("Hora fin: (HH:MM) ");
-                            String horaFin = sc.nextLine();
-                            System.out.println("Capacidad: ");
-                            int capacidad = sc.nextInt();
-                            sc.nextLine();
-                            Evento evento;
-                            String eleccionOrdenPago;
+                            /* Validación ingreso horas de forma secuencial*/
+                            int horaInicio = 0;
+                            int horaFin = 0;
+                            boolean salir = true;
+                            while (salir) {
+                                String horaInicioString;
+                                String horaFinString;
+                                do {
+                                    System.out.println("Hora de inicio: (Ej: 1700) ");
+                                    horaInicioString = sc.nextLine();
+                                    System.out.println("Hora fin: (Ej: 1700) ");
+                                    horaFinString = sc.nextLine();
+                                } while ((horaInicioString.matches(".*[a-z].*")) && (horaFinString.matches(".*[a-z].*")));
+                                horaInicio = Integer.parseInt(horaInicioString);
+                                horaFin = Integer.parseInt(horaFinString);
+                                if (horaInicio < horaFin) {
+                                    salir = false;
+                                } else {
+                                    System.out.println("Ingrese las horas de forma correcta.");
+                                }
+                            }
+                            /* ------- */
 
+                            String capacidadString;
+                            do {
+                                System.out.println("Capacidad: ");
+                                capacidadString = sc.nextLine();
+                            } while (capacidadString.matches(".*[a-z].*"));
+                            int capacidad = Integer.parseInt(capacidadString);
+
+                            String eleccionOrdenPago;
                             switch (solicitud.getTipoEvento()) {
                                 case BODA:
                                     System.out.println("Tipo vehículo: ");
@@ -100,29 +123,21 @@ public class Planificador extends Usuario {
                                     Boda boda = new Boda(solicitud.getCliente(), planificador, solicitud.getFechaEvento(), horaInicio, horaFin, capacidad, solicitud, tipoVehiculo);// CREAR OBJETO BODA
 
                                     // AGREGANDO ELEMENTOS ADICIONALES
-                                    System.out.println("/*-------------------------------------------------------------*/");
-                                    System.out.println("¿Desea agregar elementos adicionales? (S/N)");
-                                    agregarAdicional = sc.nextLine();
-
-                                    if (agregarAdicional.equals("S")) {
-                                        int eleccion = 0;
-                                        do {// Mostrar Menú adicional: 
-                                            eleccion = boda.mostrarMenuAdicional();
-                                            boda.guardarAdicional(eleccion);
-                                        } while (eleccion != 6);// AGREGAR ADICIONALES PARA BODA                                     
-                                    }
-
+                                    boda.mostrarMenuGuardarAdicional(boda);
                                     System.out.println("Ha concluido el ingreso de los datos del evento");
                                     System.out.println("El costo total de su evento será " + boda.getPrecio() + " dólares.");
                                     System.out.println("¿Desea generar su orden de pago? (S/N)");
-                                    eleccionOrdenPago = sc.nextLine();
+                                    eleccionOrdenPago = sc.nextLine().toUpperCase();
                                     // Método generar orden de pago del evento. 
                                     if (eleccionOrdenPago.equals("S")) {
                                         OrdenPago ordenPago = new OrdenPago(boda.getCliente(), boda, boda.getFechaEvento(), boda.getArrayAdicionales(), boda.getPrecio());
                                         ordenPago.guardarOrdenPago();
                                         ordenPago.mostrarDatosPago();
 
+                                    } else {
+                                        System.out.println("La orden de Pago no se ha generado. ");
                                     }
+
                                     ListaEventos.add(boda);
                                     solicitud.getCliente().setListaEventos(boda);
                                     Evento.crearEvento(boda);
@@ -130,39 +145,39 @@ public class Planificador extends Usuario {
 
                                     break;
                                 case FIESTAINFANTIL:
-                                    System.out.println("Cantidad personajes disfrazados: ");
-                                    int personajesDis = sc.nextInt();
-                                    sc.nextLine();
-                                    System.out.println("Cantidad sorpresas: ");
-                                    int sorpresas = sc.nextInt();
-                                    sc.nextLine();
+                                    String personajesDisStr;
+                                    do {
+                                        System.out.println("Cantidad personajes disfrazados: ");
+                                        personajesDisStr = sc.nextLine();
+                                    } while (personajesDisStr.matches(".*[a-z].*"));
+                                    int personajesDis = Integer.parseInt(personajesDisStr);
+
+                                    String sorpresasStr;
+                                    do {
+                                        System.out.println("Cantidad sorpresas: ");
+                                        sorpresasStr = sc.nextLine();
+                                    } while (sorpresasStr.matches(".*[a-z].*"));
+                                    int sorpresas = Integer.parseInt(sorpresasStr);
+
                                     System.out.println("¿Desea Juegos de fiesta? (S/N)");
-                                    String juegosFiesta = sc.nextLine();
+                                    String juegosFiesta = sc.nextLine().toUpperCase();
 
                                     FiestaInfantil fiestaInfantil = new FiestaInfantil(solicitud.getCliente(), planificador, solicitud.getFechaEvento(), horaInicio, horaFin, capacidad, solicitud, personajesDis, sorpresas, juegosFiesta);// CREAR OBJETO BODA
 
                                     // AGREGANDO ELEMENTOS ADICIONALES
-                                    System.out.println("/*-------------------------------------------------------------*/");
-                                    System.out.println("¿Desea agregar elementos adicionales? (S/N)");
-                                    agregarAdicional = sc.nextLine();
-
-                                    if (agregarAdicional.equals("S")) {
-                                        int eleccion = 0;
-                                        do {// Mostrar Menú adicional: 
-                                            eleccion = fiestaInfantil.mostrarMenuAdicional();
-                                            fiestaInfantil.guardarAdicional(eleccion);
-                                        } while (eleccion != 6);// AGREGAR ADICIONALES PARA FI                                     
-                                    }
-
+                                    fiestaInfantil.mostrarMenuGuardarAdicional(fiestaInfantil);
+                                    //
                                     System.out.println("Ha concluido el ingreso de los datos del evento");
                                     System.out.println("El costo total de su evento será " + fiestaInfantil.getPrecio() + " dólares.");
                                     System.out.println("¿Desea generar su orden de pago? (S/N)");
-                                    eleccionOrdenPago = sc.nextLine();
+                                    eleccionOrdenPago = sc.nextLine().toUpperCase();
                                     // Método generar orden de pago del evento. 
                                     if (eleccionOrdenPago.equals("S")) {
                                         OrdenPago ordenPago = new OrdenPago(fiestaInfantil.getCliente(), fiestaInfantil, fiestaInfantil.getFechaEvento(), fiestaInfantil.getArrayAdicionales(), fiestaInfantil.getPrecio());
                                         ordenPago.guardarOrdenPago();
                                         ordenPago.mostrarDatosPago();
+                                    } else {
+                                        System.out.println("La orden de Pago no se ha generado. ");
 
                                     }
                                     ListaEventos.add(fiestaInfantil);
@@ -174,37 +189,26 @@ public class Planificador extends Usuario {
                                 case FIESTAEMPRESARIAL:
 
                                     System.out.println("¿Desea transporte? (S/N): ");
-                                    String transporte = sc.nextLine();
+                                    String transporte = sc.nextLine().toUpperCase();
 
                                     FiestaEmpresarial fiestaEmpresarial = new FiestaEmpresarial(solicitud.getCliente(), planificador, solicitud.getFechaEvento(), horaInicio, horaFin, capacidad, solicitud, transporte);// CREAR OBJETO BODA
 
                                     // AGREGANDO ELEMENTOS ADICIONALES
-                                    System.out.println("/*-------------------------------------------------------------*/");
-                                    System.out.println("¿Desea agregar elementos adicionales? (S/N)");
-                                    agregarAdicional = sc.nextLine();
-
-                                    if (agregarAdicional.equals("S")) {
-                                        int eleccion = 0;
-                                        do {// Mostrar Menú adicional: 
-                                            eleccion = fiestaEmpresarial.mostrarMenuAdicional();
-                                            fiestaEmpresarial.guardarAdicional(eleccion);
-                                        } while (eleccion != 6);// AGREGAR ADICIONALES PARA FI                                     
-                                    }
-
+                                    fiestaEmpresarial.mostrarMenuGuardarAdicional(fiestaEmpresarial);
                                     System.out.println("Ha concluido el ingreso de los datos del evento");
                                     System.out.println("El costo total de su evento será " + fiestaEmpresarial.getPrecio() + " dólares.");
                                     System.out.println("¿Desea generar su orden de pago? (S/N)");
-                                    eleccionOrdenPago = sc.nextLine();
+                                    eleccionOrdenPago = sc.nextLine().toUpperCase();
                                     // Método generar orden de pago del evento. 
                                     if (eleccionOrdenPago.equals("S")) {
                                         OrdenPago ordenPago = new OrdenPago(fiestaEmpresarial.getCliente(), fiestaEmpresarial, fiestaEmpresarial.getFechaEvento(), fiestaEmpresarial.getArrayAdicionales(), fiestaEmpresarial.getPrecio());
                                         ordenPago.guardarOrdenPago();
                                         ordenPago.mostrarDatosPago();
-
+                                    } else {
+                                        System.out.println("La orden de Pago no se ha generado. ");
                                     }
                                     ListaEventos.add(fiestaEmpresarial);
                                     Evento.crearEvento(fiestaEmpresarial);
-//////////////////                                    Evento.crearAdicional(fiestaEmpresarial);
                                     solicitud.getCliente().setListaEventos(fiestaEmpresarial);
 
                                     break;
@@ -222,16 +226,16 @@ public class Planificador extends Usuario {
                     int idPago = sc.nextInt();
                     sc.nextLine();
                     System.out.println(ListaOrdenesPago);
-                    
-                    for ( OrdenPago ordenPago: ListaOrdenesPago){
-                        if ((idPago == ordenPago.getId())&& (ordenPago.getEvento().getPlanificador().equals(planificador)) &&(ordenPago.getEstadoPago().equals(EstadoPago.PENDIENTEPAGO)) ){
-                            System.out.println("El pago se ha realizado el: "+ordenPago.getFechaRegistroTransaccion());
+
+                    for (OrdenPago ordenPago : ListaOrdenesPago) {
+                        if ((idPago == ordenPago.getId()) && (ordenPago.getEvento().getPlanificador().equals(planificador)) && (ordenPago.getEstadoPago().equals(EstadoPago.PENDIENTEPAGO))) {
+                            System.out.println("El pago se ha realizado el: " + ordenPago.getFechaRegistroTransaccion());
                             System.out.println("¿Desea aprobar este pago? (S/N)");
                             String aprobarPago = sc.nextLine();
-                            switch(aprobarPago){
+                            switch (aprobarPago) {
                                 case "S":
                                     System.out.println("El evento se ha confirmado para la fecha establecida");
-                                    ordenPago.setEstadoPago(EstadoPago.CONFIRMADO);                           
+                                    ordenPago.setEstadoPago(EstadoPago.CONFIRMADO);
                                     break;
                                 case "N":
                                     System.out.println("No ha confirmado el evento.");
@@ -240,19 +244,14 @@ public class Planificador extends Usuario {
                                     System.out.println("Debe ingresar una opción válida.");
                                     break;
                             }
-                        }
-                        else if ((idPago == ordenPago.getId()) && (ordenPago.getEvento().getPlanificador().equals(planificador)) &&(ordenPago.getEstadoPago().equals(EstadoPago.CONFIRMADO)) ){
+                        } else if ((idPago == ordenPago.getId()) && (ordenPago.getEvento().getPlanificador().equals(planificador)) && (ordenPago.getEstadoPago().equals(EstadoPago.CONFIRMADO))) {
                             System.out.println("Esta orden de pago ya ha sido confirmada. ");
-                            
-                        }
-                        else {
+
+                        } else {
                             System.out.println("No ha ingresado correctamente el ID.");
                         }
-                    
+
                     }
-                    
-                    
-                    
 
                     break;
                 case 4://consultar eventos
@@ -272,7 +271,7 @@ public class Planificador extends Usuario {
 
                     for (Evento evento : ListaEventos) {
                         if ((elecTipoEven == 1) && (evento instanceof Boda)) {
-                            
+
                             cantidad += 1;
                         } else if ((elecTipoEven == 2) && (evento instanceof FiestaInfantil)) {
                             cantidad += 1;
@@ -284,17 +283,17 @@ public class Planificador extends Usuario {
 
                             case 1:
                                 System.out.println("Tiene " + cantidad + " boda(s) asignadas");
-                                Boda boda= (Boda) evento;
+                                Boda boda = (Boda) evento;
                                 boda.mostrarMensaje();
                                 break;
                             case 2:
                                 System.out.println("Tiene " + cantidad + " fiesta(s) infaltil(es) asignadas");
-                                FiestaInfantil fiestaInfantil=(FiestaInfantil) evento;
+                                FiestaInfantil fiestaInfantil = (FiestaInfantil) evento;
                                 fiestaInfantil.mostrarMensaje();
                                 break;
                             case 3:
                                 System.out.println("Tiene " + cantidad + " fiesta(s) empresarial(es) asignadas.");
-                                FiestaEmpresarial fiestaEmpresarial=(FiestaEmpresarial) evento;
+                                FiestaEmpresarial fiestaEmpresarial = (FiestaEmpresarial) evento;
                                 fiestaEmpresarial.mostrarMensaje();
                                 break;
                             default:
