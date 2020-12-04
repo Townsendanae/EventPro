@@ -40,8 +40,9 @@ public class Planificador extends Usuario {
     }
     
     
-
+    /*Menu de ingreso para el planificador*/
     public boolean menuPlanificador(Planificador planificador) {
+        String agregarAdicional;
         System.out.println("Bienvenido " + this.getNombre());
         System.out.println("\n 1. Consultar Solicitudes pendientes");
         System.out.println(" 2. Registrar evento");
@@ -85,23 +86,35 @@ public class Planificador extends Usuario {
                             String horaInicio = sc.nextLine();
                             System.out.println("Hora fin: ");
                             String horaFin = sc.nextLine();
+                            System.out.println("Capacidad: ");
+                            int capacidad = sc.nextInt();
+                            sc.nextLine();
                             
+                           
                             switch(solicitud.getTipoEvento()){
                                 case BODA:
                                     System.out.println("Tipo vehículo: ");
                                     String tipoVehiculo = sc.nextLine();
                                     
                                     // CREAR BODA
+                                    Boda boda = new Boda(solicitud.getCliente(),solicitud.getPlanificador(),
+                                            solicitud.getFechaEvento(),horaInicio,horaFin,capacidad,tipoVehiculo);
                                     
                                     System.out.println("¿Desea agregar elementos adicionales? (S/N)");
-                                    String agregarAdicional = sc.nextLine();
+                                    agregarAdicional = sc.nextLine();
                                     
+                                      // AGREGAR ADICIONALES PARA BODA 
                                     if (agregarAdicional.equals("S")){
                                        Evento.menu();
+                                       int eleccion = sc.nextInt();
+                                       sc.nextLine();
+                                       boda.guardarAdicional(eleccion);
                                        
-                                      // AGREGAR ADICIONALES PARA BODA 
+                                      
                                         
                                     }
+                                    ListaEventos.add(boda);
+                                    Evento.crearEvento(boda);
                                     
                                     
                                     break;
@@ -113,28 +126,50 @@ public class Planificador extends Usuario {
                                     int sorpresas = sc.nextInt();
                                     sc.nextLine();
                                     
+                                    FiestaInfantil fiestaInfantil = new FiestaInfantil(solicitud.getCliente(), solicitud.getPlanificador(),solicitud.getFechaEvento(),
+                                            horaInicio, horaFin, capacidad, personajesDis, sorpresas, true);
+                                    //AGREGANDO ELEMENTOS ADICIONALES
+                                    System.out.println("¿Desea agregar elementos adicionales? (S/N)");
+                                    agregarAdicional = sc.nextLine();
+                                    
+                                    if (agregarAdicional.equals("S")){
+                                       Evento.menu();
+                                       int eleccion = sc.nextInt();
+                                       sc.nextLine();
+                                       fiestaInfantil.guardarAdicional(eleccion);
+                                       
+                                       
+                                    }
+                                    ListaEventos.add(fiestaInfantil);
+                                    Evento.crearEvento(fiestaInfantil);
                                     break;
+                                    
                                 case FIESTAEMPRESARIAL:
                                     
                                     System.out.println("¿Desea transporte? (S/N): ");
                                     String trans = sc.nextLine();
-                                    boolean transporte;
+                                    boolean transporte = false;
                                     
-                                    switch (trans){
-                                        case "S":
-                                            transporte = true;
-                                            
-                                            
-                                            break;
-                                        case "N":
-                                            transporte = false;
-                                            
-                                            break;
-                                            
-                                        default:
-                                            break;
+                                    if(trans.charAt(0)=='S')
+                                        transporte=true;
+                                    System.out.println("Ingrese la cantidad de personas: ");
+                                    int cantidadPersonas=sc.nextInt();
+                                    sc.nextLine();
+                                    FiestaEmpresarial fiestaEmpresarial = new FiestaEmpresarial(solicitud.getCliente(), solicitud.getPlanificador(), solicitud.getFechaEvento(),
+                                                horaInicio, horaFin, capacidad, transporte, cantidadPersonas);
+                                    //AGREGANDO ELEMENTOS ADICIONALES
+                                    System.out.println("¿Desea agregar elementos adicionales? (S/N)");
+                                    agregarAdicional = sc.nextLine();
+                                    
+                                    if (agregarAdicional.equals("S")){
+                                       Evento.menu();
+                                       int eleccion = sc.nextInt();
+                                       sc.nextLine();
+                                       fiestaEmpresarial.guardarAdicional(eleccion);
+                                       
                                     }
-                                    
+                                    ListaEventos.add(fiestaEmpresarial);
+                                    Evento.crearEvento(fiestaEmpresarial);
                                     break;
                                 
                             }
@@ -164,6 +199,8 @@ public class Planificador extends Usuario {
         return true;
 
     }
+    
+    
     
 //    private static void cargarSolicitudes(String nombreArchivo) {
 //        

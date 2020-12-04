@@ -4,6 +4,9 @@ import Papeleo.*;
 //import Papeleo.TipoEvento;
 import Usuario.Cliente;
 import Usuario.Planificador;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.*;
 
 /**
@@ -19,13 +22,26 @@ public class Evento {
     protected Planificador planificador;
     protected EstadoEvento estado;
     protected String horaInicio; 
-    protected String horaFin; 
+    protected String horaFin;
+    protected Date fechaEvento;
    // TipoEvento tipo;
     protected ArrayList<Adicional> adicionales;
     protected ArrayList<Double> sumaAdicionales;//La suma de la cuenta de los pedidos adicionales
 
     Scanner sc = new Scanner(System.in);//Scanner
     
+    //Constructor
+    public Evento(Cliente cliente, Planificador planificador, Date fecha, String horaInicio, String horaFin, int capacidad){ 
+        this.ID = generarCodigo(); 
+        this.cliente = cliente;
+        this.estado = EstadoEvento.PENDIENTE; 
+        this.planificador = planificador;
+        this.capacidad = capacidad;
+        this.fechaEvento=fecha;
+        this.horaInicio=horaInicio;
+        this.horaFin=horaFin;
+        this.capacidad=capacidad;
+    }
     //----------------Setters -----------
     
     
@@ -42,10 +58,42 @@ public class Evento {
         return this.ID;
     }
 
+    public int getCapacidad() {
+        return capacidad;
+    }
 
+    public int getID() {
+        return ID;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public Planificador getPlanificador() {
+        return planificador;
+    }
+
+    public EstadoEvento getEstado() {
+        return estado;
+    }
+
+    public String getHoraInicio() {
+        return horaInicio;
+    }
+
+    public String getHoraFin() {
+        return horaFin;
+    }
+
+    public Date getFechaEvento() {
+        return fechaEvento;
+    }
+    
+    /*Metodo por el cual almacenamos los adicionales para cada evento*/
     public void guardarAdicional(int numero) {
-        String eleccion;
-        
+        String eleccion=null;
+        do{
             switch (numero) {
                 case 1://Pedido platos
                     System.out.print("Ingrese la cantidad de platos: ");
@@ -84,6 +132,7 @@ public class Evento {
                         if (eleccion.equals("S")) //Invocar constructor adicional para BOCADITOS
                         {
                             adicionales.add(new Adicional(TipoAdicional.BOCADITOS, total, cantidad, 0.25));
+                            sumaAdicionales.add(total);
                         }
                         break;
                     }
@@ -187,7 +236,10 @@ public class Evento {
                     }
 
             }
-        }
+           
+            
+        }while(eleccion.equals("S"));
+    }
     
     
     public String mostrarMensaje() {
@@ -210,11 +262,64 @@ public class Evento {
     
     
     //------Contructores ------
-    public Evento(Cliente cliente, Planificador planificador, Date fecha, String horaInicio, String horaFin, int capacidad){ 
-        this.ID = generarCodigo(); 
-        this.cliente = cliente;
-        this.estado = EstadoEvento.PENDIENTE; 
-        this.planificador = planificador;
-        this.capacidad = capacidad;
-    }
+    
+    
+    
+    public static void crearEvento(Evento evento){
+        
+        FileWriter fichero = null;
+        BufferedWriter bw = null;
+        PrintWriter pw = null;
+        try {
+            fichero = new FileWriter("evento.txt", true);
+            bw = new BufferedWriter(fichero);
+            
+                        
+            int mes=0;
+            if (evento.getFechaEvento().getMonth()>0 && evento.getFechaEvento().getMonth()<=11)
+                mes=evento.getFechaEvento().getMonth()+1;
+            else if(evento.getFechaEvento().getMonth()==0)
+                mes=12;
+            
+            String fechaEvento = evento.getFechaEvento().getDate()+"/"+mes+"/"+
+                    (evento.getFechaEvento().getYear()+1900);
+            String tipoEvento=null;
+            if(evento instanceof Boda){
+                tipoEvento="Boda";
+            }else if (evento instanceof FiestaInfantil){
+                tipoEvento="Fiesta Infantil";
+            }else if(evento instanceof FiestaEmpresarial){
+                tipoEvento="Fiesta Empresarial";
+            }
+            
+            String[] datos = {String.valueOf(evento.getID()), evento.getCliente().getNombre(),
+                tipoEvento,fechaEvento,evento.getHoraInicio(),evento.getHoraFin(),String.valueOf(evento.getCapacidad()),
+                evento.getPlanificador().getNombre(),evento.getEstado().toString()};
+            
+            
+            String linea="\n"+datos[0];
+
+            for (int i = 1; i < datos.length; i++) {
+                
+                linea += ","+datos[i];
+            }
+            System.out.println(linea);
+            bw.write(linea);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Nuevamente aprovechamos el finally para 
+                // asegurarnos que se cierra el fichero.
+                if (null != fichero) {
+                    //fichero.close();
+                    bw.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+
+  }
 }
