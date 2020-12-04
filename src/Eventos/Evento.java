@@ -152,10 +152,23 @@ public class Evento {
 
             case 3://Pedido Musica
                 System.out.println("Opciones: \n 1. DJ ($300) \n 2. Banda($2000)");
-                System.out.print("¿Qué prefiere?");
+                System.out.print("¿Qué prefiere? ");
                 int opcion = sc.nextInt();
                 sc.nextLine();
-                if (opcion == 1) {
+                
+                /* COMPROBAR QUE EL USUARIO NO HAYA ELEGIDO LA OPCIÓN ANTES. */
+                boolean opcionDj = true;
+                boolean opcionBanda = true;
+                
+                for (Adicional adicional: adicionales){ 
+                    if ((adicional.getTipo().equals(TipoAdicional.MUSICA)) && (adicional.getTotal() == 300))
+                        opcionDj = false;
+                    else if ((adicional.getTipo().equals(TipoAdicional.MUSICA)) && (adicional.getTotal() == 2000))
+                        opcionBanda = false;
+                }
+                /* --- */
+                
+                if ((opcion == 1) && (opcionDj)) {
                     total = 300;
                     System.out.println("Total: " + total + " \n Agregar(S/N)");
                     eleccion = sc.nextLine();
@@ -167,7 +180,7 @@ public class Evento {
                     }
                     break;
 
-                } else {
+                } else if ((opcion == 2) && (opcionBanda) ) {
                     total = 2000;
                     System.out.println("Total: " + total + " \n Agregar(S/N)");
                     eleccion = sc.nextLine();
@@ -179,7 +192,11 @@ public class Evento {
 
                     }
                     break;
+                } else{
+                    System.out.println("YA HA AGREGADO ESTE ELEMENTO A SU LISTA, ELIJA OTRO.");
+                   break;
                 }
+                
 
             case 4: // Pedido Fotografia
                 total = 500;
