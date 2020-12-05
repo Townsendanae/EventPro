@@ -47,13 +47,14 @@ public class Evento {
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
     }
+    
 
-    //----------------Setters -----------
+    /**Setters necesarios**/
     public void setIdOrdenPago(int idOrdenPago) {
         this.idOrdenPago = idOrdenPago;
     }
 
-    //--------------Getters ----------------
+    /**Getters necesarios**/
     public double getPrecio() {
         return this.precio;
     }
@@ -128,6 +129,7 @@ public class Evento {
                     adicionales.add(new Adicional(TipoAdicional.COMIDA, total, cantidad, 15));
                     precio += total;
                     sumaAdicionales.add(total);
+                    System.out.println("Se ha agregado el adicional correctamente");
                 }
                 break;
 
@@ -144,6 +146,7 @@ public class Evento {
                         adicionales.add(new Adicional(TipoAdicional.BOCADITOS, total, cantidad, 0.10));
                         precio += total;
                         sumaAdicionales.add(total);
+                        System.out.println("Se ha agregado el adicional correctamente");
                     }
                     break;
 
@@ -156,6 +159,7 @@ public class Evento {
                         adicionales.add(new Adicional(TipoAdicional.BOCADITOS, total, cantidad, 0.25));
                         precio += total;
                         sumaAdicionales.add(total);
+                        System.out.println("Se ha agregado el adicional correctamente");
                     }
                     break;
                 }
@@ -188,6 +192,7 @@ public class Evento {
                         adicionales.add(new Adicional(TipoAdicional.MUSICA, 300));
                         precio += total;
                         sumaAdicionales.add(total);
+                        System.out.println("Se ha agregado el adicional correctamente");
                     }
                     break;
 
@@ -200,6 +205,7 @@ public class Evento {
                         adicionales.add(new Adicional(TipoAdicional.MUSICA, 2000));
                         precio += total;
                         sumaAdicionales.add(total);
+                        System.out.println("Se ha agregado el adicional correctamente");
 
                     }
                     break;
@@ -217,6 +223,7 @@ public class Evento {
                     adicionales.add(new Adicional(TipoAdicional.FOTOGRAFIA, 500));
                     precio += total;
                     sumaAdicionales.add(total);
+                    System.out.println("Se ha agregado el adicional correctamente");
                 }
                 break;
 
@@ -237,6 +244,7 @@ public class Evento {
                             adicionales.add(new Adicional(TipoAdicional.BEBIDA, total, cantidad, 50));
                             precio += total;
                             sumaAdicionales.add(total);
+                            System.out.println("Se ha agregado el adicional correctamente");
                         }
                         //Invocar constructor adicional para BEBIDA
                         break;
@@ -248,6 +256,7 @@ public class Evento {
                             adicionales.add(new Adicional(TipoAdicional.BEBIDA, total, cantidad, 25));
                             precio += total;
                             sumaAdicionales.add(total);
+                            System.out.println("Se ha agregado el adicional correctamente");
                         }
                         //Invocar constructor adicional para BEBIDA                       
                         break;
@@ -260,6 +269,7 @@ public class Evento {
                             adicionales.add(new Adicional(TipoAdicional.BEBIDA, total, cantidad, 3));
                             precio += total;
                             sumaAdicionales.add(total);
+                            System.out.println("Se ha agregado el adicional correctamente");
                         }
                         //Invocar constructor adicional para BEBIDA
                         break;
@@ -271,12 +281,17 @@ public class Evento {
                             adicionales.add(new Adicional(TipoAdicional.BEBIDA, total, cantidad, 1));
                             precio += total;
                             sumaAdicionales.add(total);
-                        }
-                        //Invocar constructor adicional para BEBIDA
-                        break;
+                            System.out.println("Se ha agregado el adicional correctamente");
+                        }                     
+                        break;                        
                     default:
+                        System.out.println("Elija una opción válida");
                         break;
                 }
+                break;
+            default:
+                System.out.println("Ingrese una opción válida");
+                break;
 
         }
     }
@@ -285,19 +300,19 @@ public class Evento {
     * es sobrescrito en las clases hijas
     */
     public String mostrarMensaje() {
-        return "mensaje"; //FALTA DETALLES
+        return ""; 
     }
     
     /**
     * Metodo para generar pago con los respectivos valores de los adicionales
     */
-    public double generarPago(ArrayList<Double> sumaAdicionales) {//Se va sumando el costo de los adicionales
-        double suma = 0;
-        for (Double x : sumaAdicionales) {
-            suma += x;
-        }
-        return suma;
-    }
+//    public double generarPago(ArrayList<Double> sumaAdicionales) {//Se va sumando el costo de los adicionales
+//        double suma = 0;
+//        for (Double x : sumaAdicionales) {
+//            suma += x;
+//        }
+//        return suma;
+//    }
     
     /**
     * Sobrecarga del mismo metodo para generar pago de las solicitudes
@@ -320,17 +335,21 @@ public class Evento {
     
     
     /**
-    * Metodo que nos muestra todos los adicionales a elegir
+    * Metodo que nos muestra todos los adicionales a elegir y devuelve la eleeción
     */
     public int mostrarMenuAdicional() {
         System.out.println("/*---------------------------------------------------/*" + "\nLas opciones son:\n1.  Comida" + "\n2.  Bocaditos" + "\n3.  Música" + "\n4.  Fotografía" + "\n5.  Bebida" + "\n6.  Regresar al menú anterior");
         System.out.println("Elija elemento a adicionar: ");
-        int eleccion = sc.nextInt();
-        sc.nextLine();
-
+         String eleccionStr;
+        do {
+            System.out.println("Ingrese una opcion: ");
+            eleccionStr = sc.nextLine();
+        } while (eleccionStr.matches(".*[a-z].*"));
+        int eleccion = Integer.parseInt(eleccionStr);
         return eleccion;
 
     }
+    
     /**
     * Metodo que por medio del manejo de archivo
     * guardamos los eventos

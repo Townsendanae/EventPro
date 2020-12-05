@@ -190,7 +190,7 @@ public class Solicitud {
                     solicitud.getFechaSolicitud().getMonth()+"/"+(solicitud.getFechaSolicitud().getYear()+1900);
             int mes=0;
             if (solicitud.getFechaEvento().getMonth()>0 && solicitud.getFechaEvento().getMonth()<=11)
-                mes=solicitud.getFechaEvento().getMonth()+1;
+                mes=solicitud.getFechaEvento().getMonth();
             else if(solicitud.getFechaEvento().getMonth()==0)
                 mes=12;
             

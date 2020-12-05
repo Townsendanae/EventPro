@@ -44,7 +44,7 @@ public class EventProAplicacion {
             if (user.getTipo() == 'C') {
                 boolean salirCliente = false;
                 do {
-                    System.out.println("Es un cliente"); //mostrar menú y opciones clientes, hacer método
+                    System.out.println("Interfaz cliente"); //mostrar menú y opciones clientes, hacer método
                     Cliente userCliente = (Cliente) user;
                     salirCliente = userCliente.menuCliente(userCliente, usuarios);
 
@@ -53,7 +53,7 @@ public class EventProAplicacion {
             } else {
                 boolean salirPlanificador = false;
                 do {
-                    System.out.println("Es un planificador"); //mostrar menú y opciones planificadores, hacer método. 
+                    System.out.println("Interfaz planificador"); //mostrar menú y opciones planificadores, hacer método. 
                     Planificador userPlanificador = (Planificador) user;
                     salirPlanificador = userPlanificador.menuPlanificador(userPlanificador);
 
