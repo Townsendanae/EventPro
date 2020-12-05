@@ -49,6 +49,10 @@ public class FiestaInfantil extends Evento {
     }
 
     //--- Constructores-----
+    
+    /**
+    * Constructor para Fiesta Infantil
+    */
     public FiestaInfantil(Cliente cliente, Planificador planificador, Date fecha, int horaInicio, int horaFin, int capacidad, Solicitud solicitud, int personajesDis, int sorpresas, String juegosFiesta) {
         super(cliente, planificador, fecha, horaInicio, horaFin, capacidad, solicitud);
         this.precio = 300;
@@ -62,7 +66,10 @@ public class FiestaInfantil extends Evento {
 
     }
     //-----metodos-----------------
-
+    /**
+    * Metodo sobrescrito para un mensaje personalizado 
+    * en Fiesta Infantil
+    */
     public String mostrarMensaje() {//IMPRESION
         return "Si realizas un proximo evento en las mismas "
                 + "instalaciones en un plazo de 6 meses se te otorgara"

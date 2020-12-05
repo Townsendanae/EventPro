@@ -33,6 +33,10 @@ public class Evento {
     Scanner sc = new Scanner(System.in);//Scanner
 
     //Constructor
+    
+    /**
+    * Constructor Evento con todos sus atributos inicializados
+    */
     public Evento(Cliente cliente, Planificador planificador, Date fecha, int horaInicio, int horaFin, int capacidad, Solicitud solicitud) {
         this.ID = generarCodigo();
         this.cliente = cliente;
@@ -95,13 +99,19 @@ public class Evento {
     }
 
     //-----------------------Metodos------------------------------
+    /**
+    * Metodo para Generar Codigo de 4 digitos 
+    * Para el ID del Evento
+    */
     public int generarCodigo() {//GENERAR CODIGO 4 DIGITOS
         Random ID = new Random();
         int id = 1000 + ID.nextInt(9000);
         return id;
     }
 
-    /*Metodo por el cual almacenamos los adicionales para cada evento*/
+    /**
+    * Metodo por el cual almacenamos los adicionales para cada evento
+    */
     public void guardarAdicional(int numero) {
 
         String eleccion;
@@ -270,11 +280,17 @@ public class Evento {
 
         }
     }
-
+    /**
+    * Metodo para mostrar un mensaje en la clase Evento
+    * es sobrescrito en las clases hijas
+    */
     public String mostrarMensaje() {
         return "mensaje"; //FALTA DETALLES
     }
-
+    
+    /**
+    * Metodo para generar pago con los respectivos valores de los adicionales
+    */
     public double generarPago(ArrayList<Double> sumaAdicionales) {//Se va sumando el costo de los adicionales
         double suma = 0;
         for (Double x : sumaAdicionales) {
@@ -282,7 +298,10 @@ public class Evento {
         }
         return suma;
     }
-
+    
+    /**
+    * Sobrecarga del mismo metodo para generar pago de las solicitudes
+    */
     public void generarPago(String eleccionPago, ArrayList<Solicitud> solicitudes) {
         for (Solicitud solicitud : solicitudes) {
             if (this.solicitud == solicitud) {
@@ -298,7 +317,11 @@ public class Evento {
         ordenPago.mostrarDatosPago();
 
     }
-
+    
+    
+    /**
+    * Metodo que nos muestra todos los adicionales a elegir
+    */
     public int mostrarMenuAdicional() {
         System.out.println("/*---------------------------------------------------/*" + "\nLas opciones son:\n1.  Comida" + "\n2.  Bocaditos" + "\n3.  Música" + "\n4.  Fotografía" + "\n5.  Bebida" + "\n6.  Regresar al menú anterior");
         System.out.println("Elija elemento a adicionar: ");
@@ -308,7 +331,10 @@ public class Evento {
         return eleccion;
 
     }
-
+    /**
+    * Metodo que por medio del manejo de archivo
+    * guardamos los eventos
+    */
     public static void crearEvento(Evento evento) {
 
         FileWriter fichero = null;
@@ -365,6 +391,10 @@ public class Evento {
         }
 
     }
+    
+    /**
+    * Con este metodo creamos el archivo con los adicionales
+    */
 
     public static void crearAdicional(Evento evento) {
 
@@ -405,7 +435,10 @@ public class Evento {
         }
 
     }
-
+    
+    /**
+    * Con este metodo guardamos los adicionales en una lista
+    */
     public void mostrarMenuGuardarAdicional(Evento evento) {
         boolean Nosalir = true;
 

@@ -19,7 +19,7 @@ import java.util.Calendar;
 
 /**
  *
- * @author ablup
+ * @author Gustavo
  */
 public class Usuario {
     protected String nombre;
@@ -93,7 +93,11 @@ public class Usuario {
     public String toString() {
         return "Usuario{" + "nombre=" + nombre + ", apellido=" + apellido + ", usuario=" + usuario + ", contrasena=" + contrasena + ", tipo=" + tipo + '}';
     }
-    
+    /**
+    * Metodo para validar fecha que no sobrepase el tiempo
+    * segun el evento
+    *
+    */
     public Date validarFecha() {
         
         Calendar c = Calendar.getInstance();
@@ -123,7 +127,5 @@ public class Usuario {
     
     
     
-    //Metodos por agregar
-    
-  
+   
 }

@@ -35,6 +35,10 @@ public class FiestaEmpresarial extends Evento {
     }
 
     //------- Constructores --------
+    /**
+    * Constructor respectivo para la Fiesta Empresarial 
+    * 
+    */
     public FiestaEmpresarial(Cliente cliente, Planificador planificador, Date fecha, int horaInicio, int horaFin, int capacidad, Solicitud solicitud, String transporte) {
         super(cliente, planificador, fecha, horaInicio, horaFin, capacidad, solicitud);
         this.capacidad = capacidad;
@@ -45,8 +49,13 @@ public class FiestaEmpresarial extends Evento {
         }
     }
     //-----Metodos------------
-
+    /**
+    * Con este metodo sobreescribimos para mostrar un mensaje 
+    * personalizado
+    */
     @Override
+    
+    
     public String mostrarMensaje() {//IMPRESION
         return "Si ustede realiza su evento con el mismo planificador"
                 + " Su vehiculo sera totalmente gratuito";

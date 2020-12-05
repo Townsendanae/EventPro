@@ -1,7 +1,2 @@
 código,nombre_cliente,tipo,fecha,hora_inicio,hora_fin,capacidad,planificador,estado
-1663,Alonso,Fiesta Infantil,12/12/2021,9:00,14:00,200,Diego,PENDIENTE
-3362,Alonso,Fiesta Infantil,22/12/2021,6,9,200,Andres,PENDIENTE
-3090,Alonso,Boda,12/12/2021,9:00,12:00,200,Diego,PENDIENTE
-6995,Alonso,Fiesta Empresarial,12/12/2021,16,41,200,Andres,PENDIENTE
-3931,Alonso,Boda,12/12/2021,1200,1500,20,Mercedes,PENDIENTE
-1216,Alonso,Fiesta Infantil,12/12/2021,1200,1800,200,Andres,PENDIENTE
+8610,Alonso,Fiesta Empresarial,9/12/2021,1566,16161,200,Diego,PENDIENTE

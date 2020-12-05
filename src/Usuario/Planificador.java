@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 
 /**
  *
- * @author ablup
+ * @author Gustavo
  */
 public class Planificador extends Usuario {
 
@@ -39,7 +39,7 @@ public class Planificador extends Usuario {
         return ListaSolicitud;
     }
 
-    /*Menu de ingreso para el planificador*/
+    /**Menu de ingreso para el planificador*/
     public boolean menuPlanificador(Planificador planificador) {
         System.out.println("Bienvenido " + this.getNombre());
         System.out.println("\n 1. Consultar Solicitudes pendientes");
@@ -284,17 +284,17 @@ public class Planificador extends Usuario {
                             case 1:
                                 System.out.println("Tiene " + cantidad + " boda(s) asignadas");
                                 Boda boda = (Boda) evento;
-                                boda.mostrarMensaje();
+                                System.out.println(boda.mostrarMensaje());
                                 break;
                             case 2:
                                 System.out.println("Tiene " + cantidad + " fiesta(s) infaltil(es) asignadas");
                                 FiestaInfantil fiestaInfantil = (FiestaInfantil) evento;
-                                fiestaInfantil.mostrarMensaje();
+                                System.out.println(fiestaInfantil.mostrarMensaje());
                                 break;
                             case 3:
                                 System.out.println("Tiene " + cantidad + " fiesta(s) empresarial(es) asignadas.");
                                 FiestaEmpresarial fiestaEmpresarial = (FiestaEmpresarial) evento;
-                                fiestaEmpresarial.mostrarMensaje();
+                                System.out.println(fiestaEmpresarial.mostrarMensaje());
                                 break;
                             default:
                                 System.out.println("Ingrese el número correctamente");

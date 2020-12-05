@@ -22,23 +22,27 @@ public class Adicional {
     Scanner sc = new Scanner(System.in);
 
     // --- Setters ------
+    /**
+    *Metodo para modificar los tipos Adicionales
+    **/
     public void setTipo(TipoAdicional tipo) {
         this.tipo = tipo;
     }
-
+    /*Metodo para modificar la canditad de adicionales*/
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
 
     //--- Getters ----- 
+    /**Metodo para poder obtener los tipos de adicionales*/
     public TipoAdicional getTipo() {
         return this.tipo;
     }
-
+    /**Metodo para obtener la cantidad de adicionales agregados*/
     public int getCantidad() {
         return this.cantidad;
     }
-
+    
     public double getPrecioUnitario() {
         return this.precioUnitario;
     }
@@ -48,13 +52,20 @@ public class Adicional {
     }
 
     //--- Constructores -----
+    /**
+     * Constructor con sus respectivos parametros
+     * @tipo 
+     * @total 
+     * @cantidad 
+     * @precioUnitario
+     */
     public Adicional(TipoAdicional tipo, double total, int cantidad, double precioUnitario) {
         this.tipo = tipo;
         this.total = total;
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
     }
-
+    /**Constructor con dos parametros*/
     public Adicional(TipoAdicional tipo, double total) {
         this.tipo = tipo;
         this.total = total;

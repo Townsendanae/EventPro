@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author ablup
+ * @author Gustavo  
  */
 public class Cliente extends Usuario {
 
@@ -62,6 +62,11 @@ public class Cliente extends Usuario {
 
     //public Solicitud registrarSolicitud(){}
     //public void registrarPago(){}
+    
+    /**
+    * Metodo que muestra el menu al cliente 
+    * 
+    */
     public boolean menuCliente(Cliente cliente, ArrayList<Usuario> usuarios) {
 
         System.out.println("\n 1. Solicitar planificacion de evento");
@@ -251,7 +256,11 @@ public class Cliente extends Usuario {
 
         return true;
     }
-
+    /**
+    * Meetod que recibe un String la fecha del evento y una opcion a elegir 
+    * entre boda/fiesta empresarial/ fiesta Infantil
+    * 
+    */
     public Boolean validarTiempo(String fechaEvento, int opcion) {
         int diferencia = calcularDiferenciaFechas(fechaEvento, opcion);
 
@@ -279,7 +288,11 @@ public class Cliente extends Usuario {
                 return false;
         }
     }
-
+    
+    /**
+    * Metodo para calcular una diferencia de tiempo entre dos fechas 
+    *
+    */
     @SuppressWarnings("unchecked")
     private int calcularDiferenciaFechas(String fecha, int opcion) {
         try {
