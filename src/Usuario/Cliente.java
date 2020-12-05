@@ -227,10 +227,11 @@ public class Cliente extends Usuario {
                                     } while (noSalir);
                                     ordenPago.setIdTransaccion(Long.parseLong(codigoTransaccion));
                                     ordenPago.setFechaRegistroTransaccion(new Date());
+                                    ordenPago.setEstadoPago(EstadoPago.PENDIENTEPAGO);
                                     System.out.println("Listo, se ha registrado. Cuando el planificador valide el pago se pondrá en contacto con usted. ");
                                     break;
                                 case "N":
-                                    System.out.println("Su pago no ha sifo registrado");
+                                    System.out.println("Su pago no ha sido registrado");
                                     break;
                                 default:
                                     System.out.println("Ingrese una opción correcta");

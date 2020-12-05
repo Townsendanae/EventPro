@@ -299,6 +299,7 @@ public class Planificador extends Usuario {
                     case "S":
                         System.out.println("El evento se ha confirmado para la fecha establecida");
                         ordenPago.setEstadoPago(EstadoPago.CONFIRMADO);
+                        ordenPago.getEvento().setEstadoEvento(EstadoEvento.APROBADO);
                         break;
                     case "N":
                         System.out.println("No ha confirmado el evento.");

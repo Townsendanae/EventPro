@@ -10,6 +10,6 @@ package Papeleo;
  * @author danae
  */
 public enum EstadoEvento {
-    PENDIENTE,PAGADO
+    PENDIENTE,APROBADO
     
 }

@@ -53,6 +53,10 @@ public class Evento {
     public void setIdOrdenPago(int idOrdenPago) {
         this.idOrdenPago = idOrdenPago;
     }
+    
+    public void setEstadoEvento(EstadoEvento estado){
+        this.estado = estado;
+    }
 
     /**Getters necesarios**/
     public double getPrecio() {
