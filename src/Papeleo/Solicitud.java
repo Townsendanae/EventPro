@@ -29,74 +29,139 @@ public class Solicitud {
     private double precioBase;
     
  //---- Setters ------
+    /**
+     * 
+     * @param numero 
+     */
     public void setNumero(int numero){
         this.numero = numero;  
     }
-    
+    /**
+     * 
+     * @param cliente 
+     */
     public void setCliente(Cliente cliente){
         this.cliente = cliente;
     }
-    
+    /**
+     * 
+     * @param planificador 
+     */
     public void setPlanificador(Planificador planificador){
         this.planificador = planificador;
     }
-    
+    /**
+     * 
+     * @param fechaSolicitud 
+     */
     public void setFechaSolicitud(Date fechaSolicitud){
         this.fechaSolicitud = fechaSolicitud;
     }
-    
+    /**
+     * 
+     * @param fechaEvento 
+     */
     public void setFechaEvento(Date fechaEvento){
         this.fechaEvento = fechaEvento;
     }
-    
+    /**
+     * 
+     * @param estadoSolicitud 
+     */
      public void setEstadoSolicitud(EstadoSolicitud estadoSolicitud){
         this.estadoSolicitud = estadoSolicitud;
     }
      
     //----- Getters -----
-    
+    /**
+     * Devuelve numero
+     * @return 
+     */
     public int getNumero(){
         return this.numero;
     }
+    /**
+     * Obtiene cliente
+     * @return 
+     */
     
     public Cliente getCliente(){
         return this.cliente;
     }
     
+    /**
+     * Devuelve el planificador
+     * @return 
+     */
+    
     public Planificador getPlanificador(){
         return this.planificador;
     }
+    
+    /**
+     * Devuelve fecha de solicitud
+     * @return 
+     */
     
     public Date getFechaSolicitud(){
         return this.fechaSolicitud;
     }
 
-    
+    /**
+     * Devuelve fecha del evento
+     * @return 
+     */
     public Date getFechaEvento(){
         return this.fechaEvento;
     }
     
-    
+    /**
+     * Devuelve el ID de la solicitud
+     * @return 
+     */
     public String getId(){
         return this.id;
     }
+    
+    /**
+     * 
+     * @param id 
+     */
 
     public void setId(String id) {
         this.id = id;
     }
+    
+    /**
+     * 
+     * @param tipoEvento 
+     */
 
     public void setTipoEvento(TipoEvento tipoEvento) {
         this.tipoEvento = tipoEvento;
     }
+    
+    /**
+     * 
+     * @param precioBase 
+     */
 
     public void setPrecioBase(double precioBase) {
         this.precioBase = precioBase;
     }
     
-    
+    /**
+     * Devuelve el estado de la solicitud
+     * @return 
+     */
     public EstadoSolicitud getEstadoSolicitud(){
         return this.estadoSolicitud;
     }
+    
+    /**
+     * Devuelve de que tipo es el evento
+     * @return 
+     */
     
     public TipoEvento getTipoEvento(){
         return this.tipoEvento;
@@ -105,6 +170,15 @@ public class Solicitud {
     
     // ---- Constructores ---- 
        
+    /**
+     * 
+     * @param cliente
+     * @param fechaSolicitud
+     * @param fechaEvento
+     * @param usuarios
+     * @param tipoEvento
+     * @param precioBase 
+     */
     public Solicitud(Cliente cliente,Date fechaSolicitud, String fechaEvento, ArrayList<Usuario> usuarios, TipoEvento tipoEvento,double precioBase){
         this.cliente = cliente;
         this.id =generarId() ;
@@ -128,7 +202,11 @@ public class Solicitud {
     }
     
     
-    
+    /**
+     * Asigna el planificador a la solicitud
+     * @param usuarios
+     * @return 
+     */
     
     
     
@@ -151,6 +229,9 @@ public class Solicitud {
  
     
     @Override
+    /**
+     * Muetra los datos de la solicitud
+     */
     public String toString(){
         System.out.println("DATOS:");
         System.out.println("CLIENTE: "+cliente.getNombre()+" "+cliente.getApellido());
@@ -163,8 +244,10 @@ public class Solicitud {
         return null;
     
     }
-    
-    /*Generar Id de Solicitud*/
+    /**
+     * Genera el dato de la id de la solicitud
+     * @return numero
+     */
     private String generarId(){
         int id=0;
         String numero="";
@@ -175,8 +258,11 @@ public class Solicitud {
         }
         return numero;
     }
-    
-    /*Crear solicitudes desde cliente*/
+    /**
+     * Dada una solicitud, devuelve un archivo con los datos de la solicitud
+     * 
+     * @param solicitud 
+     */
     public static void crearSolicitud(Solicitud solicitud){
         
         FileWriter fichero = null;

@@ -28,7 +28,14 @@ public class Usuario {
     protected String contrasena;
     protected char tipo;
     protected static ArrayList<OrdenPago> ListaOrdenesPago = new ArrayList<OrdenPago>();
-
+    /**
+     * Constructor de Usuario
+     * @param nombre
+     * @param apellido
+     * @param usuario
+     * @param contrasena
+     * @param tipo 
+     */
     public Usuario(String nombre, String apellido, String usuario, String contrasena, char tipo) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -38,52 +45,89 @@ public class Usuario {
     }
     
     
-
+    /**
+     * Obtiene el nombre
+     * @return 
+     */
     public String getNombre() {
         return nombre;
     }
-
+    /**
+     * Modifica el nombre
+     * @param nombre 
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    /**
+     * Obtiene el apellido del Usuario 
+     * 
+     * @return 
+     */
     public String getApellido() {
         return apellido;
     }
-
+    /**
+     * Modifica el dato del apellido del usuario 
+     * @param apellido 
+     */
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-
+    /**
+     * Obtiene el ussuario 
+     * @return 
+     */
     public String getUsuario() {
         return usuario;
     }
-
+    /**
+     * Modifica el Usuario 
+     * @param usuario 
+     */
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-
+    /**
+     * Obtiene la contraseña
+     * @return 
+     */
     public String getContrasena() {
         return contrasena;
     }
-
+    /**
+     * Coloca la contraseña para el usuario 
+     * @param contrasena 
+     */
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
-
+    /**
+     * Obtiene el tipo adicional 
+     * @return 
+     */
     public char getTipo() {
         return tipo;
     }
-
+    /**
+     * 
+     * @param tipo 
+     */
     public void setTipo(char tipo) {
         this.tipo = tipo;
     }
     
-    
+    /**
+     * 
+     * @return 
+     */
     public ArrayList<OrdenPago> getListaOrdenesPago(){
         return this.ListaOrdenesPago;
     }
-    
+    /**
+     * 
+     * @param ordenPago 
+     */
     public void setListaSolicitud(OrdenPago ordenPago) {
         ListaOrdenesPago.add(ordenPago);
     }
@@ -94,10 +138,9 @@ public class Usuario {
         return "Usuario{" + "nombre=" + nombre + ", apellido=" + apellido + ", usuario=" + usuario + ", contrasena=" + contrasena + ", tipo=" + tipo + '}';
     }
     /**
-    * Metodo para validar fecha que no sobrepase el tiempo
-    * segun el evento
-    *
-    */
+     * Valida la fecha dada para cada condicion segun el evento
+     * @return 
+     */
     public Date validarFecha() {
         
         Calendar c = Calendar.getInstance();

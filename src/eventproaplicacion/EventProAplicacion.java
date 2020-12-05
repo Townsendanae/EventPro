@@ -65,6 +65,11 @@ public class EventProAplicacion {
         // TODO code application logic here
     }
         /**Metodo Para cargar la lista de usuarios desde el archivo almacenado*/
+    /**
+     * Sirve para cargar los usuarios descritos en el archivo txt
+     * @param lineas
+     * @param lineasClientes 
+     */
     private static void CargarUsuarios(ArrayList<String> lineas, ArrayList<String> lineasClientes) {
         for (String linea : lineas) { // crear Usuarios. 
             if (!linea.equals("Nombre;Apellido;Usuario;Contrasena;Tipo")) { //modificar para que no salga la primera linea. 
@@ -85,6 +90,10 @@ public class EventProAplicacion {
     }
 
     /**Metodo para iniciar sesion*/
+    /**
+     * Inicia el menu principal
+     * @return 
+     */
     private static Usuario menuLogin() {
 
         System.out.println("+++++++++++++++++++++++++++");
@@ -120,6 +129,12 @@ public class EventProAplicacion {
     }
 
     /**Verificamos cada usuario que se encuentra almacenado*/
+    /**
+     * verifica el usuario ingresado 
+     * @param nomUsuario
+     * @param contrasena
+     * @return 
+     */
     private static boolean VerificarUsuario(String nomUsuario, String contrasena) {
         for (Usuario usuario : usuarios) {
             if ((nomUsuario.equals(usuario.getUsuario())) && contrasena.equals(usuario.getContrasena())) {
@@ -131,6 +146,11 @@ public class EventProAplicacion {
 
     /**Metodo por el cual cargaremos todos los datos almacenados desde un 
       tipo de archivo*/
+    /**
+     * Recibe el nombre del archivo y devuelve los datos como String
+     * @param nombrearchivo
+     * @return 
+     */
     public static ArrayList<String> cargarArchivos(String nombrearchivo) {
         ArrayList<String> lineas = new ArrayList<>();
         File archivo = null;

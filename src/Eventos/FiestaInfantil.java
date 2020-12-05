@@ -16,6 +16,10 @@ import java.util.Date;
  *
  * @author danae
  */
+/**
+ * 
+ * @author ablup
+ */
 public class FiestaInfantil extends Evento {
 
     private int personajesDis;
@@ -51,8 +55,18 @@ public class FiestaInfantil extends Evento {
     //--- Constructores-----
     
     /**
-    * Constructor para Fiesta Infantil
-    */
+     * 
+     * @param cliente
+     * @param planificador
+     * @param fecha
+     * @param horaInicio
+     * @param horaFin
+     * @param capacidad
+     * @param solicitud
+     * @param personajesDis
+     * @param sorpresas
+     * @param juegosFiesta 
+     */
     public FiestaInfantil(Cliente cliente, Planificador planificador, Date fecha, int horaInicio, int horaFin, int capacidad, Solicitud solicitud, int personajesDis, int sorpresas, String juegosFiesta) {
         super(cliente, planificador, fecha, horaInicio, horaFin, capacidad, solicitud);
         this.precio = 300;
@@ -69,6 +83,7 @@ public class FiestaInfantil extends Evento {
     /**
     * Metodo sobrescrito para un mensaje personalizado 
     * en Fiesta Infantil
+    * @return
     */
     public String mostrarMensaje() {//IMPRESION
         return "Si realizas un proximo evento en las mismas "

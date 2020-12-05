@@ -1,3 +1,1 @@
 código,nombre_cliente,tipo,fecha,hora_inicio,hora_fin,capacidad,planificador,estado
-
-8117,Alonso,Boda,12/12/2021,1200,1300,20,Mercedes,PENDIENTE

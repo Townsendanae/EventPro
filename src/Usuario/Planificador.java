@@ -22,28 +22,53 @@ public class Planificador extends Usuario {
     Scanner sc = new Scanner(System.in);
 
     //---- Constructores ----
+    /**
+     * Constructor de Planificador
+     * @param nombre
+     * @param apellido
+     * @param usuario
+     * @param contrasena
+     * @param tipo
+     * @param listaSolicitud 
+     */
     public Planificador(String nombre, String apellido, String usuario, String contrasena, char tipo, ArrayList<Solicitud> listaSolicitud) {
         super(nombre, apellido, usuario, contrasena, tipo);
         this.ListaSolicitud = listaSolicitud;
     }
-
+    /**
+     * Constructor alterno
+     * @param nombre
+     * @param apellido
+     * @param usuario
+     * @param contrasena
+     * @param tipo 
+     */
     public Planificador(String nombre, String apellido, String usuario, String contrasena, char tipo) {
         super(nombre, apellido, usuario, contrasena, tipo);
     }
 
     /**Setters necesarios**/
+    /**
+     * 
+     * @param solicitud 
+     */
     public void setListaSolicitud(Solicitud solicitud) {
         ListaSolicitud.add(solicitud);
     }
     
     /**Getters necesarios**/
+    /**
+     * 
+     * @return 
+     */
     public ArrayList<Solicitud> getListaSolicitud() {
         return ListaSolicitud;
     }
-
-    /***
-     ** Menu de ingreso para el planificador
-     **/
+/**
+ * Menu donde interactua el planificador
+ * @param planificador
+ * @return 
+ */
     public boolean menuPlanificador(Planificador planificador) {
         System.out.println("Bienvenido " + this.getNombre());
         System.out.println("\n 1. Consultar Solicitudes pendientes");
@@ -280,7 +305,11 @@ public class Planificador extends Usuario {
         }
 
     }
-
+    /**
+     * Metodo para confirmar el Evento
+     * 
+     *@param planificador 
+     */
     private void confirmarEvento(Planificador planificador) {
         System.out.println("/******************* CONFIRMAR EVENTO *******************/");
         System.out.println("/*                                                      */");
@@ -318,7 +347,10 @@ public class Planificador extends Usuario {
         }
 
     }
-
+    /**
+     * Metodo para consultar el evento dado
+     * 
+     */
     private void consultarEventos() {
         System.out.println("/****************** CONSULTAR EVENTOS ******************/");
         System.out.println("/*                                                      */");
@@ -380,7 +412,13 @@ public class Planificador extends Usuario {
                 break;
         }
     }
-
+    /**
+     * Con este metodo generamos la orden de pago respectiva
+     * 
+     * @param evento
+     * @param eleccionOrdenPago
+     * @param solicitud 
+     */
     private void generarOrdenPago(Evento evento, String eleccionOrdenPago, Solicitud solicitud) {
         if (eleccionOrdenPago.equals("S")) {
             OrdenPago ordenPago = new OrdenPago(evento.getCliente(), evento, evento.getFechaEvento(), evento.getArrayAdicionales(), evento.getPrecio());
@@ -398,49 +436,5 @@ public class Planificador extends Usuario {
     
     
     
-//    private static void cargarSolicitudes(String nombreArchivo) {
-//        
-//        ArrayList<String> lineas = EventProAplicacion.cargarArchivos("usuarios.txt");
-//        ArrayList<String> lineas2 = EventProAplicacion.cargarArchivos("solicitud.txt");
-//        ArrayList<String> lineas3 = EventProAplicacion.cargarArchivos("clientes.txt");
-//        
-//        for (String linea : lineas2) { // crear Usuarios. 
-//            if (!linea.equals("id_solicitud,nombre_cliente,nombre_planificador,fecha_solicitud,fecha_evento,estado")) { //Recorremos archivo de solicitudes. 
-//                String[] datosSolicitud = linea.split(",");
-//                Solicitud solicitud = new Solicitud();
-//                    for (String lineaUsuario : lineas) {//Recorremos los usuarios
-//                        
-//                        if (!lineaUsuario.equals("Nombre;Apellido;Usuario;Contrasena;Tipo")) {
-//                            String[] datosCliente = lineaUsuario.split(";");
-//                            
-//                            if(datosSolicitud[4].equals(datosCliente[0])){
-//                                for(String lineaCliente: lineas3){//recorremos los clientes
-//                                    if(!lineaCliente.equals("Usuario;telefono;mail")){
-//                                        
-//                                        String[] datosCliente2 = lineaCliente.split(";");
-//                                        if(datosCliente2[0].equals(datosCliente[2])){
-//                                                solicitud.setCliente(new Cliente(datosCliente[0],datosCliente[1],datosCliente[2],
-//                                                datosCliente[3],datosCliente[4].charAt(0),datosCliente2[1],datosCliente2[2]));
-//                                        }
-//                                    }
-//                                }
-//                            }else if(datosSolicitud[2].equals(datosCliente[0])){
-//                                solicitud.setPlanificador(new Planificador(datosCliente[0],datosCliente[1],datosCliente[2],
-//                                datosCliente[3],datosCliente[4].charAt(0)));
-//                            
-//                            }
-//                            solicitud.setId(datosSolicitud[0]);
-//                            solicitud.setPrecioBase(0);
-//                            
-//                                
-//                            ListaSolicitud.add(new Solicitud(datos[0], datos[1], datos[2], null, datos[4].charAt(0), datosCliente[1], datosCliente[2]));
-//                        }
-//                    }
-//                
-//            }
-//        }
-//        
-//        
-//
-//    }
+
 }

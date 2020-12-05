@@ -1,3 +1,1 @@
 id_solicitud,nombre_cliente,nombre_planificador,fecha_solicitud,fecha_evento,estado
-
-00582,Alonso,Mercedes,4/11/2020,12/12/2021,PENDIENTE

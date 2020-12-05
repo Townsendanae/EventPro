@@ -36,6 +36,13 @@ public class Evento {
     
     /**
     * Constructor Evento con todos sus atributos inicializados
+    * @param cliente
+    * @param planificado
+    * @param fecha
+    * @param horaInicio
+    * @param horafin
+    * @param capacidad 
+    * @param solicitud 
     */
     public Evento(Cliente cliente, Planificador planificador, Date fecha, int horaInicio, int horaFin, int capacidad, Solicitud solicitud) {
         this.ID = generarCodigo();
@@ -49,56 +56,97 @@ public class Evento {
     }
     
 
-    /**Setters necesarios**/
+    /**
+     * Setters necesarios
+     * @param idOrdenPago 
+     */
     public void setIdOrdenPago(int idOrdenPago) {
         this.idOrdenPago = idOrdenPago;
     }
     
+    /**
+     * Colocar Evento 
+     * @param estado 
+     */
     public void setEstadoEvento(EstadoEvento estado){
         this.estado = estado;
     }
 
-    /**Getters necesarios**/
+    /**
+     * Getters necesarios
+     * @return precio
+     */
     public double getPrecio() {
         return this.precio;
     }
-
+    
+    /**
+     * Devuelve el cliente
+     * @return cliente
+     */
     public Cliente getCliente() {
         return this.cliente;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public Date getFechaEvento() {
         return this.fechaEvento;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public int getID() {
         return this.ID;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public ArrayList<Adicional> getArrayAdicionales() {
         return this.adicionales;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public int getCapacidad() {
         return capacidad;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public Planificador getPlanificador() {
         return planificador;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public EstadoEvento getEstado() {
         return estado;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public int getHoraInicio() {
         return horaInicio;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public int getHoraFin() {
         return horaFin;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public int getIdOrdenPago() {
         return this.idOrdenPago;
     }
@@ -106,7 +154,7 @@ public class Evento {
     //-----------------------Metodos------------------------------
     /**
     * Metodo para Generar Codigo de 4 digitos 
-    * Para el ID del Evento
+    * @return ID del Evento
     */
     public int generarCodigo() {//GENERAR CODIGO 4 DIGITOS
         Random ID = new Random();
@@ -115,8 +163,9 @@ public class Evento {
     }
 
     /**
-    * Metodo por el cual almacenamos los adicionales para cada evento
-    */
+     * Guarda todos los adicionales
+     * @param numero 
+     */
     public void guardarAdicional(int numero) {
 
         String eleccion;
@@ -302,6 +351,7 @@ public class Evento {
     /**
     * Metodo para mostrar un mensaje en la clase Evento
     * es sobrescrito en las clases hijas
+    * @return 
     */
     public String mostrarMensaje() {
         return ""; 
@@ -320,6 +370,8 @@ public class Evento {
     
     /**
     * Sobrecarga del mismo metodo para generar pago de las solicitudes
+    * @param eleccionPago 
+    * @param solicitudes 
     */
     public void generarPago(String eleccionPago, ArrayList<Solicitud> solicitudes) {
         for (Solicitud solicitud : solicitudes) {
@@ -340,7 +392,9 @@ public class Evento {
     
     /**
     * Metodo que nos muestra todos los adicionales a elegir y devuelve la eleeción
+    * @return eleccion 
     */
+    
     public int mostrarMenuAdicional() {
         System.out.println("/*---------------------------------------------------/*" + "\nLas opciones son:\n1.  Comida" + "\n2.  Bocaditos" + "\n3.  Música" + "\n4.  Fotografía" + "\n5.  Bebida" + "\n6.  Regresar al menú anterior");
         System.out.println("Elija elemento a adicionar: ");
@@ -357,6 +411,8 @@ public class Evento {
     /**
     * Metodo que por medio del manejo de archivo
     * guardamos los eventos
+    * @param evento 
+    * 
     */
     public static void crearEvento(Evento evento) {
 
@@ -417,6 +473,7 @@ public class Evento {
     
     /**
     * Con este metodo creamos el archivo con los adicionales
+    * @param evento 
     */
 
     public static void crearAdicional(Evento evento) {
@@ -461,6 +518,7 @@ public class Evento {
     
     /**
     * Con este metodo guardamos los adicionales en una lista
+    * @param evento 
     */
     public void mostrarMenuGuardarAdicional(Evento evento) {
         boolean Nosalir = true;

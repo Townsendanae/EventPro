@@ -24,6 +24,7 @@ public class Adicional {
     // --- Setters ------
     /**
     *Metodo para modificar los tipos Adicionales
+    * @tipo
     **/
     public void setTipo(TipoAdicional tipo) {
         this.tipo = tipo;
@@ -34,11 +35,16 @@ public class Adicional {
     }
 
     //--- Getters ----- 
-    /**Metodo para poder obtener los tipos de adicionales*/
+    /**
+     * 
+     * Metodo para poder obtener los tipos de adicionales
+     
+     */
     public TipoAdicional getTipo() {
         return this.tipo;
     }
-    /**Metodo para obtener la cantidad de adicionales agregados*/
+    /**
+     * Metodo para obtener la cantidad de adicionales agregados*/
     public int getCantidad() {
         return this.cantidad;
     }
@@ -54,10 +60,10 @@ public class Adicional {
     //--- Constructores -----
     /**
      * Constructor con sus respectivos parametros
-     * @tipo 
-     * @total 
-     * @cantidad 
-     * @precioUnitario
+     * @param tipo 
+     * @param total 
+     * @param cantidad 
+     * @param precioUnitario
      */
     public Adicional(TipoAdicional tipo, double total, int cantidad, double precioUnitario) {
         this.tipo = tipo;
@@ -65,7 +71,12 @@ public class Adicional {
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
     }
-    /**Constructor con dos parametros*/
+    /**
+     *
+     * Constructor con dos parametros
+     * @param tipo
+     * @param total
+     */
     public Adicional(TipoAdicional tipo, double total) {
         this.tipo = tipo;
         this.total = total;

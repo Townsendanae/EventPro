@@ -27,50 +27,78 @@ public class Cliente extends Usuario {
     private String correo;
     private ArrayList<Evento> ListaEventos = new ArrayList<Evento>();
     Scanner sc = new Scanner(System.in);
-
-    /**
-     * Constructor
-     *
-     */
+/**
+ * Constructor
+ * @param nombre
+ * @param apellido
+ * @param usuario
+ * @param contrasena
+ * @param tipo
+ * @param celular
+ * @param correo 
+ */
     public Cliente(String nombre, String apellido, String usuario, String contrasena, char tipo, String celular, String correo) {
         super(nombre, apellido, usuario, contrasena, tipo);
         this.celular = celular;
         this.correo = correo;
 
     }
-
-    /**
-     * Getters y setters necesarios*
-     */
+ /**
+  * Devuelve el numero celular del cliente
+  * @return 
+  */
     public String getCelular() {
         return celular;
     }
-
+    
+    /**
+     * Modifica valores en la lista de eventos
+     * @param evento 
+     */
     public void setListaEventos(Evento evento) {
         ListaEventos.add(evento);
     }
-
+    
+    /**
+     * 
+     * @param celular 
+     */
     public void setCelular(String celular) {
         this.celular = celular;
     }
+    
+    /**
+     * Obtiene el correo del cliente
+     * @return 
+     */
 
     public String getCorreo() {
         return correo;
     }
+    
+    /**
+     * 
+     * @param correo 
+     */
 
     public void setCorreo(String correo) {
         this.correo = correo;
     }
 
     @Override
+    /**
+     * Muestra los datos del cliente
+     */
     public String toString() {
         return "Cliente{" + "celular=" + celular + ", correo=" + correo + '}';
     }
-
-    /**
-     * Metodo que muestra el menu al cliente
-     *
-     */
+/**
+ * Dados los parametro muestra el menu donde el cleinte puede interactuar
+ * 
+ * @param cliente
+ * @param usuarios
+ * @return 
+ */
     public boolean menuCliente(Cliente cliente, ArrayList<Usuario> usuarios) {
 
         System.out.println("\n 1. Solicitar planificacion de evento");
@@ -260,12 +288,13 @@ public class Cliente extends Usuario {
 
         return true;
     }
-
-    /**
-     * Meetod que recibe un String la fecha del evento y una opcion a elegir
-     * entre boda/fiesta empresarial/ fiesta Infantil
-     *
-     */
+/**
+ * Metodo que recibe un String la fecha del evento y una opcion a elegir
+ * entre boda/fiesta empresarial/ fiesta Infantil
+ * @param fechaEvento
+ * @param opcion
+ * @return 
+ */
     public Boolean validarTiempo(String fechaEvento, int opcion) {
         int diferencia = calcularDiferenciaFechas(fechaEvento, opcion);
 
@@ -293,11 +322,12 @@ public class Cliente extends Usuario {
                 return false;
         }
     }
-
-    /**
-     * Metodo para calcular una diferencia de tiempo entre dos fechas
-     *
-     */
+/**
+ * Calcula la diferencia de fechas entre dos fechas dadas
+ * @param fecha
+ * @param opcion
+ * @return 
+ */
     @SuppressWarnings("unchecked")
     private int calcularDiferenciaFechas(String fecha, int opcion) {
         try {
